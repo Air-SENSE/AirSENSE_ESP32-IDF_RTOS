@@ -1,0 +1,21 @@
+menu "WiFi Config Menu"
+
+    config SSID
+        string  "SSID"
+        default "SPARC_LAB"
+        help
+            SSID.
+
+    config PASSWORD
+        string  "PASSWORD"
+        default  "123456"
+        help 
+            PASSWORD.
+
+    config MAXIMUM_RETRY
+        int "Maximum retry"
+        default 25
+        help
+            Set the Maximum retry to avoid station reconnecting to the AP unlimited when the AP is really inexistent.
+
+endmenu

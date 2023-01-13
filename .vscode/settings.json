@@ -1,0 +1,15 @@
+{
+    "idf.adapterTargetName": "esp32",
+    "files.associations": {
+        "sht3x.h": "c",
+        "i2cdev.h": "c",
+        "config.h": "c",
+        "sdkconfig.h": "c"
+    },
+    "C_Cpp.errorSquiggles": "Disabled",
+    "idf.toolsPathWin": "C:\\Users\\Admin\\.espressif",
+    "idf.espIdfPathWin": "C:/Users/Admin/esp/esp-idf/",
+    "C_Cpp.codeAnalysis.clangTidy.checks.disabled": [
+        "clang-diagnostic-error"
+    ]
+}

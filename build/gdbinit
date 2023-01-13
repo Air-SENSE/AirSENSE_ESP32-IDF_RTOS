@@ -1,0 +1,6 @@
+file c:\\users\\admin\\esp\\airsense_esp32-idf_rtos\\build\\AirSENSE_ESP32-IDF_RTOS.elf
+target remote :3333
+mon reset halt
+flushregs
+thb app_main
+c
