@@ -1,4 +1,5 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 /**
  * @file main.c
  * @author Nguyen Nhu Hai Long ( @long27032002 )
@@ -256,3 +257,12 @@ void app_main(void)
     ESP_ERROR_CHECK(pms7003_initUart(&pms_uart_config));
 
 #endif  //CONFIG_USING_PMS7003
+=======
+#include "config.h"
+#include "library.h"
+
+void app_main(void)
+{
+
+}
+>>>>>>> 4093a5f80c80c982922bae844b0dc8c0c88f9ab3
