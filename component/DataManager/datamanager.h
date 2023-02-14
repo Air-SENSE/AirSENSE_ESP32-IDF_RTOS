@@ -6,12 +6,13 @@
 #include "sdkconfig.h"
 #include <string.h>
 
-struct {
-    unsigned long timeStamp;
+struct dataSensor_st
+{
+    uint64_t timeStamp;
 
     float temperature;
     float humidity;
-    float pressyre;
+    float pressure;
 
     uint32_t pm1_0;
     uint32_t pm2_5;
@@ -23,7 +24,9 @@ struct {
     uint32_t CO;
     uint32_t SO2;
 #endif
-} dataSensor;
+};
+
+const char dataSensor_templateSaveToSDCard[] = "%s,%0.2f,%0.2f,%0.2f,%d,%d,%d";
 
 
 #endif

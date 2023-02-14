@@ -18,14 +18,16 @@
 #include <string.h>
 #include "ds3231.h"
 
-#define SECONDS_PER_MIN             60UL
-#define SECONDS_PER_HOUR            3600UL
-#define SECONDS_PER_DAY             86400UL
-#define SECONDS_PER_MON             2629743UL
-#define SECONDS_PER_YEAR            31556926UL
-#define SECONDS_FROM_1970_TO_2022   1640970000UL    // Unixtime for 2022-01-01 00:00:00
+#define SECONDS_PER_MIN             60ULL
+#define SECONDS_PER_HOUR            3600ULL
+#define SECONDS_PER_DAY             86400ULL
+#define SECONDS_PER_MON             2629743ULL
+#define SECONDS_PER_YEAR            31556926ULL
+#define SECONDS_FROM_1970_TO_2022   1640970000ULL    // Unixtime for 2022-01-01 00:00:00
 
-const char *timeFormat = "%d:%d:%d,%d/%d/%d";
+
+
+int currentDay;
 
 /**
  * @brief Initialize device descriptor
@@ -37,7 +39,7 @@ const char *timeFormat = "%d:%d:%d,%d/%d/%d";
  * 
  * @return ESP_OK to indicate success
  */
-esp_err_t ds3231_init_desc(i2c_dev_t *dev, i2c_port_t port, gpio_num_t sda_gpio, gpio_num_t scl_gpio);
+esp_err_t ds3231_initialize(i2c_dev_t *dev, i2c_port_t port, gpio_num_t sda_gpio, gpio_num_t scl_gpio);
 
 /**
  * @brief Free device descriptor
@@ -58,7 +60,7 @@ esp_err_t ds3231_free_desc(i2c_dev_t *dev);
  * 
  * @return ESP_OK to indicate success
  */
-esp_err_t ds3231_set_time(i2c_dev_t *dev, struct tm *time);
+esp_err_t ds3231_setTime(i2c_dev_t *dev, struct tm *time);
 
 /**
  * @brief Get the time from the RTC, populates a supplied tm struct
@@ -74,13 +76,12 @@ esp_err_t ds3231_get_time(i2c_dev_t *dev, struct tm *time);
  * @brief Get the time from the RTC, populates a supplied tm struct
  * 
  * @param[in] dev Device descriptor
- * @param[out] time RTC time
  * @param[out] timeString time string
  * @param[in] lenghtString lenght of time string
  * 
  * @return ESP_OK to indicate success
  */
-esp_err_t ds3231_convertTimeToString(struct tm *time, char* timeString, const unsigned int lenghtString);
+esp_err_t ds3231_convertTimeToString(i2c_dev_t *dev, char* timeString, const unsigned int lenghtString);
 
 /**
  * @brief Get the time from the RTC, populates a supplied tm struct
@@ -90,6 +91,9 @@ esp_err_t ds3231_convertTimeToString(struct tm *time, char* timeString, const un
  * 
  * @return ESP_OK to indicate success
  */
-esp_err_t ds3231_getEpochTime(i2c_dev_t *dev, unsigned long *epochTime);
+esp_err_t ds3231_getEpochTime(i2c_dev_t *dev, uint64_t *epochTime);
+
+
+bool ds3231_isNewDay(i2c_dev_t *dev);
 
 #endif

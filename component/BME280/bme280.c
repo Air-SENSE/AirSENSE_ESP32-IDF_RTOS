@@ -1,5 +1,7 @@
 #include "bme280.h"
 
+__attribute__((unused)) static const char *TAG = " bme280";
+
 static unsigned long max_timeout = 1000;
 
 esp_err_t bme280_init(bme280 *bme280_device, bmp280_params_t *bme280_params,
@@ -7,9 +9,9 @@ esp_err_t bme280_init(bme280 *bme280_device, bmp280_params_t *bme280_params,
                       gpio_num_t sda_gpio, gpio_num_t scl_gpio)
 {
     memset(bme280_device, 0, sizeof(bme280));
-    ESP_ERROR_CHECK(bmp280_init_default_params(bme280_params));
-    ESP_ERROR_CHECK(bmp280_init_desc(bme280_device, address, i2c_port, sda_gpio, scl_gpio));
-    ESP_ERROR_CHECK(bmp280_init(bme280_device, bme280_params));
+    ESP_ERROR_CHECK_WITHOUT_ABORT(bmp280_init_default_params(bme280_params));
+    ESP_ERROR_CHECK_WITHOUT_ABORT(bmp280_init_desc(bme280_device, address, i2c_port, sda_gpio, scl_gpio));
+    ESP_ERROR_CHECK_WITHOUT_ABORT(bmp280_init(bme280_device, bme280_params));
 
     esp_err_t error_t;
     i2c_cmd_handle_t i2c_command = i2c_cmd_link_create();
@@ -46,7 +48,7 @@ esp_err_t bme280_readSensorData(bme280 *bme280_device, float *temperature,
         ESP_LOGE(__func__, "BME280 sensor read data failed.");
         return ESP_ERROR_BME_READ_DATA_FAILED;
     } else {
-        ESP_LOGE(__func__, "BME280 sensor read data successful.");
+        ESP_LOGI(__func__, "BME280 sensor read data successful.");
         return ESP_OK;
     }
 }

@@ -1,0 +1,138 @@
+I (919) app_main: Booting....
+I (919) app_main: Name device: Air-SENSE device.
+I (929) app_main: Firmware version 0.0.1.
+I (929) app_main: Initialize nvs partition.
+I (1959) app_main: Initialize SD card with SPI interface.
+I (1959) sdcard_initialize: Initializing SD card
+I (1959) sdcard_initialize: Using SPI peripheral
+I (1959) sdcard_initialize: Mounting filesystem
+I (1969) gpio: GPIO[5]| InputEn: 0| OutputEn: 1| OpenDrain: 0| Pullup: 0| Pulldown: 0| Intr:0
+I (1979) sdspi_transaction: cmd=52, R1 response: command not supported
+I (2019) sdspi_transaction: cmd=5, R1 response: command not supported
+I (2039) sdcard_initialize: SDCard has been initialized.
+I (2039) sdcard_initialize: Filesystem mounted
+I (2039) sdcard_initialize: SDCard properties.
+Name: APPSD
+Type: SDSC
+Speed: 20 MHz
+Size: 1920MB
+I (2059) wifi:wifi driver task: 3ffc6fa8, prio:23, stack:6656, core=0
+I (2059) system_api: Base MAC address is not set
+I (2059) system_api: read default base MAC address from EFUSE
+I (2079) wifi:wifi firmware version: d683787
+I (2079) wifi:wifi certification version: v7.0
+I (2079) wifi:config NVS flash: enabled
+I (2079) wifi:config nano formating: disabled
+I (2089) wifi:Init data frame dynamic rx buffer num: 32
+I (2089) wifi:Init management frame dynamic rx buffer num: 32
+I (2099) wifi:Init management short buffer num: 32
+I (2099) wifi:Init dynamic tx buffer num: 32
+I (2109) wifi:Init static rx buffer size: 1600
+I (2109) wifi:Init static rx buffer num: 10
+I (2119) wifi:Init dynamic rx buffer num: 32
+I (2119) wifi_init: rx ba win: 6
+I (2119) wifi_init: tcpip mbox: 32
+I (2129) wifi_init: udp mbox: 6
+I (2129) wifi_init: tcp mbox: 6
+I (2139) wifi_init: tcp tx win: 5744
+I (2139) wifi_init: tcp rx win: 5744
+I (2139) wifi_init: tcp mss: 1440
+I (2149) wifi_init: WiFi IRAM OP enabled
+I (2149) wifi_init: WiFi RX IRAM OP enabled
+I (2159) phy_init: phy_version 4670,719f9f6,Feb 18 2021,17:07:07
+I (2259) wifi:mode : sta (40:22:d8:ee:48:40)
+I (2259) wifi:enable tsf
+I (2259) WIFI_initSTA: WIFI initialize STA finished.
+I (2269) WIFI_initSTA:
+Number of Access Points Found: 0
+
+I (2269) WIFI_initSTA: +---------------------------------+---------+------+-----------------------+
+I (2279) WIFI_initSTA: |               SSID              | Channel | RSSI |   Authentication Mode |
+I (2289) WIFI_initSTA: +---------------------------------+---------+------+-----------------------+
+I (2879) wifi:new:<6,0>, old:<1,0>, ap:<255,255>, sta:<6,0>, prof:1
+I (2879) wifi:state: init -> auth (b0)
+I (2889) wifi:state: auth -> assoc (0)
+I (2919) wifi:state: assoc -> run (10)
+I (2939) wifi:connected with ESP32, aid = 1, channel 6, BW20, bssid = d2:ae:41:6a:3c:78
+I (2939) wifi:security: WPA2-PSK, phy: bgn, rssi: -31
+I (2949) wifi:pm start, type: 1
+
+I (2979) wifi:AP's beacon interval = 102400 us, DTIM period = 2
+W (3129) wifi:<ba-add>idx:0 (ifx:0, d2:ae:41:6a:3c:78), tid:0, ssn:0, winSize:64
+I (4049) esp_netif_handlers: sta ip: 192.168.76.176, mask: 255.255.255.0, gw: 192.168.76.178
+I (4049) WIFI_eventHandler: got ip:192.168.76.176
+I (4049) WIFI_initSTA: Connected to ap SSID:ESP32 password:long2703
+I (4059) app_main: Initialize DS3231 module(I2C/Wire0).
+I (4059) app_main: Initialize BME280 sensor(I2C/Wire1).
+I (4079) bme280_init: BME280 sensor initialze successful.
+I (4079) pms7003_initUart: PMS7003 UART port initialize successful.
+
+'''
+
+I (919) app_main: Booting....
+I (919) app_main: Name device: Air-SENSE device.
+I (929) app_main: Firmware version 0.0.1.
+I (929) app_main: Initialize nvs partition.
+I (1959) app_main: Initialize SD card with SPI interface.
+I (1959) sdcard_initialize: Initializing SD card
+I (1959) sdcard_initialize: Using SPI peripheral
+I (1959) sdcard_initialize: Mounting filesystem
+I (1969) gpio: GPIO[5]| InputEn: 0| OutputEn: 1| OpenDrain: 0| Pullup: 0| Pulldown: 0| Intr:0
+I (1979) sdspi_transaction: cmd=52, R1 response: command not supported
+I (2019) sdspi_transaction: cmd=5, R1 response: command not supported
+I (2039) sdcard_initialize: SDCard has been initialized.
+I (2039) sdcard_initialize: Filesystem mounted
+I (2039) sdcard_initialize: SDCard properties.
+Name: APPSD
+Type: SDSC
+Speed: 20 MHz
+Size: 1920MB
+I (2059) wifi:wifi driver task: 3ffc6fa8, prio:23, stack:6656, core=0
+I (2059) system_api: Base MAC address is not set
+I (2059) system_api: read default base MAC address from EFUSE
+I (2079) wifi:wifi firmware version: d683787
+I (2079) wifi:wifi certification version: v7.0
+I (2079) wifi:config NVS flash: enabled
+I (2079) wifi:config nano formating: disabled
+I (2089) wifi:Init data frame dynamic rx buffer num: 32
+I (2089) wifi:Init management frame dynamic rx buffer num: 32
+I (2099) wifi:Init management short buffer num: 32
+I (2099) wifi:Init dynamic tx buffer num: 32
+I (2109) wifi:Init static rx buffer size: 1600
+I (2109) wifi:Init static rx buffer num: 10
+I (2119) wifi:Init dynamic rx buffer num: 32
+I (2119) wifi_init: rx ba win: 6
+I (2119) wifi_init: tcpip mbox: 32
+I (2129) wifi_init: udp mbox: 6
+I (2129) wifi_init: tcp mbox: 6
+I (2139) wifi_init: tcp tx win: 5744
+I (2139) wifi_init: tcp rx win: 5744
+I (2139) wifi_init: tcp mss: 1440
+I (2149) wifi_init: WiFi IRAM OP enabled
+I (2149) wifi_init: WiFi RX IRAM OP enabled
+I (2159) phy_init: phy_version 4670,719f9f6,Feb 18 2021,17:07:07
+I (2259) wifi:mode : sta (40:22:d8:ee:48:40)
+I (2259) wifi:enable tsf
+I (2259) WIFI_initSTA: WIFI initialize STA finished.
+I (2269) WIFI_initSTA:
+Number of Access Points Found: 0
+
+I (2269) WIFI_initSTA: +---------------------------------+---------+------+-----------------------+
+I (2279) WIFI_initSTA: |               SSID              | Channel | RSSI |   Authentication Mode |
+I (2289) WIFI_initSTA: +---------------------------------+---------+------+-----------------------+
+I (2929) wifi:new:<6,0>, old:<1,0>, ap:<255,255>, sta:<6,0>, prof:1
+I (2949) wifi:state: auth -> assoc (0)
+I (2959) wifi:state: assoc -> run (10)
+I (2989) wifi:connected with ESP32, aid = 1, channel 6, BW20, bssid = d2:ae:41:6a:3c:78
+I (2989) wifi:security: WPA2-PSK, phy: bgn, rssi: -42
+I (2999) wifi:pm start, type: 1
+
+I (3029) wifi:AP's beacon interval = 102400 us, DTIM period = 2
+W (3089) wifi:<ba-add>idx:0 (ifx:0, d2:ae:41:6a:3c:78), tid:0, ssn:0, winSize:64
+E (5299) WIFI_initSTA: UNEXPECTED EVENT
+I (5299) app_main: Initialize DS3231 module(I2C/Wire0).
+I (5299) app_main: Initialize BME280 sensor(I2C/Wire1).
+I (5309) bme280_init: BME280 sensor initialze successful.
+I (5309) pms7003_initUart: PMS7003 UART port initialize successful.
+I (10049) esp_netif_handlers: sta ip: 192.168.76.176, mask: 255.255.255.0, gw: 192.168.76.178
+I (10049) WIFI_eventHandler: got ip:192.168.76.176

@@ -1,24 +1,51 @@
 #include "DS3231Time.h"
 
-static const char *TAG = "DS3231";
+// %d:%d:%d,%d-%d-%d
+static const char *timeFormat = "%d:%d:%d,%d-%d-%d";
+// %d-%d-%d
+static const char *timeFormat2 = "%d-%d-%d";
 
 
-esp_err_t ds3231_convertTimeToString(struct tm *time, char* timeString, const unsigned int lenghtString)
+esp_err_t ds3231_initialize(i2c_dev_t *dev, i2c_port_t port, gpio_num_t sda_gpio, gpio_num_t scl_gpio)
 {
-    memset(timeString, 0, lenghtString);
-    int lenght = 0;
-    lenght = sprintf(timeString, timeFormat, time->tm_hour, time->tm_min, time->tm_sec, time->tm_year, time->tm_mon, time->tm_mday);
-    if (lenght)
+    esp_err_t error;
+    error = ds3231_init_desc(dev, port, sda_gpio, scl_gpio);
+    if (error != ESP_OK)
     {
-        ESP_LOGE(__func__, "Convert time to string fail.");
-        return ESP_FAIL;
+        ESP_LOGE(__func__, "DS3231 module initialize fail.");
+        return error;
     }
-    
-    ESP_LOGI(__func__, "Convert time to string success.");
-    return ESP_OK;
+    ESP_LOGI(__func__, "DS3231 module initialize success.");
+    struct tm currentTime;
+    ds3231_get_time(dev, &currentTime);
+    currentDay = currentTime.tm_yday;
+    return error;
 }
 
-esp_err_t ds3231_getEpochTime(i2c_dev_t *dev, unsigned long *epochTime)
+esp_err_t ds3231_convertTimeToString(i2c_dev_t *dev, char* timeString, const unsigned int lenghtString)
+{
+    struct tm time;
+    ds3231_get_time(dev, &time);
+    memset(timeString, 0, lenghtString);
+    int lenght = 0;
+    lenght = sprintf(timeString, timeFormat2, time.tm_hour, time.tm_min, time.tm_sec, time.tm_year, time.tm_mon, time.tm_mday);
+    if (lenght)
+    {
+        ESP_LOGI(__func__, "Convert time to string success.");
+        return ESP_OK;
+    }
+
+    ESP_LOGE(__func__, "Convert time to string fail.");
+    return ESP_FAIL;
+
+}
+
+esp_err_t ds3231_setTime(i2c_dev_t *dev, struct tm *time)
+{
+    return ds3231_set_time(dev, time);
+}
+
+esp_err_t ds3231_getEpochTime(i2c_dev_t *dev, uint64_t *epochTime)
 {
     struct tm currentTime;
     esp_err_t err_code = ESP_OK;
@@ -26,6 +53,7 @@ esp_err_t ds3231_getEpochTime(i2c_dev_t *dev, unsigned long *epochTime)
     if (err_code != ESP_OK)
     {
         ESP_LOGE(__func__, "DS3231 get UnixTime fail(%s).", esp_err_to_name(err_code));
+        return ESP_FAIL;
     }
 
     *epochTime  = SECONDS_FROM_1970_TO_2022;
@@ -37,4 +65,11 @@ esp_err_t ds3231_getEpochTime(i2c_dev_t *dev, unsigned long *epochTime)
     ESP_LOGI(__func__, "DS3231 get EpochTime success.");
     
     return ESP_OK;
+}
+
+bool ds3231_isNewDay(i2c_dev_t *dev)
+{
+    struct tm currentTime;
+    ds3231_get_time(dev, &currentTime);
+    return (currentDay == currentTime.tm_yday);
 }

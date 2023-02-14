@@ -2,7 +2,7 @@ menu "Device in use"
 
     config NAME_DEVICE
         string "Name Device"
-        default "Air-SENSE device"
+        default "AirSENSE_001"
         help
             Name device.
 
@@ -29,6 +29,12 @@ menu "Device in use"
         default y
         help 
             Using DS3231 module.
+
+    config RTC_TIME_SYNC
+        bool "Time synchronization for RTC"
+        default y
+        help 
+            Time synchronization for RTC
 
     config USING_BME280
         bool "Using BME280 Sensor"
@@ -88,10 +94,74 @@ menu "WiFi Config Menu"
         help 
             PASSWORD.
 
+    config MAXIMUM_AP
+        int "Maximum access points"
+        default  10
+        help 
+            Maximum access points.
+
     config MAXIMUM_RETRY
         int "Maximum retry"
         default 25
         help
             Set the Maximum retry to avoid station reconnecting to the AP unlimited when the AP is really inexistent.
 
+    config SHOW_LIST_ACCESS_POINTS_FOUND
+        bool "Show list Access Points found."
+        default y
+        help
+            Show list Access Points found.
+
 endmenu
+
+menu "MQTT Config menu"
+
+    config BROKER_URI
+        string "Broker URL"
+        default "mqtt://103.130.212.210:1885"
+        help
+            URL of an mqtt broker which this device connects to.
+
+    config BROKER_HOST
+        string "Broker host"
+        default "103.130.212.210"
+        help 
+            Host is MQTT server domain <ipv4 as string>
+
+    config BROKER_PORT
+        int "Broker port"
+        default 1885
+        help 
+            Port is MQTT server port
+
+    config MQTT_USERNAME
+        string "User name"
+        default "test"
+        help 
+            MQTT username
+
+    config MQTT_PASSWORD
+        string  "Password"
+        default  "testadmin"
+        help 
+            MQTT password
+
+    config BROKER_CERTIFICATE_OVERRIDE
+        string "Broker certificate override"
+        default ""
+        help
+            Please leave empty if broker certificate included from a textfile; otherwise fill in a base64 part of PEM
+            format certificate
+
+    config BROKER_CERTIFICATE_OVERRIDDEN
+        bool
+        default y if BROKER_CERTIFICATE_OVERRIDE != ""
+
+    config BROKER_BIN_SIZE_TO_SEND
+        # This option is not visible and is used only to set parameters for example tests
+        # Here we configure the data size to send and to be expected in the python script
+        int
+        default 20000
+
+endmenu
+

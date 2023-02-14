@@ -1,0 +1,1 @@
+- 1 task phải luôn có 1 vòng lặp vô hạn, không thể để hàm đó thoát khỏi hàm, sẽ gây ra lỗi -> reset
