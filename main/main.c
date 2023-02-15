@@ -244,32 +244,6 @@ void WIFI_initSTA(void)
 #endif
 }
 
-#if(0)
-void wifiEvenT_task(void *parameters)
-{
-    WIFI_eventGroup = xEventGroupCreate();
-    
-    for (;;)
-    {
-        EventBits_t bits = xEventGroupWaitBits(WIFI_eventGroup,
-                                               WIFI_CONNECTED_BIT | WIFI_CONNECT_FAIL_BIT,
-                                               pdTRUE,
-                                               pdFALSE,
-                                               portMAX_DELAY);
-
-        /* xEventGroupWaitBits() returns the bits before the call returned, hence we can test which event actually
-        * happened. */
-        if (bits & WIFI_CONNECTED_BIT) {
-            ESP_LOGI(__func__, "Connected to ap SSID:%s password:%s",
-                    CONFIG_SSID, CONFIG_PASSWORD);
-        } else if (bits & WIFI_CONNECT_FAIL_BIT) {
-            ESP_LOGI(__func__, "Failed to connect to SSID:%s, password:%s",
-                    CONFIG_SSID, CONFIG_PASSWORD);
-        }
-    }
-}
-#endif
-
 /*          -------------- *** --------------           */
 
 /*          -------------- MQTT --------------           */
@@ -298,7 +272,6 @@ static void mqtt_event_handler(void *handler_args, esp_event_base_t base, int32_
             if (eTaskGetState(mqttPublishMessageTask_handle) == eSuspended)
             {
                 vTaskResume(mqttPublishMessageTask_handle);
-                xEventGroupSetBits(fileStore_eventGroup, MQTT_CLIENT_CONNECTED);
             }
         }
         break;
@@ -374,7 +347,7 @@ void mqttPublishMessage_task(void *parameters)
             }
         } else {
             ESP_LOGE(__func__, "MQTT Client disconnected.");
-            xEventGroupSetBits(fileStore_eventGroup, MQTT_CLIENT_DISCONNECTED);
+            //xEventGroupSetBits(fileStore_eventGroup, MQTT_CLIENT_DISCONNECTED);
             vTaskSuspend(NULL);
         }
     }
@@ -436,14 +409,9 @@ void getDataFromSensor_task(void *parameters)
 
     for (;;)
     {
-
         if (xSemaphoreTake(getDataSensor_semaphore, portMAX_DELAY))
         {
-// #ifdef CONFIG_USING_RTC
-//             moduleErrorTemp.ds3231Error = ds3231_getEpochTime(&ds3231_device, &(dataSensorTemp.timeStamp));
-// #else
-            time(&dataSensorTemp.timeStamp);
-//#endif
+            moduleErrorTemp.ds3231Error = ds3231_getEpochTime(&ds3231_device, &(dataSensorTemp.timeStamp));
 
             moduleErrorTemp.pms7003Error = pms7003_readData(indoor, &(dataSensorTemp.pm1_0),
                                                                     &(dataSensorTemp.pm2_5),
@@ -505,63 +473,6 @@ void getDataFromSensor_task(void *parameters)
 };
 
 
-void fileEvent_task(void *parameters)
-{
-    fileStore_eventGroup = xEventGroupCreate();
-    SemaphoreHandle_t file_semaphore = NULL;
-    file_semaphore = xSemaphoreCreateMutex();
-
-    for (;;)
-    {
-        EventBits_t bits = xEventGroupWaitBits(fileStore_eventGroup,
-                                               FILE_RENAME_NEWDAY | MQTT_CLIENT_CONNECTED | MQTT_CLIENT_DISCONNECTED,
-                                               pdTRUE,
-                                               pdFALSE,
-                                               portMAX_DELAY);
-
-        if(xSemaphoreTake(file_semaphore, portMAX_DELAY) == pdTRUE)
-        {
-            if (bits & FILE_RENAME_NEWDAY)
-            {
-                //ds3231_convertTimeToString(&ds3231_device, nameFileSaveData, 10);
-                //struct tm dateTime = { 0 };
-                //mktime(&dateTime);
-                // sprintf(nameFileSaveData, "%d-%d-%d", dateTime.tm_mday, dateTime.tm_mon, dateTime.tm_year);
-                sprintf(nameFileSaveData, "hello");
-            }
-            else if (bits & MQTT_CLIENT_CONNECTED)
-            {
-                char *newNamefile;
-                newNamefile = strtok(nameFileSaveData, "_noWiFi");
-                strncpy(nameFileSaveData, newNamefile, strlen(newNamefile));
-                vTaskResume(saveDataSensorAfterReconnectWiFiTask_handle);
-            }
-            else if (bits & MQTT_CLIENT_DISCONNECTED)
-            {
-                strcat(nameFileSaveData, "_noWiFi");
-                //nameFileSaveDataNoWiFi_queue = xQueueCreate(NAME_FILE_QUEUE_SIZE, sizeof(nameFileSaveData));
-            }
-            xSemaphoreGive(file_semaphore);
-        }
-    }
-};
-
-void saveDataSensorAfterReconnectWiFi_task(void *parameters)
-{
-    SemaphoreHandle_t readDataSensorFromFile_semaphore = NULL;
-    readDataSensorFromFile_semaphore = xSemaphoreCreateMutex();
-
-    for(;;){
-        // while (uxQueueMessagesWaiting() != 0)
-        // {
-            
-        // }
-        // Suspend ourselves.
-        vTaskSuspend(NULL);
-    }
-}
-
-
 void saveDataSensorToSDcard_task(void *parameters)
 {
     struct dataSensor_st dataSensorReceiveFromQueue;
@@ -573,6 +484,7 @@ void saveDataSensorToSDcard_task(void *parameters)
         {
             if(xQueueReceive(dataSensorSentToSD_queue, (void *)&dataSensorReceiveFromQueue, WAIT_10_TICK * 50) == pdPASS)
             {
+                ds3231_convertTimeToString(&ds3231_device, nameFileSaveData, 10);
                 static esp_err_t errorCode_t;
                 ESP_LOGI(__func__, "Receiving data from queue successfully.");
                 if(xSemaphoreTake(writeDataToSDcard_semaphore, portMAX_DELAY) == pdTRUE)
@@ -640,16 +552,10 @@ void app_main(void)
     ESP_LOGI(__func__, "Name device: %s.", CONFIG_NAME_DEVICE);
     ESP_LOGI(__func__, "Firmware version %s.", CONFIG_FIRMWARE_VERSION);
     
-
     // Initialize nvs partition
     ESP_LOGI(__func__, "Initialize nvs partition.");
     initialize_nvs();
     // Wait a second for memory initialization
-    
-// MQTT
-
-    esp_log_level_set("MQTT_CLIENT", ESP_LOG_VERBOSE);
-
     vTaskDelay(1000 / portTICK_RATE_MS);
 
 // Initialize SD card
@@ -669,106 +575,30 @@ void app_main(void)
 #endif  //CONFIG_USING_SDCARD
 
 
-    dataSensorSentToMQTT_queue = xQueueCreate(QUEUE_SIZE, sizeof(struct dataSensor_st));
-    while (dataSensorSentToMQTT_queue == NULL)
-    {
-        ESP_LOGE(__func__, "Create dataSensorSentToMQTT Queue failed.");
-        ESP_LOGI(__func__, "Retry to create dataSensorSentToMQTT Queue...");
-        vTaskDelay(500 / portTICK_RATE_MS);
-        dataSensorSentToMQTT_queue = xQueueCreate(QUEUE_SIZE, sizeof(struct dataSensor_st));
-    };
-    ESP_LOGI(__func__, "Create dataSensorSentToMQTT Queue success.");
-
-    xTaskCreate(fileEvent_task,
-                            "EventFile",
-                            (1024 * 8),
-                            NULL,
-                            (UBaseType_t)7,
-                            NULL);
-
-    vTaskDelay(100 / portTICK_RATE_MS);
-
-    xEventGroupSetBits(fileStore_eventGroup, FILE_RENAME_NEWDAY);
-
-    xTaskCreate(mqttPublishMessage_task, 
-                            "MQTT Publish",
-                            (1024 * 16),
-                            NULL,
-                            (UBaseType_t)10,
-                            &mqttPublishMessageTask_handle);
-    //vTaskSuspend(mqttPublishMessageTask_handle);
-
-#if(CONFIG_USING_WIFI)
-    WIFI_initSTA();
-#endif
-
-    //mqtt_app_start();
-
 // Initialize BME280 Sensor
 #if(CONFIG_USING_BME280)
-    // Initialize I2C wire for BME280 Sensor
-    // i2c_config_t bme280_i2cConfig = {
-    //     .mode = I2C_MODE_MASTER,
-    //     .sda_io_num = CONFIG_BME_PIN_NUM_SDA,
-    //     .scl_io_num = CONFIG_BME_PIN_NUM_SCL,
-    //     .sda_pullup_en = GPIO_PULLUP_ENABLE,
-    //     .scl_pullup_en = GPIO_PULLUP_ENABLE,
-    //     .master.clk_speed = CONFIG_BME_I2C_FREQ_HZ,
-    // };
-    // i2c_param_config(CONFIG_BME_I2C_PORT, &bme280_i2cConfig);
-    // ESP_ERROR_CHECK_WITHOUT_ABORT(i2c_driver_install(CONFIG_BME_I2C_PORT, bme280_i2cConfig.mode, I2C_MASTER_RX_BUF_DISABLE, I2C_MASTER_TX_BUF_DISABLE, 0));
-
-    ESP_LOGI(__func__, "Initialize BME280 sensor(I2C/Wire%d).", CONFIG_BME_I2C_PORT);
     ESP_ERROR_CHECK_WITHOUT_ABORT(i2cdev_init());
+    ESP_LOGI(__func__, "Initialize BME280 sensor(I2C/Wire%d).", CONFIG_BME_I2C_PORT);
 
     ESP_ERROR_CHECK_WITHOUT_ABORT(bme280_init(&bme280_device, &bme280_params, BME280_ADDRESS,
                                     CONFIG_BME_I2C_PORT, CONFIG_BME_PIN_NUM_SDA, CONFIG_BME_PIN_NUM_SCL));
 
 #endif  //CONFIG_USING_BME280
 
-    time_t timeNow = 0;
-    struct tm timeInfo = { 0 };
-#if(CONFIG_RTC_TIME_SYNC)
-    /**
-     * NTP server address could be aquired via DHCP,
-     * */
-    //sntp_servermode_dhcp(1);
-    sntp_init_func();
-    sntp_setTime(&timeInfo, & timeNow);
-    mktime(&timeInfo);
-    sprintf(nameFileSaveData, "%d-%d-%d", timeInfo.tm_mday, timeInfo.tm_mon, timeInfo.tm_year);
-#endif
 
 // Initialize RTC module
 #if(CONFIG_USING_RTC)
-    // Initialize I2C wire for RTC module
-    // i2c_config_t ds3231_i2cConfig = {
-    //     .mode = I2C_MODE_MASTER,
-    //     .sda_io_num = CONFIG_RTC_PIN_NUM_SDA,
-    //     .scl_io_num = CONFIG_RTC_PIN_NUM_SCL,
-    //     .sda_pullup_en = GPIO_PULLUP_ENABLE,
-    //     .scl_pullup_en = GPIO_PULLUP_ENABLE,
-    //     .master.clk_speed = CONFIG_RTC_I2C_FREQ_HZ,
-    // };
-    // i2c_param_config(CONFIG_RTC_I2C_PORT, &ds3231_i2cConfig);
-    // ESP_ERROR_CHECK_WITHOUT_ABORT(i2c_driver_install(CONFIG_RTC_I2C_PORT, ds3231_i2cConfig.mode, I2C_MASTER_RX_BUF_DISABLE, I2C_MASTER_TX_BUF_DISABLE, 0));
-
     ESP_LOGI(__func__, "Initialize DS3231 module(I2C/Wire%d).", CONFIG_RTC_I2C_PORT);
 
     memset(&ds3231_device, 0, sizeof(i2c_dev_t));
 
     ESP_ERROR_CHECK_WITHOUT_ABORT(ds3231_initialize(&ds3231_device, CONFIG_RTC_I2C_PORT, CONFIG_RTC_PIN_NUM_SDA, CONFIG_RTC_PIN_NUM_SCL));
-    ds3231_convertTimeToString(&ds3231_device, nameFileSaveData, 10);
-
-    ds3231_setTime(&ds3231_device, &timeInfo);
-
+    //ds3231_convertTimeToString(&ds3231_device, nameFileSaveData, 10);
 #endif  //CONFIG_USING_RTC
-
 
 
 #if(CONFIG_USING_PMS7003)
     ESP_ERROR_CHECK_WITHOUT_ABORT(pms7003_initUart(&pms_uart_config));
-
 #endif  //CONFIG_USING_PMS7003
 
 // Create dataSensorQueue
@@ -801,31 +631,27 @@ void app_main(void)
         ESP_LOGI(__func__, "Create moduleError Queue success.");
     }
     
-// Create nameFileSaveDataNoWiFi Queue
-    //nameFileSaveDataNoWiFi_queue = xQueueCreate(QUEUE_SIZE, sizeof(nameFileSaveData));
-    // if (nameFileSaveDataNoWiFi_queue == NULL)
-    // {
-    //     ESP_LOGE(__func__, "Create nameFileSaveData Queue failed.");
-    // }
-    
-    xTaskCreate(getDataFromSensor_task,
-                            "GetDataSensor",
-                            (1024 * 64),
-                            NULL,
-                            (UBaseType_t)25,
-                            &getDataFromSensorTask_handle);
+    dataSensorSentToMQTT_queue = xQueueCreate(QUEUE_SIZE, sizeof(struct dataSensor_st));
+    while (dataSensorSentToMQTT_queue == NULL)
+    {
+        ESP_LOGE(__func__, "Create dataSensorSentToMQTT Queue failed.");
+        ESP_LOGI(__func__, "Retry to create dataSensorSentToMQTT Queue...");
+        vTaskDelay(500 / portTICK_RATE_MS);
+        dataSensorSentToMQTT_queue = xQueueCreate(QUEUE_SIZE, sizeof(struct dataSensor_st));
+    };
+    ESP_LOGI(__func__, "Create dataSensorSentToMQTT Queue success.");
 
+    xTaskCreate(getDataFromSensor_task, "GetDataSensor", (1024 * 64), NULL, (UBaseType_t)25, &getDataFromSensorTask_handle);
 
+    xTaskCreate(saveDataSensorToSDcard_task, "SaveDataSensor", (1024 * 16), NULL, (UBaseType_t)10, &saveDataSensorToSDcardTask_handle);
 
-    xTaskCreate(saveDataSensorToSDcard_task,
-                            "SaveDataSensor",
-                            (1024 * 16),
-                            NULL,
-                            (UBaseType_t)10,
-                            &saveDataSensorToSDcardTask_handle);
+    xTaskCreate(mqttPublishMessage_task, "MQTT Publish",  (1024 * 16), NULL, (UBaseType_t)10, &mqttPublishMessageTask_handle);
+    vTaskSuspend(mqttPublishMessageTask_handle);
 
+#if(CONFIG_USING_WIFI)
+    WIFI_initSTA();
+#endif
 
-    //vTaskStartScheduler();
 }
 
 

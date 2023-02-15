@@ -28,7 +28,7 @@ esp_err_t ds3231_convertTimeToString(i2c_dev_t *dev, char* timeString, const uns
     ds3231_get_time(dev, &time);
     memset(timeString, 0, lenghtString);
     int lenght = 0;
-    lenght = sprintf(timeString, timeFormat2, time.tm_hour, time.tm_min, time.tm_sec, time.tm_year, time.tm_mon, time.tm_mday);
+    lenght = sprintf(timeString, timeFormat2, time.tm_mday, time.tm_mon, time.tm_year);
     if (lenght)
     {
         ESP_LOGI(__func__, "Convert time to string success.");
