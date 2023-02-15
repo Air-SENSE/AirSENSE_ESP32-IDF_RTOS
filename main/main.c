@@ -74,7 +74,6 @@ __attribute__((unused)) static const char *TAG = "Main";
 #define PERIOD_GET_DATA_FROM_SENSOR                 (TickType_t)(5000 / portTICK_RATE_MS)
 #define PERIOD_SAVE_DATA_SENSOR_TO_SDCARD           (TickType_t)(2500 / portTICK_RATE_MS)
 #define PERIOD_SAVE_DATA_AFTER_WIFI_RECONNECT       (TickType_t)(1000 / portTICK_RATE_MS)
-//#define WIFI_RECONECT_PERIOD                        (TickType_t)((15 * 60 * 1000) / portTICK_RATE_MS)
 
 #define NO_WAIT                                     (TickType_t)(0)
 #define WAIT_10_TICK                                (TickType_t)(10 / portTICK_RATE_MS)
@@ -82,18 +81,6 @@ __attribute__((unused)) static const char *TAG = "Main";
 #define QUEUE_SIZE              10U
 #define NAME_FILE_QUEUE_SIZE    5U
 
-//static EventGroupHandle_t WIFI_eventGroup;
-static EventGroupHandle_t fileStore_eventGroup;
-
-//static int WIFI_retryCount = 0;
-#define WIFI_CONNECTED_BIT          BIT0
-#define WIFI_CONNECT_FAIL_BIT       BIT1
-
-#define WIFI_AVAIABLE_BIT           BIT0
-#define MQTT_CLIENT_CONNECTED       WIFI_AVAIABLE_BIT
-#define WIFI_DISCONNECT_BIT         BIT1
-#define MQTT_CLIENT_DISCONNECTED    WIFI_DISCONNECT_BIT
-#define FILE_RENAME_NEWDAY          BIT2
 
 esp_mqtt_client_handle_t mqttClient_handle = NULL;
 
@@ -128,7 +115,6 @@ bmp280_t bme280_device;
 bmp280_params_t bme280_params;
 
 uart_config_t pms_uart_config = UART_CONFIG_DEFAULT();
-
 
 /*------------------------------------ WIFI ------------------------------------ */
 
@@ -200,51 +186,8 @@ void WIFI_initSTA(void)
     ESP_ERROR_CHECK_WITHOUT_ABORT(esp_wifi_start());
 
     ESP_LOGI(__func__, "WIFI initialize STA finished.");
-
-/**
- * Show list Access Point found.
- * 
- * @note: Number of Access Points dependent on CONFIG_MAXIMUM_AP,
- * you can set in menuconfig.
- * 
- */
-#ifdef CONFIG_SHOW_LIST_ACCESS_POINTS_FOUND
-
-    wifi_scan_config_t scan_config = {
-        .ssid = 0,
-        .bssid = 0,
-        .channel = 0,
-        .show_hidden = true
-    };
-
-    ESP_ERROR_CHECK_WITHOUT_ABORT(esp_wifi_scan_start(&scan_config, true));
-    wifi_ap_record_t wifi_recordArray[CONFIG_MAXIMUM_AP];
-
-    uint16_t max_records = CONFIG_MAXIMUM_AP;
-    esp_err_t error_espWifiScanGetAPRecords;
-    error_espWifiScanGetAPRecords = esp_wifi_scan_get_ap_records(&max_records, wifi_recordArray);
-    ESP_ERROR_CHECK_WITHOUT_ABORT(error_espWifiScanGetAPRecords);
-
-    if (error_espWifiScanGetAPRecords == ESP_OK)
-    {
-        ESP_LOGI(__func__, "\nNumber of Access Points Found: %d\r\n", max_records);
-        ESP_LOGI(__func__, "+---------------------------------+---------+------+-----------------------+");
-        ESP_LOGI(__func__, "|               SSID              | Channel | RSSI |   Authentication Mode |");
-        ESP_LOGI(__func__, "+---------------------------------+---------+------+-----------------------+");
-        for (int i = 0; i < max_records; i++)
-        {
-            ESP_LOGI(__func__, "|%32s | %7d | %4d | %12s|\n", (char *)wifi_recordArray[i].ssid,
-                                                wifi_recordArray[i].primary,
-                                                wifi_recordArray[i].rssi,
-                                                auth_mode_type(wifi_recordArray[i].authmode));
-
-            ESP_LOGI(__func__, "+---------------------------------+---------+------+-----------------------+");
-        }
-    }
-#endif
 }
 
-/*          -------------- *** --------------           */
 
 /*          -------------- MQTT --------------           */
 
@@ -267,12 +210,10 @@ static void mqtt_event_handler(void *handler_args, esp_event_base_t base, int32_
     case MQTT_EVENT_CONNECTED:
         ESP_LOGI(__func__, "MQTT_EVENT_CONNECTED");
         statusDevice.mqttClient = CONNECTED;
-        if (mqttPublishMessageTask_handle != NULL)
+
+        if (eTaskGetState(mqttPublishMessageTask_handle) == eSuspended)
         {
-            if (eTaskGetState(mqttPublishMessageTask_handle) == eSuspended)
-            {
-                vTaskResume(mqttPublishMessageTask_handle);
-            }
+            vTaskResume(mqttPublishMessageTask_handle);
         }
         break;
 
@@ -317,7 +258,7 @@ void mqttPublishMessage_task(void *parameters)
                     ESP_LOGI(__func__, "Receiving data from queue successfully.");
                     if(xSemaphoreTake(sentDataToMQTT_semaphore, portMAX_DELAY) == pdTRUE)
                     {
-                        int error = 0;
+                        esp_err_t error = 0;
                         char mqttMessage[256];
                         sprintf(mqttMessage, formatDataSensorString, MAC_address[0],
                                                                      MAC_address[1],
@@ -333,7 +274,7 @@ void mqttPublishMessage_task(void *parameters)
                         
                         error = esp_mqtt_client_publish(mqttClient_handle, (const char*)mqttTopic, mqttMessage, 0, 0, 0);
                         xSemaphoreGive(sentDataToMQTT_semaphore);
-                        if (error == -1)
+                        if (error == ESP_FAIL)
                         {
                             ESP_LOGE(__func__, "MQTT client publish message failed ¯\\_(ツ)_/¯...");
                         } else {
@@ -347,7 +288,7 @@ void mqttPublishMessage_task(void *parameters)
             }
         } else {
             ESP_LOGE(__func__, "MQTT Client disconnected.");
-            //xEventGroupSetBits(fileStore_eventGroup, MQTT_CLIENT_DISCONNECTED);
+            // Suspend ourselves.
             vTaskSuspend(NULL);
         }
     }
@@ -372,13 +313,9 @@ static void mqtt_app_start(void)
     esp_mqtt_client_register_event(mqttClient_handle, ESP_EVENT_ANY_ID, mqtt_event_handler, mqttClient_handle);
     esp_mqtt_client_start(mqttClient_handle);
     esp_read_mac(MAC_address, ESP_MAC_WIFI_STA);
-    sprintf(mqttTopic, "%s/%x:%x:%x:%x:%x:%x",  "IDF",
-                                                MAC_address[0],
-                                                MAC_address[1],
-                                                MAC_address[2],
-                                                MAC_address[3],
-                                                MAC_address[4],
-                                                MAC_address[5]);
+    sprintf(mqttTopic, "%s/%x:%x:%x:%x:%x:%x", "IDF", MAC_address[0], MAC_address[1], MAC_address[2], MAC_address[3], MAC_address[4], MAC_address[5]);
+
+    xTaskCreate(mqttPublishMessage_task, "MQTT Publish", (1024 * 16), NULL, (UBaseType_t)10, &mqttPublishMessageTask_handle);
 
 }
 
@@ -489,16 +426,6 @@ void saveDataSensorToSDcard_task(void *parameters)
                 ESP_LOGI(__func__, "Receiving data from queue successfully.");
                 if(xSemaphoreTake(writeDataToSDcard_semaphore, portMAX_DELAY) == pdTRUE)
                 {
-
-                    printf("%s,%llu,%.2f,%.2f,%.2f,%d,%d,%d\n", CONFIG_NAME_DEVICE,
-                                                              dataSensorReceiveFromQueue.timeStamp,
-                                                              dataSensorReceiveFromQueue.temperature,
-                                                              dataSensorReceiveFromQueue.humidity,
-                                                              dataSensorReceiveFromQueue.pressure,
-                                                              dataSensorReceiveFromQueue.pm1_0,
-                                                              dataSensorReceiveFromQueue.pm2_5,
-                                                              dataSensorReceiveFromQueue.pm10);
-
                     errorCode_t = sdcard_writeDataToFile(nameFileSaveData, "%s,%llu,%.2f,%.2f,%.2f,%d,%d,%d\n", CONFIG_NAME_DEVICE,
                                                                                                                 dataSensorReceiveFromQueue.timeStamp,
                                                                                                                 dataSensorReceiveFromQueue.temperature,
@@ -641,18 +568,11 @@ void app_main(void)
     };
     ESP_LOGI(__func__, "Create dataSensorSentToMQTT Queue success.");
 
-    xTaskCreate(getDataFromSensor_task, "GetDataSensor", (1024 * 64), NULL, (UBaseType_t)25, &getDataFromSensorTask_handle);
+    xTaskCreate(getDataFromSensor_task,     "GetDataSensor",    (1024 * 64), NULL, (UBaseType_t)25, &getDataFromSensorTask_handle);
 
-    xTaskCreate(saveDataSensorToSDcard_task, "SaveDataSensor", (1024 * 16), NULL, (UBaseType_t)10, &saveDataSensorToSDcardTask_handle);
-
-    xTaskCreate(mqttPublishMessage_task, "MQTT Publish",  (1024 * 16), NULL, (UBaseType_t)10, &mqttPublishMessageTask_handle);
-    vTaskSuspend(mqttPublishMessageTask_handle);
+    xTaskCreate(saveDataSensorToSDcard_task, "SaveDataSensor",  (1024 * 16), NULL, (UBaseType_t)10, &saveDataSensorToSDcardTask_handle);
 
 #if(CONFIG_USING_WIFI)
     WIFI_initSTA();
 #endif
-
 }
-
-
-/*------------------------------------ func ------------------------------------ */

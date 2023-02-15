@@ -1,9 +1,9 @@
 #include "DS3231Time.h"
 
 // %d:%d:%d,%d-%d-%d
-static const char *timeFormat = "%d:%d:%d,%d-%d-%d";
+__attribute__((unused)) static const char *timeFormat = "%d:%d:%d,%d-%d-%d";
 // %d-%d-%d
-static const char *timeFormat2 = "%d-%d-%d";
+static const char *timeFormat2 = "%d %d %d";
 
 
 esp_err_t ds3231_initialize(i2c_dev_t *dev, i2c_port_t port, gpio_num_t sda_gpio, gpio_num_t scl_gpio)
