@@ -118,11 +118,6 @@ uart_config_t pms_uart_config = UART_CONFIG_DEFAULT();
 
 /*------------------------------------ WIFI ------------------------------------ */
 
-__attribute__((unused)) static char *auth_mode_type(wifi_auth_mode_t auth_mode)
-{
-  char *types[] = {"OPEN", "WEP", "WPA PSK", "WPA2 PSK", "WPA WPA2 PSK", "MAX"};
-  return types[auth_mode];
-}
 
 static void mqtt_app_start(void);
 static esp_err_t WiFi_eventHandler(void *argument, system_event_t *event)
@@ -154,7 +149,10 @@ static esp_err_t WiFi_eventHandler(void *argument, system_event_t *event)
     return ESP_OK;
 }
 
-
+/**
+ * @brief This function initialize wifi and create, start WiFi handle such as loop (low priority)
+ * 
+ */
 void WIFI_initSTA(void)
 {
     ESP_ERROR_CHECK_WITHOUT_ABORT(esp_netif_init());
@@ -191,15 +189,15 @@ void WIFI_initSTA(void)
 
 /*          -------------- MQTT --------------           */
 
-/*
+/**
  * @brief Event handler registered to receive MQTT events
  *
  *  This function is called by the MQTT client event loop.
  *
- * @param handler_args user data registered to the event.
- * @param base Event base for the handler(always MQTT Base in this example).
- * @param event_id The id for the received event.
- * @param event_data The data for the event, esp_mqtt_event_handle_t.
+ * @param[in] handler_args user data registered to the event.
+ * @param[in] base Event base for the handler(always MQTT Base in this example).
+ * @param[in] event_id The id for the received event.
+ * @param[in] event_data The data for the event, esp_mqtt_event_handle_t.
  */
 static void mqtt_event_handler(void *handler_args, esp_event_base_t base, int32_t event_id, void *event_data)
 {
@@ -242,6 +240,10 @@ static void mqtt_event_handler(void *handler_args, esp_event_base_t base, int32_
     }
 }
 
+/**
+ * @brief Publish message dataSensor receive from dataSensorSentToMQTT_queue to MQTT
+ * 
+ */
 void mqttPublishMessage_task(void *parameters)
 {
     sentDataToMQTT_semaphore = xSemaphoreCreateMutex();
@@ -294,7 +296,10 @@ void mqttPublishMessage_task(void *parameters)
     }
 }
 
-
+/**
+ * @brief This function initialize MQTT client and create, start MQTT Client handle such as loop (low priority)
+ * 
+ */
 static void mqtt_app_start(void)
 {
     const esp_mqtt_client_config_t mqtt_Config = {
@@ -312,11 +317,10 @@ static void mqtt_app_start(void)
     /* The last argument may be used to pass data to the event handler, in this example mqtt_event_handler */
     esp_mqtt_client_register_event(mqttClient_handle, ESP_EVENT_ANY_ID, mqtt_event_handler, mqttClient_handle);
     esp_mqtt_client_start(mqttClient_handle);
-    esp_read_mac(MAC_address, ESP_MAC_WIFI_STA);
+    esp_read_mac(MAC_address, ESP_MAC_WIFI_STA);    // Get MAC address of ESP32
     sprintf(mqttTopic, "%s/%x:%x:%x:%x:%x:%x", "IDF", MAC_address[0], MAC_address[1], MAC_address[2], MAC_address[3], MAC_address[4], MAC_address[5]);
 
     xTaskCreate(mqttPublishMessage_task, "MQTT Publish", (1024 * 16), NULL, (UBaseType_t)10, &mqttPublishMessageTask_handle);
-
 }
 
 
@@ -350,13 +354,18 @@ void getDataFromSensor_task(void *parameters)
         {
             moduleErrorTemp.ds3231Error = ds3231_getEpochTime(&ds3231_device, &(dataSensorTemp.timeStamp));
 
+#if(CONFIG_USING_PMS7003)
             moduleErrorTemp.pms7003Error = pms7003_readData(indoor, &(dataSensorTemp.pm1_0),
                                                                     &(dataSensorTemp.pm2_5),
                                                                     &(dataSensorTemp.pm10));
+#endif
 
+#if(CONFIG_USING_BME280)
             moduleErrorTemp.bme280Error = bme280_readSensorData(&bme280_device, &(dataSensorTemp.temperature),
                                                                                 &(dataSensorTemp.pressure),
                                                                                 &(dataSensorTemp.humidity));
+#endif
+            xSemaphoreGive(getDataSensor_semaphore);    // Give mutex
 
             printf("%s,%llu,%.2f,%.2f,%.2f,%d,%d,%d\n", CONFIG_NAME_DEVICE,
                                                         dataSensorTemp.timeStamp,
@@ -400,8 +409,6 @@ void getDataFromSensor_task(void *parameters)
                     ESP_LOGI(__func__, "Success to post the moduleError to Queue.");
                 }
             }
-
-            xSemaphoreGive(getDataSensor_semaphore);
         }
         memset(&dataSensorTemp, 0, sizeof(struct dataSensor_st));
         memset(&moduleErrorTemp, 0, sizeof(struct moduleError_st));
@@ -417,15 +424,16 @@ void saveDataSensorToSDcard_task(void *parameters)
     writeDataToSDcard_semaphore = xSemaphoreCreateMutex();
     for(;;)
     {
-        if (uxQueueMessagesWaiting(dataSensorSentToSD_queue) != 0)
+        if (uxQueueMessagesWaiting(dataSensorSentToSD_queue) != 0)      // Check if dataSensorSentToSD_queue is empty
         {
-            if(xQueueReceive(dataSensorSentToSD_queue, (void *)&dataSensorReceiveFromQueue, WAIT_10_TICK * 50) == pdPASS)
+            if(xQueueReceive(dataSensorSentToSD_queue, (void *)&dataSensorReceiveFromQueue, WAIT_10_TICK * 50) == pdPASS)   // Get data sesor from queue
             {
-                ds3231_convertTimeToString(&ds3231_device, nameFileSaveData, 10);
-                static esp_err_t errorCode_t;
+                ds3231_convertTimeToString(&ds3231_device, nameFileSaveData, 10);   // Get dateTime string (as name file to save data follow date)
                 ESP_LOGI(__func__, "Receiving data from queue successfully.");
                 if(xSemaphoreTake(writeDataToSDcard_semaphore, portMAX_DELAY) == pdTRUE)
                 {
+                    static esp_err_t errorCode_t;
+                    //Create data string follow format
                     errorCode_t = sdcard_writeDataToFile(nameFileSaveData, "%s,%llu,%.2f,%.2f,%.2f,%d,%d,%d\n", CONFIG_NAME_DEVICE,
                                                                                                                 dataSensorReceiveFromQueue.timeStamp,
                                                                                                                 dataSensorReceiveFromQueue.temperature,
@@ -526,7 +534,11 @@ void app_main(void)
 
 #if(CONFIG_USING_PMS7003)
     ESP_ERROR_CHECK_WITHOUT_ABORT(pms7003_initUart(&pms_uart_config));
+
+    uint32_t pm1p0_t, pm2p5_t, pm10_t;
+    while(pms7003_readData(indoor, &pm1p0_t, &pm2p5_t, &pm10_t) != ESP_OK);    // Waiting for PMS7003 sensor read data from RX buffer
 #endif  //CONFIG_USING_PMS7003
+
 
 // Create dataSensorQueue
     dataSensorSentToSD_queue = xQueueCreate(QUEUE_SIZE, sizeof(struct dataSensor_st));
@@ -558,6 +570,7 @@ void app_main(void)
         ESP_LOGI(__func__, "Create moduleError Queue success.");
     }
     
+// Create dataSensorSentToMQTT Queue
     dataSensorSentToMQTT_queue = xQueueCreate(QUEUE_SIZE, sizeof(struct dataSensor_st));
     while (dataSensorSentToMQTT_queue == NULL)
     {
@@ -568,9 +581,13 @@ void app_main(void)
     };
     ESP_LOGI(__func__, "Create dataSensorSentToMQTT Queue success.");
 
-    xTaskCreate(getDataFromSensor_task,     "GetDataSensor",    (1024 * 64), NULL, (UBaseType_t)25, &getDataFromSensorTask_handle);
+    // Create task to get data from sensor (64Kb stack memory| priority 25(max))
+    // Period 5000ms
+    xTaskCreate(getDataFromSensor_task, "GetDataSensor", (1024 * 64), NULL, (UBaseType_t)25, &getDataFromSensorTask_handle);
 
-    xTaskCreate(saveDataSensorToSDcard_task, "SaveDataSensor",  (1024 * 16), NULL, (UBaseType_t)10, &saveDataSensorToSDcardTask_handle);
+    // Create task to save data from sensor read by getDataFromSensor_task() to SD card (16Kb stack memory| priority 10)
+    // Period 5000ms
+    xTaskCreate(saveDataSensorToSDcard_task, "SaveDataSensor", (1024 * 16), NULL, (UBaseType_t)10, &saveDataSensorToSDcardTask_handle);
 
 #if(CONFIG_USING_WIFI)
     WIFI_initSTA();
