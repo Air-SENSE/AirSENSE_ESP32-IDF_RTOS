@@ -323,7 +323,6 @@ static void mqtt_app_start(void)
     xTaskCreate(mqttPublishMessage_task, "MQTT Publish", (1024 * 16), NULL, (UBaseType_t)10, &mqttPublishMessageTask_handle);
 }
 
-
 /*          -------------- *** --------------           */
 
 

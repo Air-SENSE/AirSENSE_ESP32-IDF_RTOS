@@ -23,9 +23,7 @@
 #define SECONDS_PER_DAY             86400ULL
 #define SECONDS_PER_MON             2629743ULL
 #define SECONDS_PER_YEAR            31556926ULL
-#define SECONDS_FROM_1970_TO_2022   1640970000ULL    // Unixtime for 2022-01-01 00:00:00
-
-
+#define SECONDS_FROM_1970_TO_2023   1672506000U    // Unixtime for 2023-01-01 00:00:00
 
 int currentDay;
 
@@ -91,7 +89,7 @@ esp_err_t ds3231_convertTimeToString(i2c_dev_t *dev, char* timeString, const uns
  * 
  * @return ESP_OK to indicate success
  */
-esp_err_t ds3231_getEpochTime(i2c_dev_t *dev, uint64_t *epochTime);
+esp_err_t ds3231_getEpochTime(i2c_dev_t *dev, uint32_t *epochTime);
 
 
 bool ds3231_isNewDay(i2c_dev_t *dev);
