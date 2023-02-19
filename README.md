@@ -5,6 +5,9 @@ This is main development repo for ESP32 device in 20221 semester - a simple buil
 
 ## :rocket: Features
 
+**Feature Rich**<br>
+It has all the features which you need in a IOT system: Read Sensor data, save data to micro SD card, publish data to MQTT server... To integrate AirSENSE into your project, all you need is an ESP32 Board, a computer with Visual Studio Code to run PlatformIO, usb capble for flashing.
+
 **Free and Portable**
   - Support platformIO on Visual Studio Code.
   - Can be compiled to ESP32 for running freeRTOS OS.
@@ -16,7 +19,7 @@ This is main development repo for ESP32 device in 20221 semester - a simple buil
 ## :heart: Sponsor
 
 **AirSENSE - Facebook**<br>
-[AirSENSE](https://opencollective.com/lvgl)
+[AirSENSE](https://www.facebook.com/airsenseairqualitymornitoringsystem)
 
 **AirSENSE - Another Version**<br>
 [Another repositories](https://github.com/orgs/Air-SENSE/repositories)
@@ -26,22 +29,14 @@ This is main development repo for ESP32 device in 20221 semester - a simple buil
 We encourage the users to use the example as a template for the new projects.
 A recommended way is to follow the instructions on a [docs page](https://docs.espressif.com/projects/esp-idf/en/latest/api-guides/build-system.html#start-a-new-project).
 
-## Example folder contents
+## :star2: Contributing
+AirSENSE is an open project and contribution is very welcome. There are many ways to contribute from simply speaking about your project, through writing examples, improving the documentation, fixing bugs or even hosting your own project under the AirSENSE organization.
 
-The project **sample_project** contains one source file in C language [main.c](main/main.c). The file is located in folder [main](main).
 
-ESP-IDF projects are built using CMake. The project build configuration is contained in `CMakeLists.txt`
-files that provide set of directives and instructions describing the project's source files and targets
-(executable, library, or both). 
+Alot of people already left their fingerprint in AirSENSE. Be one them! See your here! :slightly_smiling_face:
 
-Below is short explanation of remaining files in the project folder.
+<a href="https://github.com/Air-SENSE/AirSENSE_ESP32-IDF_RTOS/graphs/contributors">
+  <img src="https://contrib.rocks/image?repo=Air-SENSE/AirSENSE_ESP32-IDF_RTOS&max=48" />
+</a>
 
-```
-├── CMakeLists.txt
-├── main
-│   ├── CMakeLists.txt
-│   └── main.c
-└── README.md                  This is the file you are currently reading
-```
-Additionally, the sample project contains Makefile and component.mk files, used for the legacy Make based build system. 
-They are not used or needed when building with CMake and idf.py.
+... and many other.
