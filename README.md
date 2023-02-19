@@ -1,10 +1,25 @@
-# _Sample project_
+# AirSENSE-ESP32-IDF
 
-(See the README.md file in the upper level 'examples' directory for more information about examples.)
+This is main development repo for ESP32 device in 20221 semester - a simple buildable esp-idf example. For more information please contact [Nhu Hai Long Nguyen](https://www.facebook.com/long.hai.14203544)
 
-This is the simplest buildable example. The example is used by command `idf.py create-project`
-that copies the project to user specified path and set it's name. For more information follow the [docs page](https://docs.espressif.com/projects/esp-idf/en/latest/api-guides/build-system.html#start-a-new-project)
 
+## :rocket: Features
+
+**Free and Portable**
+  - Support platformIO on Visual Studio Code.
+  - Can be compiled to ESP32 for running freeRTOS OS.
+  - Distributed under the MIT licence, so you can easily use it in commercial projects too.
+
+**Docs, Tools, and Services**
+  - We are writing about documents. 
+
+## :heart: Sponsor
+
+**AirSENSE - Facebook**<br>
+[AirSENSE](https://opencollective.com/lvgl)
+
+**AirSENSE - Another Version**<br>
+[Another repositories](https://github.com/orgs/Air-SENSE/repositories)
 
 
 ## How to use example
