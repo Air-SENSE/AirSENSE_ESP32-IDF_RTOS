@@ -1,6 +1,6 @@
 # AirSENSE-ESP32-IDF
 
-This is main development repo for ESP32 device in 20221 semester - a simple buildable esp-idf example. For more information please contact [Nhu Hai Long Nguyen](https://www.linkedin.com/in/hải-long-nguyễn-như-95b718207) or [Gmail](long27032002@gmaill.com)
+This is main development repo for ESP32 device in 20221 semester - a simple buildable esp-idf example. For more information please contact [Nhu Hai Long Nguyen](https://www.linkedin.com/in/hải-long-nguyễn-như-95b718207) or [Gmail]:long27032002@gmaill.com
 
 
 ## :rocket: Features
