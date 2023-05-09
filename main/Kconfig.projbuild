@@ -2,13 +2,13 @@ menu "Device in use"
 
     config NAME_DEVICE
         string "Name Device"
-        default "AirSENSE_001"
+        default "AirSENSE_SPARC_LAB"
         help
             Name device.
 
     config FIRMWARE_VERSION
         string "Firmware version"
-        default "0.0.1"
+        default "1.0.1"
         help 
             Firmware version.
 
