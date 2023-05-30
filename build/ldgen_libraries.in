@@ -22,6 +22,7 @@ $<TARGET_FILE:__idf_esp_netif>
 $<TARGET_FILE:__idf_esp_event>
 $<TARGET_FILE:__idf_wpa_supplicant>
 $<TARGET_FILE:__idf_esp_wifi>
+$<TARGET_FILE:__idf_console>
 $<TARGET_FILE:__idf_lwip>
 $<TARGET_FILE:__idf_log>
 $<TARGET_FILE:__idf_heap>
@@ -39,7 +40,6 @@ $<TARGET_FILE:__idf_cbor>
 $<TARGET_FILE:__idf_unity>
 $<TARGET_FILE:__idf_cmock>
 $<TARGET_FILE:__idf_coap>
-$<TARGET_FILE:__idf_console>
 $<TARGET_FILE:__idf_nghttp>
 $<TARGET_FILE:__idf_esp-tls>
 $<TARGET_FILE:__idf_esp_adc_cal>
@@ -73,13 +73,9 @@ $<TARGET_FILE:__idf_main>
 $<TARGET_FILE:__idf_i2cdev>
 $<TARGET_FILE:__idf_bmp280>
 $<TARGET_FILE:__idf_BME280>
-$<TARGET_FILE:__idf_Buttons>
 $<TARGET_FILE:__idf_DS3231>
 $<TARGET_FILE:__idf_DataManager>
 $<TARGET_FILE:__idf_DeviceManager>
 $<TARGET_FILE:__idf_FileManager>
-$<TARGET_FILE:__idf_JsonData>
 $<TARGET_FILE:__idf_PMS7003>
-$<TARGET_FILE:__idf_SNTP_Sync>
 $<TARGET_FILE:__idf_Time>
-$<TARGET_FILE:__idf_sht3x>

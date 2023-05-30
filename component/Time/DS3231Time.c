@@ -47,7 +47,7 @@ esp_err_t ds3231_setTime(i2c_dev_t *dev, struct tm *time)
     return ds3231_set_time(dev, time);
 }
 
-esp_err_t ds3231_getEpochTime(i2c_dev_t *dev, uint32_t *epochTime)
+esp_err_t ds3231_getEpochTime(i2c_dev_t *dev, uint64_t *epochTime)
 {
     struct tm currentTime = {0};
     esp_err_t err_code = ESP_OK;

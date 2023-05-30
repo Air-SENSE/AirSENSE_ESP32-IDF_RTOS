@@ -31,7 +31,6 @@
 #include "nvs_flash.h"
 #include "esp_netif.h"
 #include "esp_mac.h"
-#include "esp_sntp.h"
 #include "esp_attr.h"
 #include "esp_spi_flash.h"
 #include "mqtt_client.h"
@@ -56,10 +55,8 @@
 #include "lwip/err.h"
 #include "lwip/sys.h"
 
-#include "sntp_sync.h"
 #include "bme280.h"
 #include "sdcard.h"
-#include "button.h"
 #include "pms7003.h"
 #include "DS3231Time.h"
 #include "datamanager.h"

@@ -89,7 +89,7 @@ esp_err_t ds3231_convertTimeToString(i2c_dev_t *dev, char* timeString, const uns
  * 
  * @return ESP_OK to indicate success
  */
-esp_err_t ds3231_getEpochTime(i2c_dev_t *dev, uint32_t *epochTime);
+esp_err_t ds3231_getEpochTime(i2c_dev_t *dev, uint64_t *epochTime);
 
 
 bool ds3231_isNewDay(i2c_dev_t *dev);
