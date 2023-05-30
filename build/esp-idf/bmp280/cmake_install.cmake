@@ -1,4 +1,4 @@
-# Install script for directory: C:/Users/Long2703/AirSENSE_ESP32-IDF_RTOS/component/bmp280
+# Install script for directory: C:/Users/Long2703/AirSENSE_ESP32-IDF_RTOS/component/BMP280
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)

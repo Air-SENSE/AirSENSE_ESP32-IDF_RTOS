@@ -71,7 +71,7 @@ C:/Users/Long2703/AirSENSE_ESP32-IDF_RTOS/build/esp-idf/ulp/libulp.a
 C:/Users/Long2703/AirSENSE_ESP32-IDF_RTOS/build/esp-idf/wifi_provisioning/libwifi_provisioning.a
 C:/Users/Long2703/AirSENSE_ESP32-IDF_RTOS/build/esp-idf/main/libmain.a
 C:/Users/Long2703/AirSENSE_ESP32-IDF_RTOS/build/esp-idf/i2cdev/libi2cdev.a
-C:/Users/Long2703/AirSENSE_ESP32-IDF_RTOS/build/esp-idf/bmp280/libbmp280.a
+C:/Users/Long2703/AirSENSE_ESP32-IDF_RTOS/build/esp-idf/bmp280/libBMP280.a
 C:/Users/Long2703/AirSENSE_ESP32-IDF_RTOS/build/esp-idf/BME280/libBME280.a
 C:/Users/Long2703/AirSENSE_ESP32-IDF_RTOS/build/esp-idf/DS3231/libDS3231.a
 C:/Users/Long2703/AirSENSE_ESP32-IDF_RTOS/build/esp-idf/DataManager/libDataManager.a

@@ -689,7 +689,7 @@ C:/Users/Long2703/AirSENSE_ESP32-IDF_RTOS/build/esp-idf/i2cdev/CMakeFiles/list_i
 C:/Users/Long2703/AirSENSE_ESP32-IDF_RTOS/build/esp-idf/i2cdev/CMakeFiles/install.dir
 C:/Users/Long2703/AirSENSE_ESP32-IDF_RTOS/build/esp-idf/i2cdev/CMakeFiles/install/local.dir
 C:/Users/Long2703/AirSENSE_ESP32-IDF_RTOS/build/esp-idf/i2cdev/CMakeFiles/install/strip.dir
-C:/Users/Long2703/AirSENSE_ESP32-IDF_RTOS/build/esp-idf/bmp280/CMakeFiles/__idf_bmp280.dir
+C:/Users/Long2703/AirSENSE_ESP32-IDF_RTOS/build/esp-idf/bmp280/CMakeFiles/__idf_BMP280.dir
 C:/Users/Long2703/AirSENSE_ESP32-IDF_RTOS/build/esp-idf/bmp280/CMakeFiles/edit_cache.dir
 C:/Users/Long2703/AirSENSE_ESP32-IDF_RTOS/build/esp-idf/bmp280/CMakeFiles/rebuild_cache.dir
 C:/Users/Long2703/AirSENSE_ESP32-IDF_RTOS/build/esp-idf/bmp280/CMakeFiles/list_install_components.dir

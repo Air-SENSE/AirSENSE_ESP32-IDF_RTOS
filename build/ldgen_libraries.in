@@ -71,7 +71,7 @@ $<TARGET_FILE:__idf_ulp>
 $<TARGET_FILE:__idf_wifi_provisioning>
 $<TARGET_FILE:__idf_main>
 $<TARGET_FILE:__idf_i2cdev>
-$<TARGET_FILE:__idf_bmp280>
+$<TARGET_FILE:__idf_BMP280>
 $<TARGET_FILE:__idf_BME280>
 $<TARGET_FILE:__idf_DS3231>
 $<TARGET_FILE:__idf_DataManager>
