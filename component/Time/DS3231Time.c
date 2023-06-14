@@ -3,7 +3,7 @@
 // %d:%d:%d,%d-%d-%d
 __attribute__((unused)) static const char *timeFormat = "%d:%d:%d,%d-%d-%d";
 // %d-%d-%d
-static const char *timeFormat2 = "%d %d %d";
+static const char *timeFormat2 = "%d%d%d";
 
 static const int month[12] = {31,28,31,30,31,30,31,31,30,31,30,31};
 
