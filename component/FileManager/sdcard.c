@@ -97,7 +97,7 @@ esp_err_t sdcard_writeDataToFile(const char *nameFile, const char *format, ...)
 }
 
 
-esp_err_t sdcard_read_data_from_file(const char *nameFile, const char *format, ...)
+esp_err_t sdcard_readDataFromFile(const char *nameFile, const char *format, ...)
 {
     char pathFile[64];
     sprintf(pathFile, "%s/%s.txt", mount_point, nameFile);
