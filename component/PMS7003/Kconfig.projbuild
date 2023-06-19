@@ -24,11 +24,5 @@ menu "PMS7003 configuration"
         help 
             UART port for PMS sensor.
 
-    config PMS_REINIT_TIMES
-        int "PMS Reinit times"
-        default 10
-        help
-            Times that PMS sensor re-initialize.
-
 
 endmenu

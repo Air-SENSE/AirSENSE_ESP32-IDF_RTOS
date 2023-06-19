@@ -550,15 +550,7 @@ void app_main(void)
     ESP_ERROR_CHECK_WITHOUT_ABORT(pms7003_initUart(&pms_uart_config));
 
     uint32_t pm1p0_t, pm2p5_t, pm10_t;
-    //while(pms7003_readData(indoor, &pm1p0_t, &pm2p5_t, &pm10_t) != ESP_OK);    // Waiting for PMS7003 sensor read data from RX buffer
-    for (int i = 0; i < CONFIG_PMS_REINIT_TIMES; i++) 
-    {
-        if (pms7003_readData(indoor, &pm1p0_t, &pm2p5_t, &pm10_t) != ESP_OK)
-        {
-            continue;
-        }
-        
-    }
+    while(pms7003_readData(indoor, &pm1p0_t, &pm2p5_t, &pm10_t) != ESP_OK);    // Waiting for PMS7003 sensor read data from RX buffer
 #endif  //CONFIG_USING_PMS7003
 
 
