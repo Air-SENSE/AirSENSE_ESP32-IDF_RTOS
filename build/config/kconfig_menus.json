@@ -2468,6 +2468,16 @@
                 "range": null,
                 "title": "Uart Port",
                 "type": "int"
+            },
+            {
+                "children": [],
+                "depends_on": null,
+                "help": "Times that PMS sensor re-initialize.",
+                "id": "PMS_REINIT_TIMES",
+                "name": "PMS_REINIT_TIMES",
+                "range": null,
+                "title": "PMS Reinit times",
+                "type": "int"
             }
         ],
         "depends_on": null,

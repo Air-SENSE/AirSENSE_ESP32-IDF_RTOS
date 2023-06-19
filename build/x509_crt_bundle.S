@@ -1,4 +1,4 @@
-/* * Data converted from C:/Users/Long2703/AirSENSE_ESP32-IDF_RTOS/build/esp-idf/mbedtls/x509_crt_bundle
+/* * Data converted from C:/Users/admin/esp/AirSENSE_ESP32-IDF_RTOS_KHANH/build/esp-idf/mbedtls/x509_crt_bundle
  */
 .data
 .section .rodata.embedded

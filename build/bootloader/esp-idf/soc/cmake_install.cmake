@@ -39,7 +39,7 @@ endif()
 
 if(NOT CMAKE_INSTALL_LOCAL_ONLY)
   # Include the install script for each subdirectory.
-  include("C:/Users/Long2703/AirSENSE_ESP32-IDF_RTOS/build/bootloader/esp-idf/soc/esp32/cmake_install.cmake")
+  include("C:/Users/admin/esp/AirSENSE_ESP32-IDF_RTOS_KHANH/build/bootloader/esp-idf/soc/esp32/cmake_install.cmake")
 
 endif()
 

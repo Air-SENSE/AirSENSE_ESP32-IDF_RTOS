@@ -1,8 +1,8 @@
 {
     "project_name":       "bootloader",
     "project_path":       "C:/Espressif/frameworks/esp-idf-v4.4.3/components/bootloader/subproject",
-    "build_dir":          "C:/Users/Long2703/AirSENSE_ESP32-IDF_RTOS/build/bootloader",
-    "config_file":        "C:/Users/Long2703/AirSENSE_ESP32-IDF_RTOS/sdkconfig",
+    "build_dir":          "C:/Users/admin/esp/AirSENSE_ESP32-IDF_RTOS_KHANH/build/bootloader",
+    "config_file":        "C:/Users/admin/esp/AirSENSE_ESP32-IDF_RTOS_KHANH/sdkconfig",
     "config_defaults":    "",
     "app_elf":            "bootloader.elf",
     "app_bin":            "bootloader.bin",

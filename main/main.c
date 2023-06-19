@@ -131,12 +131,25 @@ static esp_err_t WiFi_eventHandler(void *argument, system_event_t *event)
         break;
 
     case SYSTEM_EVENT_STA_GOT_IP:
+        if (mqttPublishMessageTask_handle == NULL)
+        {
+            mqtt_app_start();
+        } else {
+            if (eTaskGetState(mqttPublishMessageTask_handle) == eSuspended)
+            {
+                vTaskResume(mqttPublishMessageTask_handle);
+            }
+            
+        }
         ESP_LOGI(__func__, "got ip: startibg MQTT Client\n");
-        mqtt_app_start();
         break;
 
     case SYSTEM_EVENT_STA_DISCONNECTED:
         ESP_LOGI(__func__, "disconnected: Retrying Wi-Fi connect to AP SSID:%s password:%s", CONFIG_SSID, CONFIG_PASSWORD);
+        if (mqttPublishMessageTask_handle != NULL)
+        {
+            vTaskSuspend(mqttPublishMessageTask_handle);
+        }
         esp_wifi_connect();
         break;
 
@@ -305,7 +318,7 @@ static void mqtt_app_start(void)
         .port = CONFIG_BROKER_PORT,
         .username = CONFIG_MQTT_USERNAME,
         .password = CONFIG_MQTT_PASSWORD,
-        .cert_pem = (const char *)"",
+        //.cert_pem = (const char *)"",
     };
 
     ESP_LOGI(__func__, "Free memory: %d bytes", esp_get_free_heap_size());
@@ -532,7 +545,15 @@ void app_main(void)
     ESP_ERROR_CHECK_WITHOUT_ABORT(pms7003_initUart(&pms_uart_config));
 
     uint32_t pm1p0_t, pm2p5_t, pm10_t;
-    while(pms7003_readData(indoor, &pm1p0_t, &pm2p5_t, &pm10_t) != ESP_OK);    // Waiting for PMS7003 sensor read data from RX buffer
+    //while(pms7003_readData(indoor, &pm1p0_t, &pm2p5_t, &pm10_t) != ESP_OK);    // Waiting for PMS7003 sensor read data from RX buffer
+    for (int i = 0; i < CONFIG_PMS_REINIT_TIMES; i++) 
+    {
+        if (pms7003_readData(indoor, &pm1p0_t, &pm2p5_t, &pm10_t) != ESP_OK)
+        {
+            continue;
+        }
+        
+    }
 #endif  //CONFIG_USING_PMS7003
 
 
