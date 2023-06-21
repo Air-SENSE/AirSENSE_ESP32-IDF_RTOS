@@ -131,12 +131,30 @@ static esp_err_t WiFi_eventHandler(void *argument, system_event_t *event)
         break;
 
     case SYSTEM_EVENT_STA_GOT_IP:
+        /* When connect/reconnect wifi, esp32 take an IP address and this 
+         * event become active. If it's the first-time connection, create
+         * task mqttPublishMessageTask, else resume that task. */
+        if (mqttPublishMessageTask_handle == NULL)
+        {
+            mqtt_app_start();
+        } else {
+            if (eTaskGetState(mqttPublishMessageTask_handle) == eSuspended)
+            {
+                vTaskResume(mqttPublishMessageTask_handle);
+            }
+            
+        }
         ESP_LOGI(__func__, "got ip: startibg MQTT Client\n");
-        mqtt_app_start();
         break;
 
     case SYSTEM_EVENT_STA_DISCONNECTED:
+        /* When esp32 disconnect to wifi, this event become 
+         * active. We suspend the task mqttPublishMessageTask. */
         ESP_LOGI(__func__, "disconnected: Retrying Wi-Fi connect to AP SSID:%s password:%s", CONFIG_SSID, CONFIG_PASSWORD);
+        if (mqttPublishMessageTask_handle != NULL)
+        {
+            vTaskSuspend(mqttPublishMessageTask_handle);
+        }
         esp_wifi_connect();
         break;
 
@@ -287,7 +305,7 @@ void mqttPublishMessage_task(void *parameters)
             }
         } else {
             ESP_LOGE(__func__, "MQTT Client disconnected.");
-            // Suspend ourselves.
+            /* Suspend this task until status of MQTT Client is CONNECTED */
             vTaskSuspend(NULL);
         }
     }
@@ -305,7 +323,7 @@ static void mqtt_app_start(void)
         .port = CONFIG_BROKER_PORT,
         .username = CONFIG_MQTT_USERNAME,
         .password = CONFIG_MQTT_PASSWORD,
-        .cert_pem = (const char *)"",
+        //.cert_pem = (const char *)"",     // For SSL
     };
 
     ESP_LOGI(__func__, "Free memory: %d bytes", esp_get_free_heap_size());

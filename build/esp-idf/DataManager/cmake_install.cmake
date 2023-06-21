@@ -1,4 +1,4 @@
-# Install script for directory: C:/Users/Long2703/AirSENSE_ESP32-IDF_RTOS/component/DataManager
+# Install script for directory: C:/Users/admin/esp/AirSENSE_ESP32-IDF_RTOS_KHANH/component/DataManager
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)

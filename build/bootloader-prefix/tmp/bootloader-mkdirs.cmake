@@ -5,15 +5,15 @@ cmake_minimum_required(VERSION 3.5)
 
 file(MAKE_DIRECTORY
   "C:/Espressif/frameworks/esp-idf-v4.4.3/components/bootloader/subproject"
-  "C:/Users/Long2703/AirSENSE_ESP32-IDF_RTOS/build/bootloader"
-  "C:/Users/Long2703/AirSENSE_ESP32-IDF_RTOS/build/bootloader-prefix"
-  "C:/Users/Long2703/AirSENSE_ESP32-IDF_RTOS/build/bootloader-prefix/tmp"
-  "C:/Users/Long2703/AirSENSE_ESP32-IDF_RTOS/build/bootloader-prefix/src/bootloader-stamp"
-  "C:/Users/Long2703/AirSENSE_ESP32-IDF_RTOS/build/bootloader-prefix/src"
-  "C:/Users/Long2703/AirSENSE_ESP32-IDF_RTOS/build/bootloader-prefix/src/bootloader-stamp"
+  "C:/Users/admin/esp/AirSENSE_ESP32-IDF_RTOS_KHANH/build/bootloader"
+  "C:/Users/admin/esp/AirSENSE_ESP32-IDF_RTOS_KHANH/build/bootloader-prefix"
+  "C:/Users/admin/esp/AirSENSE_ESP32-IDF_RTOS_KHANH/build/bootloader-prefix/tmp"
+  "C:/Users/admin/esp/AirSENSE_ESP32-IDF_RTOS_KHANH/build/bootloader-prefix/src/bootloader-stamp"
+  "C:/Users/admin/esp/AirSENSE_ESP32-IDF_RTOS_KHANH/build/bootloader-prefix/src"
+  "C:/Users/admin/esp/AirSENSE_ESP32-IDF_RTOS_KHANH/build/bootloader-prefix/src/bootloader-stamp"
 )
 
 set(configSubDirs )
 foreach(subDir IN LISTS configSubDirs)
-    file(MAKE_DIRECTORY "C:/Users/Long2703/AirSENSE_ESP32-IDF_RTOS/build/bootloader-prefix/src/bootloader-stamp/${subDir}")
+    file(MAKE_DIRECTORY "C:/Users/admin/esp/AirSENSE_ESP32-IDF_RTOS_KHANH/build/bootloader-prefix/src/bootloader-stamp/${subDir}")
 endforeach()
