@@ -71,7 +71,7 @@ __attribute__((unused)) static const char *TAG = "Main";
 #define PERIOD_GET_DATA_FROM_SENSOR                 (TickType_t)(5000 / portTICK_RATE_MS)
 #define PERIOD_SAVE_DATA_SENSOR_TO_SDCARD           (TickType_t)(2500 / portTICK_RATE_MS)
 #define PERIOD_SAVE_DATA_AFTER_WIFI_RECONNECT       (TickType_t)(1000 / portTICK_RATE_MS)
-
+#define PERIOD_READ_DATA_SENSOR_FROM_SDCARD         (TickType_t)(120000/portTICK_RATE_MS)
 #define NO_WAIT                                     (TickType_t)(0)
 #define WAIT_10_TICK                                (TickType_t)(10 / portTICK_RATE_MS)
 
@@ -84,10 +84,12 @@ esp_mqtt_client_handle_t mqttClient_handle = NULL;
 TaskHandle_t getDataFromSensorTask_handle = NULL;
 TaskHandle_t saveDataSensorToSDcardTask_handle = NULL;
 TaskHandle_t saveDataSensorAfterReconnectWiFiTask_handle = NULL;
+TaskHandle_t readDataSensorFromSDcardTask_handle = NULL;
 TaskHandle_t mqttPublishMessageTask_handle = NULL;
 
 SemaphoreHandle_t getDataSensor_semaphore = NULL;
 SemaphoreHandle_t writeDataToSDcard_semaphore = NULL;
+SemaphoreHandle_t readDataSensorFromSDcard_semaphore = NULL;
 SemaphoreHandle_t sentDataToMQTT_semaphore = NULL;
 SemaphoreHandle_t writeDataToSDcardNoWifi_semaphore = NULL;
 
@@ -471,6 +473,27 @@ void saveDataSensorToSDcard_task(void *parameters)
     }
 };
 
+void readDataSensorFromSDcard_task(void *parameters ){
+    struct dataSensor_st dataSensorReadFromSD;
+    memset(&dataSensorReadFromSD,0,sizeof(struct dataSensor_st));
+    readDataSensorFromSDcard_semaphore = xSemaphoreCreateMutex();
+    for(;;){
+        vTaskDelay(PERIOD_READ_DATA_SENSOR_FROM_SDCARD);
+        if(xSemaphoreTake(readDataSensorFromSDcard_semaphore,portMAX_DELAY) == pdTRUE){
+            esp_err_t errorCode_t = sdcard_readDataFromFile(nameFileSaveData,"%llu,%.2f,%.2f,%.2f,%d,%d,%d\n", dataSensorReadFromSD.timeStamp,
+                                                                                                   dataSensorReadFromSD.temperature,
+                                                                                                   dataSensorReadFromSD.humidity,
+                                                                                                   dataSensorReadFromSD.pressure,
+                                                                                                   dataSensorReadFromSD.pm1_0,
+                                                                                                   dataSensorReadFromSD.pm2_5,
+                                                                                                   dataSensorReadFromSD.pm10);
+            xSemaphoreGive(readDataSensorFromSDcard_semaphore);
+            if(errorCode_t != ESP_OK){
+                ESP_LOGE(__func__, "sdcard_readDataFromFile(...) function returned error");
+            }
+        }
+    }
+}
 
 /*------------------------------------ MAIN_APP ------------------------------------*/
 
@@ -603,6 +626,8 @@ void app_main(void)
     // Period 5000ms
     xTaskCreate(saveDataSensorToSDcard_task, "SaveDataSensor", (1024 * 16), NULL, (UBaseType_t)10, &saveDataSensorToSDcardTask_handle);
 
+    //Creat task to read data from SD card
+    //xTaskCreate(readDataSensorFromSDcard_task, "ReadDataSensorFromSDcard",(1024*16), NULL, (BaseType_t)10, &readDataSensorFromSDcardTask_handle);
 #if(CONFIG_USING_WIFI)
     WIFI_initSTA();
 #endif

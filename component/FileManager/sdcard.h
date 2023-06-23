@@ -100,7 +100,7 @@ esp_err_t sdcard_writeDataToFile(const char *nameFile, const char *format, ...);
  * @retval  - ESP_ERROR_SD_OPEN_FILE_FAILED on can't open file.
  * @retval  - ESP_ERROR_SD_READ_DATA_FAILED on fail to read data.
  */
-esp_err_t sdcard_readDataToFile(const char *nameFile, const char *format, ...);
+esp_err_t sdcard_readDataFromFile(const char *nameFile, const char *format, ...);
 
 
 /**
