@@ -2,8 +2,12 @@
 
 // %d:%d:%d,%d-%d-%d
 __attribute__((unused)) static const char *timeFormat = "%d:%d:%d,%d-%d-%d";
+
+// %d %d %d
+__attribute__((unused)) static const char *timeFormat2 = "%d %d %d";
+
 // %d-%d-%d
-static const char *timeFormat2 = "%d%d%d";
+static const char *timeFormat3 = "%d-%d-%d";
 
 static const int month[12] = {31,28,31,30,31,30,31,31,30,31,30,31};
 
@@ -28,9 +32,12 @@ esp_err_t ds3231_convertTimeToString(i2c_dev_t *dev, char* timeString, const uns
 {
     struct tm time;
     ds3231_get_time(dev, &time);
+#ifdef CONFIG_RTC_TIME_SYNC
+    time.tm_mon += 1;
+#endif
     memset(timeString, 0, lenghtString);
     int lenght = 0;
-    lenght = sprintf(timeString, timeFormat2, time.tm_mday, time.tm_mon, time.tm_year);
+    lenght = sprintf(timeString, timeFormat3, time.tm_mday, time.tm_mon, time.tm_year);
     if (lenght)
     {
         ESP_LOGI(__func__, "Convert time to string success.");
@@ -44,6 +51,9 @@ esp_err_t ds3231_convertTimeToString(i2c_dev_t *dev, char* timeString, const uns
 
 esp_err_t ds3231_setTime(i2c_dev_t *dev, struct tm *time)
 {
+#ifdef CONFIG_RTC_TIME_SYNC
+    time->tm_year += 1900;
+#endif
     return ds3231_set_time(dev, time);
 }
 
@@ -52,6 +62,11 @@ esp_err_t ds3231_getEpochTime(i2c_dev_t *dev, uint64_t *epochTime)
     struct tm currentTime = {0};
     esp_err_t err_code = ESP_OK;
     err_code = ds3231_get_time(dev, &currentTime);
+
+#ifdef CONFIG_RTC_TIME_SYNC
+    currentTime.tm_mon += 1;
+#endif
+
     if (err_code != ESP_OK)
     {
         ESP_LOGE(__func__, "DS3231 get UnixTime fail(%s).", esp_err_to_name(err_code));
@@ -80,5 +95,12 @@ bool ds3231_isNewDay(i2c_dev_t *dev)
 {
     struct tm currentTime;
     ds3231_get_time(dev, &currentTime);
-    return (currentDay == currentTime.tm_yday);
+    if (currentDay == currentTime.tm_yday)
+    {
+        return false;
+    } else {
+        ESP_LOGI(__func__, "New day come.");
+        currentDay = currentTime.tm_yday;
+        return true;
+    }
 }

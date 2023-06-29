@@ -15,12 +15,15 @@
 #include <stdlib.h>
 #include <string.h>
 #include <time.h>
+#include <sys/param.h>
 #include <sys/time.h>
 
 #include "sdkconfig.h"
 #include "esp_err.h"
 #include "esp_log.h"
 #include "esp_system.h"
+#include "esp_cpu.h"
+#include "esp_mem.h"
 #include "esp_wifi.h"
 #include "esp_wifi_types.h"
 #include "esp_event_loop.h"
@@ -36,7 +39,6 @@
 #include "mqtt_client.h"
 #include "esp_tls.h"
 #include "esp_ota_ops.h"
-#include <sys/param.h>
 
 #include "driver/adc.h"
 #include "driver/gpio.h"
@@ -61,6 +63,7 @@
 #include "DS3231Time.h"
 #include "datamanager.h"
 #include "DeviceManager.h"
+#include "sntp_sync.h"
 
 
 /*------------------------------------ DEFINE ------------------------------------ */
@@ -74,10 +77,22 @@ __attribute__((unused)) static const char *TAG = "Main";
 
 #define NO_WAIT                                     (TickType_t)(0)
 #define WAIT_10_TICK                                (TickType_t)(10 / portTICK_RATE_MS)
+#define WAIT_100_TICK                               (TickType_t)(100 / portTICK_RATE_MS)
 
 #define QUEUE_SIZE              10U
 #define NAME_FILE_QUEUE_SIZE    5U
 
+static EventGroupHandle_t fileStore_eventGroup;
+
+#define WIFI_CONNECTED_BIT          BIT0
+#define WIFI_CONNECT_FAIL_BIT       BIT1
+
+#define WIFI_AVAIABLE_BIT           BIT0
+#define MQTT_CLIENT_CONNECTED       WIFI_AVAIABLE_BIT
+#define WIFI_DISCONNECT_BIT         BIT1
+#define MQTT_CLIENT_DISCONNECTED    WIFI_DISCONNECT_BIT
+#define FILE_RENAME_NEWDAY          BIT2
+#define FILE_RENAME_FROMSYNC        BIT3
 
 esp_mqtt_client_handle_t mqttClient_handle = NULL;
 
@@ -85,6 +100,7 @@ TaskHandle_t getDataFromSensorTask_handle = NULL;
 TaskHandle_t saveDataSensorToSDcardTask_handle = NULL;
 TaskHandle_t saveDataSensorAfterReconnectWiFiTask_handle = NULL;
 TaskHandle_t mqttPublishMessageTask_handle = NULL;
+TaskHandle_t sntpGetTimeTask_handle = NULL;
 
 SemaphoreHandle_t getDataSensor_semaphore = NULL;
 SemaphoreHandle_t writeDataToSDcard_semaphore = NULL;
@@ -95,12 +111,16 @@ QueueHandle_t dataSensorSentToSD_queue;
 QueueHandle_t dataSensorSentToMQTT_queue;
 QueueHandle_t moduleError_queue;
 QueueHandle_t nameFileSaveDataNoWiFi_queue;
+QueueHandle_t dateTimeLostWiFi_queue;
 
 static struct statusDevice_st statusDevice = { 0 };
 
 static char nameFileSaveData[21];
 char mqttTopic[32];
 uint8_t MAC_address[6];
+uint8_t countWifiLostFileName = 0;
+char countWifiLostFileName_str[4];
+bool sendToMQTTQueue = false;
 
 const char *formatDataSensorString = "{\n\t\"station_id\":\"%x%x%x%x\",\n\t\"Time\":%lld,\n\t\"Temperature\":%.2f,\n\t\"Humidity\":%.2f,\n\t\"Pressure\":%.2f,\n\t\"PM1\":%d,\n\t\"PM2p5\":%d,\n\t\"PM10\":%d\n}";
 
@@ -117,6 +137,8 @@ uart_config_t pms_uart_config = UART_CONFIG_DEFAULT();
 
 
 static void mqtt_app_start(void);
+static void sntp_app_start(void);
+
 static esp_err_t WiFi_eventHandler(void *argument, system_event_t *event)
 {
     switch (event->event_id)
@@ -131,12 +153,21 @@ static esp_err_t WiFi_eventHandler(void *argument, system_event_t *event)
         break;
 
     case SYSTEM_EVENT_STA_GOT_IP:
+        sendToMQTTQueue = true;
+        ESP_LOGI(__func__, "got ip: starting MQTT Client\n");
+#ifdef CONFIG_RTC_TIME_SYNC
+        if(sntpGetTimeTask_handle == NULL)
+        {
+            sntp_app_start();
+        }
+#endif
         /* When connect/reconnect wifi, esp32 take an IP address and this 
          * event become active. If it's the first-time connection, create
          * task mqttPublishMessageTask, else resume that task. */
         if (mqttPublishMessageTask_handle == NULL)
         {
             mqtt_app_start();
+            statusDevice.mqttClient = CONNECTED;
         } else {
             if (eTaskGetState(mqttPublishMessageTask_handle) == eSuspended)
             {
@@ -144,16 +175,19 @@ static esp_err_t WiFi_eventHandler(void *argument, system_event_t *event)
             }
             
         }
-        ESP_LOGI(__func__, "got ip: startibg MQTT Client\n");
         break;
 
     case SYSTEM_EVENT_STA_DISCONNECTED:
         /* When esp32 disconnect to wifi, this event become 
          * active. We suspend the task mqttPublishMessageTask. */
         ESP_LOGI(__func__, "disconnected: Retrying Wi-Fi connect to AP SSID:%s password:%s", CONFIG_SSID, CONFIG_PASSWORD);
-        if (mqttPublishMessageTask_handle != NULL)
+        if (mqttPublishMessageTask_handle != NULL  && eTaskGetState(mqttPublishMessageTask_handle) != eSuspended)
         {
             vTaskSuspend(mqttPublishMessageTask_handle);
+            statusDevice.mqttClient = DISCONNECTED;
+            xEventGroupSetBits(fileStore_eventGroup, MQTT_CLIENT_DISCONNECTED);
+            sendToMQTTQueue = false;
+            ESP_LOGI(__func__, "set bit disconnect");
         }
         esp_wifi_connect();
         break;
@@ -163,6 +197,8 @@ static esp_err_t WiFi_eventHandler(void *argument, system_event_t *event)
     }
     return ESP_OK;
 }
+
+
 
 /**
  * @brief This function initialize wifi and create, start WiFi handle such as loop (low priority)
@@ -222,6 +258,7 @@ static void mqtt_event_handler(void *handler_args, esp_event_base_t base, int32_
     {
     case MQTT_EVENT_CONNECTED:
         ESP_LOGI(__func__, "MQTT_EVENT_CONNECTED");
+        xEventGroupSetBits(fileStore_eventGroup, MQTT_CLIENT_CONNECTED);
         statusDevice.mqttClient = CONNECTED;
 
         if (eTaskGetState(mqttPublishMessageTask_handle) == eSuspended)
@@ -276,7 +313,7 @@ void mqttPublishMessage_task(void *parameters)
                     if(xSemaphoreTake(sentDataToMQTT_semaphore, portMAX_DELAY) == pdTRUE)
                     {
                         esp_err_t error = 0;
-                        char mqttMessage[256];
+                        WORD_ALIGNED_ATTR char mqttMessage[256];
                         sprintf(mqttMessage, formatDataSensorString, MAC_address[0],
                                                                      MAC_address[1],
                                                                      MAC_address[2],
@@ -305,7 +342,7 @@ void mqttPublishMessage_task(void *parameters)
             }
         } else {
             ESP_LOGE(__func__, "MQTT Client disconnected.");
-            /* Suspend this task until status of MQTT Client is CONNECTED */
+            // Suspend ourselves.
             vTaskSuspend(NULL);
         }
     }
@@ -323,7 +360,7 @@ static void mqtt_app_start(void)
         .port = CONFIG_BROKER_PORT,
         .username = CONFIG_MQTT_USERNAME,
         .password = CONFIG_MQTT_PASSWORD,
-        //.cert_pem = (const char *)"",     // For SSL
+        //.cert_pem = (const char *)"",
     };
 
     ESP_LOGI(__func__, "Free memory: %d bytes", esp_get_free_heap_size());
@@ -336,6 +373,40 @@ static void mqtt_app_start(void)
     sprintf(mqttTopic, "%s/%x:%x:%x:%x:%x:%x", "IDF", MAC_address[0], MAC_address[1], MAC_address[2], MAC_address[3], MAC_address[4], MAC_address[5]);
 
     xTaskCreate(mqttPublishMessage_task, "MQTT Publish", (1024 * 16), NULL, (UBaseType_t)10, &mqttPublishMessageTask_handle);
+}
+
+/**
+ * @brief SNTP Get time task : init sntp, then get time from ntp and save time to DS3231,
+ *        finally delete itself (no loop task)
+ * 
+ * @param parameter 
+ */
+void sntpGetTime_task(void *parameter)
+{
+    time_t timeNow = 0;
+    struct tm timeInfo = { 0 };
+    do
+    {
+        sntp_init_func();
+        ESP_ERROR_CHECK_WITHOUT_ABORT(sntp_setTime(&timeInfo, & timeNow));
+        mktime(&timeInfo);
+        if (timeInfo.tm_year < 130 && timeInfo.tm_year > 120) 
+        {
+            ESP_ERROR_CHECK_WITHOUT_ABORT(ds3231_setTime(&ds3231_device, &timeInfo));
+            xEventGroupSetBits(fileStore_eventGroup, FILE_RENAME_FROMSYNC);
+        }
+        vTaskDelete(NULL);    
+    } while (0);
+}
+
+/**
+ * @brief @brief This function initialize SNTP, then get time from ntp and save time to DS3231
+ * 
+ * 
+ */
+static void sntp_app_start()
+{
+    xTaskCreate(sntpGetTime_task, "SNTP Get Time", (1024 * 4), NULL, (UBaseType_t)10, &sntpGetTimeTask_handle);
 }
 
 /*          -------------- *** --------------           */
@@ -364,9 +435,15 @@ void getDataFromSensor_task(void *parameters)
 
     for (;;)
     {
+#if(CONFIG_USING_RTC)
         if (xSemaphoreTake(getDataSensor_semaphore, portMAX_DELAY))
         {
             moduleErrorTemp.ds3231Error = ds3231_getEpochTime(&ds3231_device, &(dataSensorTemp.timeStamp));
+            if (ds3231_isNewDay(&ds3231_device)) 
+            {
+                xEventGroupSetBits(fileStore_eventGroup, FILE_RENAME_NEWDAY);
+            }
+#endif
 
 #if(CONFIG_USING_PMS7003)
             moduleErrorTemp.pms7003Error = pms7003_readData(indoor, &(dataSensorTemp.pm1_0),
@@ -402,12 +479,14 @@ void getDataFromSensor_task(void *parameters)
             } else {
                 ESP_LOGI(__func__, "Success to post the data sensor to dataSensorSentToSD Queue.");
             }
-
-            if (xQueueSendToBack(dataSensorSentToMQTT_queue, (void *) &dataSensorTemp, WAIT_10_TICK * 5) != pdPASS)
+            if (sendToMQTTQueue)
             {
-                ESP_LOGE(__func__, "Failed to post the data sensor to dataSensorSentToMQTT Queue.");
-            } else {
-                ESP_LOGI(__func__, "Success to post the data sensor to dataSensorSentToMQTT Queue.");
+                if (xQueueSendToBack(dataSensorSentToMQTT_queue, (void *) &dataSensorTemp, WAIT_10_TICK * 5) != pdPASS)
+                {
+                    ESP_LOGE(__func__, "Failed to post the data sensor to dataSensorSentToMQTT Queue.");
+                } else {
+                    ESP_LOGI(__func__, "Success to post the data sensor to dataSensorSentToMQTT Queue.");
+                }
             }
 
             if (moduleError_queue != NULL &&
@@ -430,6 +509,178 @@ void getDataFromSensor_task(void *parameters)
     }
 };
 
+/**
+ * @brief 
+ * 
+ * @param parameters 
+ */
+void fileEvent_task(void *parameters)
+{
+    fileStore_eventGroup = xEventGroupCreate();
+    SemaphoreHandle_t file_semaphore = NULL;
+    file_semaphore = xSemaphoreCreateMutex();
+    ds3231_convertTimeToString(&ds3231_device, nameFileSaveData, 10);
+
+    for (;;)
+    {
+        EventBits_t bits = xEventGroupWaitBits(fileStore_eventGroup,
+                                               FILE_RENAME_NEWDAY | MQTT_CLIENT_CONNECTED | MQTT_CLIENT_DISCONNECTED | FILE_RENAME_FROMSYNC,
+                                               pdTRUE,
+                                               pdFALSE,
+                                               portMAX_DELAY);
+
+        if(xSemaphoreTake(file_semaphore, portMAX_DELAY) == pdTRUE)
+        {
+            struct tm timeInfo = { 0 };
+            time_t timeNow = 0;
+            time(&timeNow);
+            localtime_r(&timeNow, &timeInfo);
+
+            if (bits & FILE_RENAME_NEWDAY)
+            {
+                ds3231_convertTimeToString(&ds3231_device, nameFileSaveData, 10);
+                if (statusDevice.mqttClient == DISCONNECTED)
+                {
+                    if(strstr(nameFileSaveData, "_noWiFi") == NULL)
+                    {
+                        strcat(nameFileSaveData, "_noWiFi");
+                    }
+                    if (xQueueSendToBack(dateTimeLostWiFi_queue, (void *) &timeInfo, WAIT_10_TICK * 5) != pdPASS)
+                    {
+                        ESP_LOGE(__func__, "Failed to post the data sensor to dateTimeLostWiFi_queue Queue.");
+                    } else {
+                        ESP_LOGI(__func__, "Success to post the data sensor to dateTimeLostWiFi_queue Queue.");
+                    }
+                }
+            }
+            else if (bits & MQTT_CLIENT_CONNECTED)
+            {
+                if (strstr(nameFileSaveData, "_noWiFi") != NULL)
+                {
+                    char* position = strrchr(nameFileSaveData, '_');
+                    if (position != NULL) {
+                        *position = '\0';  // Truncate the string at the underscore position
+                    }
+                    ESP_LOGI(__func__, "Update file name after reconnect: %s", nameFileSaveData);
+                }
+                if (saveDataSensorAfterReconnectWiFiTask_handle != NULL)
+                {
+                    vTaskResume(saveDataSensorAfterReconnectWiFiTask_handle);
+                }
+            }
+            else if (bits & MQTT_CLIENT_DISCONNECTED)
+            {
+                if (strstr(nameFileSaveData, "_noWiFi") == NULL)
+                {
+                    strcat(nameFileSaveData, "_noWiFi");
+                    ESP_LOGI(__func__, "Update file name after disconnect: %s", nameFileSaveData);
+                }
+                if (xQueueSendToBack(dateTimeLostWiFi_queue, (void *) &timeInfo, WAIT_10_TICK * 5) != pdPASS)
+                {
+                    ESP_LOGE(__func__, "Failed to post the data sensor to dateTimeLostWiFi_queue Queue.");
+                } else {
+                    ESP_LOGI(__func__, "Success to post the data sensor to dateTimeLostWiFi_queue Queue.");
+                }
+                printf("Time: %d-%d-%d\n", timeInfo.tm_mday, timeInfo.tm_mon + 1, timeInfo.tm_year + 1900);
+            }
+            else if (bits & FILE_RENAME_FROMSYNC)
+            {
+                ds3231_convertTimeToString(&ds3231_device, nameFileSaveData, 10);
+                ESP_LOGI(__func__, "File name updated from SNTP");
+            }
+            xSemaphoreGive(file_semaphore);
+        }
+    }
+};
+
+/**
+ * @brief 
+ * 
+ * @param parameters 
+ */
+void sendDataSensorToMQTTServerAfterReconnectWiFi_task(void *parameters)
+{
+    struct tm timeLostWiFi = { 0 };
+    char nameFileSaveDataLostWiFi[21];
+    char nameFileNew[21];
+
+    for(;;)
+    {
+        while (uxQueueMessagesWaiting((const QueueHandle_t)dateTimeLostWiFi_queue) != 0)
+        {
+            memset(&timeLostWiFi, 0, sizeof(struct tm));
+            memset(nameFileSaveDataLostWiFi, 0, sizeof(nameFileSaveDataLostWiFi));
+            memset(nameFileNew, 0, sizeof(nameFileNew));
+            memset(countWifiLostFileName_str, 0, sizeof(countWifiLostFileName_str));
+
+            if (xQueueReceive(dateTimeLostWiFi_queue, (void *)&timeLostWiFi, portMAX_DELAY))
+            {
+                sprintf(nameFileSaveDataLostWiFi, "%d-%d-%d_noWiFi", (uint8_t)timeLostWiFi.tm_mday, (uint8_t)(timeLostWiFi.tm_mon + 1), (uint8_t)(timeLostWiFi.tm_year) + 1900);
+            }
+            char pathFile[64];
+            sprintf(pathFile, "%s/%s.txt", mount_point, nameFileSaveDataLostWiFi);
+            char *dataSensorString;
+            struct dataSensor_st dataSensorTemp = { 0 };
+            dataSensorString = (char *)malloc((size_t)256);
+            ESP_LOGI(__func__, "Opening file %s...", pathFile);
+            FILE *file = fopen(pathFile, "r");
+            if (file == NULL) 
+            {
+                ESP_LOGE(__func__, "Failed to open file for reading.");
+                continue;
+            }
+
+            //while (*file != EOF)
+            while (!feof(file))
+            {
+                memset(dataSensorString, 0, strlen(dataSensorString));
+                memset(&dataSensorTemp, 0, sizeof(struct dataSensor_st));
+                fscanf(file, "%[^,],%llu,%f,%f,%f,%u,%u,%u\n", dataSensorString,
+                                                            &(dataSensorTemp.timeStamp),
+                                                            &(dataSensorTemp.temperature),
+                                                            &(dataSensorTemp.humidity),
+                                                            &(dataSensorTemp.pressure),
+                                                            &(dataSensorTemp.pm1_0),
+                                                            &(dataSensorTemp.pm2_5),
+                                                            &(dataSensorTemp.pm10));
+
+                /**
+                 * @warning: Do not use xSemaphoreTake() function here!!!
+                 */
+                // while (!(uxQueueMessagesWaiting(dataSensorSentToMQTT_queue) < (QUEUE_SIZE - 1)));
+
+                BaseType_t flag_checkSendToQueueSuccess = pdFAIL;
+                do {
+                    flag_checkSendToQueueSuccess = xQueueSendToBack(dataSensorSentToMQTT_queue, (void *)&dataSensorTemp, WAIT_100_TICK);
+                    if(flag_checkSendToQueueSuccess != pdPASS)
+                    {
+                        ESP_LOGE(__func__, "Failed to post the data sensor to dataSensorSentToMQTT Queue.  Queue size: %u (max 10).", uxQueueMessagesWaiting(dataSensorSentToMQTT_queue));
+                    } else {
+                        ESP_LOGI(__func__, "Success to post the data sensor to dataSensorSentToMQTT Queue.");
+                    }
+                    vTaskDelay(100 / portTICK_RATE_MS);
+                } while (flag_checkSendToQueueSuccess != pdPASS);
+
+                vTaskDelay(100 / portTICK_RATE_MS);
+            }
+            free(dataSensorString);
+
+            strcpy(nameFileNew, nameFileSaveDataLostWiFi);
+            sprintf(countWifiLostFileName_str, "%d", countWifiLostFileName);
+            char* position = strrchr(nameFileNew, 'n');
+            if (position != NULL) {
+                *position = '\0';  // Truncate the string at the underscore position
+            }
+            strcat(nameFileNew, countWifiLostFileName_str);
+            ESP_ERROR_CHECK_WITHOUT_ABORT(sdcard_renameFile(nameFileSaveDataLostWiFi, nameFileNew));
+            ESP_LOGI(__func__, "Update file name after read complete: %s", nameFileNew);
+
+            //strcat(nameFileSaveDataLostWiFi, "_r");
+        }
+        // Suspend ourselves.
+        vTaskSuspend(NULL);
+    }
+}
 
 void saveDataSensorToSDcard_task(void *parameters)
 {
@@ -442,12 +693,12 @@ void saveDataSensorToSDcard_task(void *parameters)
         {
             if(xQueueReceive(dataSensorSentToSD_queue, (void *)&dataSensorReceiveFromQueue, WAIT_10_TICK * 50) == pdPASS)   // Get data sesor from queue
             {
-                ds3231_convertTimeToString(&ds3231_device, nameFileSaveData, 10);   // Get dateTime string (as name file to save data follow date)
                 ESP_LOGI(__func__, "Receiving data from queue successfully.");
+                
                 if(xSemaphoreTake(writeDataToSDcard_semaphore, portMAX_DELAY) == pdTRUE)
                 {
                     static esp_err_t errorCode_t;
-                    //Create data string follow format
+                    // Create data string follow format
                     errorCode_t = sdcard_writeDataToFile(nameFileSaveData, "%s,%llu,%.2f,%.2f,%.2f,%d,%d,%d\n", CONFIG_NAME_DEVICE,
                                                                                                                 dataSensorReceiveFromQueue.timeStamp,
                                                                                                                 dataSensorReceiveFromQueue.temperature,
@@ -456,8 +707,9 @@ void saveDataSensorToSDcard_task(void *parameters)
                                                                                                                 dataSensorReceiveFromQueue.pm1_0,
                                                                                                                 dataSensorReceiveFromQueue.pm2_5,
                                                                                                                 dataSensorReceiveFromQueue.pm10);
+                    ESP_LOGI(TAG, "Save task received mutex!");
                     xSemaphoreGive(writeDataToSDcard_semaphore);
-                    if (errorCode_t != ESP_OK)
+                   if (errorCode_t != ESP_OK)
                     {
                         ESP_LOGE(__func__, "sdcard_writeDataToFile(...) function returned error: 0x%.4X", errorCode_t);
                     }
@@ -507,6 +759,10 @@ void app_main(void)
     // Wait a second for memory initialization
     vTaskDelay(1000 / portTICK_RATE_MS);
 
+
+// Smartconfig 
+    //configSmartWifi();
+
 // Initialize SD card
 #if(CONFIG_USING_SDCARD)
     // Initialize SPI Bus
@@ -551,7 +807,14 @@ void app_main(void)
 
     uint32_t pm1p0_t, pm2p5_t, pm10_t;
     while(pms7003_readData(indoor, &pm1p0_t, &pm2p5_t, &pm10_t) != ESP_OK);    // Waiting for PMS7003 sensor read data from RX buffer
+
 #endif  //CONFIG_USING_PMS7003
+
+    xTaskCreate(fileEvent_task, "EventFile",
+                                (1024 * 8),
+                                NULL,
+                                (UBaseType_t)7,
+                                NULL);
 
 
 // Create dataSensorQueue
@@ -595,6 +858,14 @@ void app_main(void)
     };
     ESP_LOGI(__func__, "Create dataSensorSentToMQTT Queue success.");
 
+//Create dateTimeLostWiFi_queue Queue
+    dateTimeLostWiFi_queue = xQueueCreate(QUEUE_SIZE, sizeof(struct tm));
+    if (dateTimeLostWiFi_queue == NULL)
+    {
+        ESP_LOGE("Booting", "Create nameFileSaveData Queue failed.");
+    }
+    ESP_LOGI(__func__, "Create dateTimeLostWiFi Queue success.");
+
     // Create task to get data from sensor (64Kb stack memory| priority 25(max))
     // Period 5000ms
     xTaskCreate(getDataFromSensor_task, "GetDataSensor", (1024 * 64), NULL, (UBaseType_t)25, &getDataFromSensorTask_handle);
@@ -603,7 +874,13 @@ void app_main(void)
     // Period 5000ms
     xTaskCreate(saveDataSensorToSDcard_task, "SaveDataSensor", (1024 * 16), NULL, (UBaseType_t)10, &saveDataSensorToSDcardTask_handle);
 
+    // Create task to send data from sensor read by getDataFromSensor_task() to MQTT queue after reconnect to Wifi
+    // Period 100ms
+    xTaskCreate(sendDataSensorToMQTTServerAfterReconnectWiFi_task, "SendDataAfterConnect", (1024 * 16), NULL, (UBaseType_t)15, &saveDataSensorAfterReconnectWiFiTask_handle);
+
 #if(CONFIG_USING_WIFI)
     WIFI_initSTA();
 #endif
 }
+
+
