@@ -25,6 +25,7 @@
 #define ESP_ERROR_SD_WRITE_DATA_FAILED      ((ID_SD_CARD << 12)|(0x02))
 #define ESP_ERROR_SD_READ_DATA_FAILED       ((ID_SD_CARD << 12)|(0x03))
 #define ESP_ERROR_SD_RENAME_FILE_FAILED     ((ID_SD_CARD << 12)|(0x04))
+#define ESP_ERROR_SD_REMOVE_FILE_FAILED     ((ID_SD_CARD << 12)|(0x05))
 
 // #define PIN_NUM_MISO 21
 // #define PIN_NUM_MOSI 19
@@ -117,7 +118,8 @@ esp_err_t sdcard_readDataToFile(const char *nameFile, const char *format, ...);
  */
 esp_err_t sdcard_deinitialize(const char* _mount_point, sdmmc_card_t *_sdcard, sdmmc_host_t *_host);
 
-
 esp_err_t sdcard_renameFile(const char *oldNameFile, char *newNameFile);
+
+esp_err_t sdcard_removeFile(const char *nameFile);
 
 #endif
