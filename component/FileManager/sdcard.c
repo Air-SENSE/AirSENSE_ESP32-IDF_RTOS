@@ -141,14 +141,20 @@ esp_err_t sdcard_renameFile(const char *oldNameFile, char *newNameFile)
 {
     // Check if destination file exists before renaming
     struct stat st;
-    if (stat(newNameFile, &st) == 0) {
-        ESP_LOGE(__func__, "File \"%s\" exists.", newNameFile);
+    char _oldNameFile[64];
+    char _newNameFile[64];
+    sprintf(_oldNameFile, "%s/%s.txt", MOUNT_POINT, oldNameFile);
+    sprintf(_newNameFile, "%s/%s.txt", MOUNT_POINT, newNameFile);
+    ESP_LOGI(__func__, "Update file name from %s to %s", _oldNameFile, _newNameFile);
+
+    if (stat(_newNameFile, &st) == 0) {
+        ESP_LOGE(__func__, "File \"%s\" exists.", _newNameFile);
         return ESP_ERROR_SD_RENAME_FILE_FAILED;
     }
 
     // Rename original file
-    ESP_LOGI(__func__, "Renaming file %s to %s", oldNameFile, newNameFile);
-    if (rename(oldNameFile, newNameFile) != 0) 
+    ESP_LOGI(__func__, "Renaming file %s to %s", _oldNameFile, _newNameFile);
+    if (rename(_oldNameFile, _newNameFile) != 0) 
     {
         ESP_LOGE(__func__, "Rename failed");
         return ESP_ERROR_SD_RENAME_FILE_FAILED;
@@ -157,6 +163,30 @@ esp_err_t sdcard_renameFile(const char *oldNameFile, char *newNameFile)
         return ESP_OK;
     }
 }
+
+esp_err_t sdcard_removeFile(const char *nameFile)
+{
+    struct stat st;
+    char _nameFile[64];
+    sprintf(_nameFile, "%s/%s.txt", MOUNT_POINT, nameFile);
+    
+    // Check whether destination file exists or not
+    if (stat(_nameFile, &st) != 0) {
+        ESP_LOGE(__func__, "File \"%s\" doesn't exists.", _nameFile);
+        return ESP_ERROR_SD_REMOVE_FILE_FAILED;
+    }
+
+    if (remove(_nameFile) != 0) 
+    {
+        ESP_LOGE(__func__, "Remove failed");
+        return ESP_ERROR_SD_REMOVE_FILE_FAILED;
+    } else {
+        ESP_LOGW(__func__, "Remove successful");
+        return ESP_OK;
+    }
+
+}
+
 
 esp_err_t sdcard_deinitialize(const char* _mount_point, sdmmc_card_t *_sdcard, sdmmc_host_t *_host)
 {

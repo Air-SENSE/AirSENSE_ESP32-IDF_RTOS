@@ -738,6 +738,13 @@ C:/Users/admin/esp/AirSENSE_ESP32-IDF_RTOS_KHANH/build/esp-idf/PMS7003/CMakeFile
 C:/Users/admin/esp/AirSENSE_ESP32-IDF_RTOS_KHANH/build/esp-idf/PMS7003/CMakeFiles/install.dir
 C:/Users/admin/esp/AirSENSE_ESP32-IDF_RTOS_KHANH/build/esp-idf/PMS7003/CMakeFiles/install/local.dir
 C:/Users/admin/esp/AirSENSE_ESP32-IDF_RTOS_KHANH/build/esp-idf/PMS7003/CMakeFiles/install/strip.dir
+C:/Users/admin/esp/AirSENSE_ESP32-IDF_RTOS_KHANH/build/esp-idf/SNTP_Sync/CMakeFiles/__idf_SNTP_Sync.dir
+C:/Users/admin/esp/AirSENSE_ESP32-IDF_RTOS_KHANH/build/esp-idf/SNTP_Sync/CMakeFiles/edit_cache.dir
+C:/Users/admin/esp/AirSENSE_ESP32-IDF_RTOS_KHANH/build/esp-idf/SNTP_Sync/CMakeFiles/rebuild_cache.dir
+C:/Users/admin/esp/AirSENSE_ESP32-IDF_RTOS_KHANH/build/esp-idf/SNTP_Sync/CMakeFiles/list_install_components.dir
+C:/Users/admin/esp/AirSENSE_ESP32-IDF_RTOS_KHANH/build/esp-idf/SNTP_Sync/CMakeFiles/install.dir
+C:/Users/admin/esp/AirSENSE_ESP32-IDF_RTOS_KHANH/build/esp-idf/SNTP_Sync/CMakeFiles/install/local.dir
+C:/Users/admin/esp/AirSENSE_ESP32-IDF_RTOS_KHANH/build/esp-idf/SNTP_Sync/CMakeFiles/install/strip.dir
 C:/Users/admin/esp/AirSENSE_ESP32-IDF_RTOS_KHANH/build/esp-idf/Time/CMakeFiles/__idf_Time.dir
 C:/Users/admin/esp/AirSENSE_ESP32-IDF_RTOS_KHANH/build/esp-idf/Time/CMakeFiles/edit_cache.dir
 C:/Users/admin/esp/AirSENSE_ESP32-IDF_RTOS_KHANH/build/esp-idf/Time/CMakeFiles/rebuild_cache.dir

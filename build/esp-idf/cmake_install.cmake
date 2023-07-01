@@ -131,6 +131,7 @@ if(NOT CMAKE_INSTALL_LOCAL_ONLY)
   include("C:/Users/admin/esp/AirSENSE_ESP32-IDF_RTOS_KHANH/build/esp-idf/DeviceManager/cmake_install.cmake")
   include("C:/Users/admin/esp/AirSENSE_ESP32-IDF_RTOS_KHANH/build/esp-idf/FileManager/cmake_install.cmake")
   include("C:/Users/admin/esp/AirSENSE_ESP32-IDF_RTOS_KHANH/build/esp-idf/PMS7003/cmake_install.cmake")
+  include("C:/Users/admin/esp/AirSENSE_ESP32-IDF_RTOS_KHANH/build/esp-idf/SNTP_Sync/cmake_install.cmake")
   include("C:/Users/admin/esp/AirSENSE_ESP32-IDF_RTOS_KHANH/build/esp-idf/Time/cmake_install.cmake")
 
 endif()

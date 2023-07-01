@@ -78,4 +78,5 @@ C:/Users/admin/esp/AirSENSE_ESP32-IDF_RTOS_KHANH/build/esp-idf/DataManager/libDa
 C:/Users/admin/esp/AirSENSE_ESP32-IDF_RTOS_KHANH/build/esp-idf/DeviceManager/libDeviceManager.a
 C:/Users/admin/esp/AirSENSE_ESP32-IDF_RTOS_KHANH/build/esp-idf/FileManager/libFileManager.a
 C:/Users/admin/esp/AirSENSE_ESP32-IDF_RTOS_KHANH/build/esp-idf/PMS7003/libPMS7003.a
+C:/Users/admin/esp/AirSENSE_ESP32-IDF_RTOS_KHANH/build/esp-idf/SNTP_Sync/libSNTP_Sync.a
 C:/Users/admin/esp/AirSENSE_ESP32-IDF_RTOS_KHANH/build/esp-idf/Time/libTime.a
