@@ -1,0 +1,65 @@
+menu "MHZ14a configuration"
+
+    config MHZ14A_PWM_PIN
+        int "PMW PIN GPIO Number"
+        default 32
+        help
+            GPIO number for PWM PIN.
+
+    config QUEUE_SIZE
+        int "Max size queue"
+        default 1
+        help
+            Max size queue for store capture PWM.
+
+    config HD_PIN
+        int "HD PIIN GPIO number"
+        default 33
+        help 
+            GPIO number for HD PIN, using for zero-point calibration(auto calibartion).
+
+    choice MHZ14A_PROTOCOL_COMMUNICATION
+        prompt "MHZ14a protocol"
+        default MHZ14A_PWM
+        help
+            MHZ14a protocol communication to get data.
+
+        config MHZ14A_PWM
+            bool "PWM"
+            default 1
+        config MHZ14A_UART
+            bool "UART"
+            default 0
+
+        
+    endchoice
+
+    menu "MHZ14a UART configuration"
+        depends on MHZ14A_UART
+
+        config MHZ14A_PIN_TX
+            int "TX GPIO Number"
+            default 1
+            help
+                GPIO number for TX.
+        
+        config MHZ14A_PIN_RX
+            int "RX GPIO Number"
+            default 3
+            help
+                GPIO number for RX.
+        
+        config MHZ14A_UART_BAUD_RATE
+            int "UART baudrate"
+            default 9600
+            help
+                UART baudrate.
+        
+        config MHZ14A_UART_PORT
+            int "Uart Port"
+            default 0
+            help 
+                UART port for PMS sensor.
+        
+    endmenu
+endmenu
