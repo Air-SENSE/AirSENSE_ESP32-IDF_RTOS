@@ -36,6 +36,12 @@ menu "Device in use"
         help 
             Time synchronization for RTC
 
+    config OTA_UPDATE
+        bool "OTA update firmware by http server"
+        default y
+        help 
+            OTA update firmware by http server which hosts the firmware.
+
     config USING_BME280
         bool "Using BME280 Sensor"
         default y

@@ -135,6 +135,13 @@ C:/Users/admin/esp/AirSENSE_ESP32-IDF_RTOS_KHANH/build/esp-idf/partition_table/C
 C:/Users/admin/esp/AirSENSE_ESP32-IDF_RTOS_KHANH/build/esp-idf/partition_table/CMakeFiles/install/local.dir
 C:/Users/admin/esp/AirSENSE_ESP32-IDF_RTOS_KHANH/build/esp-idf/partition_table/CMakeFiles/install/strip.dir
 C:/Users/admin/esp/AirSENSE_ESP32-IDF_RTOS_KHANH/build/esp-idf/app_update/CMakeFiles/__idf_app_update.dir
+C:/Users/admin/esp/AirSENSE_ESP32-IDF_RTOS_KHANH/build/esp-idf/app_update/CMakeFiles/blank_ota_data.dir
+C:/Users/admin/esp/AirSENSE_ESP32-IDF_RTOS_KHANH/build/esp-idf/app_update/CMakeFiles/read-otadata.dir
+C:/Users/admin/esp/AirSENSE_ESP32-IDF_RTOS_KHANH/build/esp-idf/app_update/CMakeFiles/read_otadata.dir
+C:/Users/admin/esp/AirSENSE_ESP32-IDF_RTOS_KHANH/build/esp-idf/app_update/CMakeFiles/erase-otadata.dir
+C:/Users/admin/esp/AirSENSE_ESP32-IDF_RTOS_KHANH/build/esp-idf/app_update/CMakeFiles/erase_otadata.dir
+C:/Users/admin/esp/AirSENSE_ESP32-IDF_RTOS_KHANH/build/esp-idf/app_update/CMakeFiles/otadata-flash.dir
+C:/Users/admin/esp/AirSENSE_ESP32-IDF_RTOS_KHANH/build/esp-idf/app_update/CMakeFiles/encrypted-otadata-flash.dir
 C:/Users/admin/esp/AirSENSE_ESP32-IDF_RTOS_KHANH/build/esp-idf/app_update/CMakeFiles/edit_cache.dir
 C:/Users/admin/esp/AirSENSE_ESP32-IDF_RTOS_KHANH/build/esp-idf/app_update/CMakeFiles/rebuild_cache.dir
 C:/Users/admin/esp/AirSENSE_ESP32-IDF_RTOS_KHANH/build/esp-idf/app_update/CMakeFiles/list_install_components.dir
@@ -731,6 +738,13 @@ C:/Users/admin/esp/AirSENSE_ESP32-IDF_RTOS_KHANH/build/esp-idf/FileManager/CMake
 C:/Users/admin/esp/AirSENSE_ESP32-IDF_RTOS_KHANH/build/esp-idf/FileManager/CMakeFiles/install.dir
 C:/Users/admin/esp/AirSENSE_ESP32-IDF_RTOS_KHANH/build/esp-idf/FileManager/CMakeFiles/install/local.dir
 C:/Users/admin/esp/AirSENSE_ESP32-IDF_RTOS_KHANH/build/esp-idf/FileManager/CMakeFiles/install/strip.dir
+C:/Users/admin/esp/AirSENSE_ESP32-IDF_RTOS_KHANH/build/esp-idf/OTA/CMakeFiles/__idf_OTA.dir
+C:/Users/admin/esp/AirSENSE_ESP32-IDF_RTOS_KHANH/build/esp-idf/OTA/CMakeFiles/edit_cache.dir
+C:/Users/admin/esp/AirSENSE_ESP32-IDF_RTOS_KHANH/build/esp-idf/OTA/CMakeFiles/rebuild_cache.dir
+C:/Users/admin/esp/AirSENSE_ESP32-IDF_RTOS_KHANH/build/esp-idf/OTA/CMakeFiles/list_install_components.dir
+C:/Users/admin/esp/AirSENSE_ESP32-IDF_RTOS_KHANH/build/esp-idf/OTA/CMakeFiles/install.dir
+C:/Users/admin/esp/AirSENSE_ESP32-IDF_RTOS_KHANH/build/esp-idf/OTA/CMakeFiles/install/local.dir
+C:/Users/admin/esp/AirSENSE_ESP32-IDF_RTOS_KHANH/build/esp-idf/OTA/CMakeFiles/install/strip.dir
 C:/Users/admin/esp/AirSENSE_ESP32-IDF_RTOS_KHANH/build/esp-idf/PMS7003/CMakeFiles/__idf_PMS7003.dir
 C:/Users/admin/esp/AirSENSE_ESP32-IDF_RTOS_KHANH/build/esp-idf/PMS7003/CMakeFiles/edit_cache.dir
 C:/Users/admin/esp/AirSENSE_ESP32-IDF_RTOS_KHANH/build/esp-idf/PMS7003/CMakeFiles/rebuild_cache.dir

@@ -77,6 +77,7 @@ $<TARGET_FILE:__idf_DS3231>
 $<TARGET_FILE:__idf_DataManager>
 $<TARGET_FILE:__idf_DeviceManager>
 $<TARGET_FILE:__idf_FileManager>
+$<TARGET_FILE:__idf_OTA>
 $<TARGET_FILE:__idf_PMS7003>
 $<TARGET_FILE:__idf_SNTP_Sync>
 $<TARGET_FILE:__idf_Time>
