@@ -104,6 +104,7 @@ TaskHandle_t mqttPublishMessageTask_handle = NULL;
 TaskHandle_t sntpGetTimeTask_handle = NULL;
 TaskHandle_t allocateDataToMQTTandSDQueue_handle = NULL;
 TaskHandle_t checkUpdateOTATask_handle = NULL;
+TaskHandle_t restartTask_handle = NULL;
 
 SemaphoreHandle_t getDataSensor_semaphore = NULL;
 SemaphoreHandle_t writeDataToSDcard_semaphore = NULL;
@@ -111,6 +112,7 @@ SemaphoreHandle_t sentDataToMQTT_semaphore = NULL;
 SemaphoreHandle_t writeDataToSDcardNoWifi_semaphore = NULL;
 SemaphoreHandle_t allocateDataToMQTTandSDQueue_semaphore = NULL;
 SemaphoreHandle_t checkUpdateOTA_semaphore = NULL;
+SemaphoreHandle_t restart_semaphore = NULL;
 
 QueueHandle_t dataSensorSentToSD_queue;
 QueueHandle_t dataSensorSentToMQTT_queue;
@@ -169,6 +171,17 @@ static esp_err_t WiFi_eventHandler(void *argument, system_event_t *event)
             sntp_app_start();
         }
 #endif
+
+#ifdef CONFIG_OTA_UPDATE
+        if (checkUpdateOTATask_handle == NULL)
+        {
+            xTaskCreate(checkUpdateOTA_task, "CheckOTA", (1024 * 8), NULL,(UBaseType_t)5, &checkUpdateOTATask_handle);
+            ESP_LOGI(__func__, "Created task checkUpdateOTA.");
+        } else if (checkUpdateOTATask_handle != NULL && eTaskGetState(checkUpdateOTATask_handle) == eSuspended) {
+            vTaskResume(checkUpdateOTATask_handle);
+            ESP_LOGI(__func__, "Resume task checkUpdateOTATask.");
+        }
+#endif
         /* When connect/reconnect wifi, esp32 take an IP address and this
          * event become active. If it's the first-time connection, create
          * task mqttPublishMessageTask, else resume that task. */
@@ -201,22 +214,20 @@ static esp_err_t WiFi_eventHandler(void *argument, system_event_t *event)
             }
         }
 
-#ifdef CONFIG_OTA_UPDATE
-        if (checkUpdateOTATask_handle == NULL)
-        {
-            xTaskCreate(checkUpdateOTA_task, "CheckOTA", (1024 * 8), NULL,(UBaseType_t)5, &checkUpdateOTATask_handle);
-            ESP_LOGI(__func__, "Created task checkUpdateOTA.");
-        } else if (checkUpdateOTATask_handle != NULL && eTaskGetState(checkUpdateOTATask_handle) == eSuspended) {
-            vTaskResume(checkUpdateOTATask_handle);
-            ESP_LOGI(__func__, "Resume task checkUpdateOTATask.");
-        }
-#endif
-
         break;
 
     case SYSTEM_EVENT_STA_DISCONNECTED:
-        /* When esp32 disconnect to wifi, this event become
-         * active. We suspend the task mqttPublishMessageTask. */
+    /* When esp32 disconnect to wifi, this event become
+     * active. We suspend the task mqttPublishMessageTask 
+     * and checkUpdateOTATask. */
+
+#ifdef CONFIG_OTA_UPDATE
+        if (checkUpdateOTATask_handle != NULL && eTaskGetState(checkUpdateOTATask_handle) != eSuspended) {
+            vTaskSuspend(checkUpdateOTATask_handle);
+            ESP_LOGI(__func__, "Suspend checkUpdateOTATask.");
+        }
+#endif
+
         ESP_LOGI(__func__, "disconnected: Retrying Wi-Fi connect to AP SSID:%s password:%s", CONFIG_SSID, CONFIG_PASSWORD);
         if (mqttPublishMessageTask_handle != NULL && eTaskGetState(mqttPublishMessageTask_handle) != eSuspended)
         {
@@ -226,13 +237,6 @@ static esp_err_t WiFi_eventHandler(void *argument, system_event_t *event)
             sendToMQTTQueue = false;
             ESP_LOGI(__func__, "set bit disconnect");
         }
-
-#ifdef CONFIG_OTA_UPDATE
-        if (checkUpdateOTATask_handle != NULL && eTaskGetState(checkUpdateOTATask_handle) != eSuspended) {
-            vTaskSuspend(checkUpdateOTATask_handle);
-            ESP_LOGI(__func__, "Suspend checkUpdateOTATask.");
-        }
-#endif
 
         esp_wifi_connect();
         break;
@@ -835,12 +839,12 @@ void saveDataSensorToSDcard_task(void *parameters)
 #define OTA_URL_SIZE 256
 
 // receive buffer
-char rcv_buffer[200];
+char receiveBufferFromHTTP[200];
 
 // esp_http_client event handler
-esp_err_t _http_event_handler(esp_http_client_event_t *evt) {
+esp_err_t _http_event_handler(esp_http_client_event_t *event) {
     
-	switch(evt->event_id) {
+	switch(event->event_id) {
         case HTTP_EVENT_ERROR:
             break;
         case HTTP_EVENT_ON_CONNECTED:
@@ -850,8 +854,8 @@ esp_err_t _http_event_handler(esp_http_client_event_t *evt) {
         case HTTP_EVENT_ON_HEADER:
             break;
         case HTTP_EVENT_ON_DATA:
-            if (!esp_http_client_is_chunked_response(evt->client)) {
-				strncpy(rcv_buffer, (char*)evt->data, evt->data_len);
+            if (!esp_http_client_is_chunked_response(event->client)) {
+				strncpy(receiveBufferFromHTTP, (char*)event->data, event->data_len);
             }
             break;
         case HTTP_EVENT_ON_FINISH:
@@ -889,7 +893,7 @@ void checkUpdateOTA_task(void *pvParameter) {
             if(err == ESP_OK) {
                 
                 // parse the json file	
-                cJSON *json = cJSON_Parse(rcv_buffer);
+                cJSON *json = cJSON_Parse(receiveBufferFromHTTP);
                 if(json == NULL) 
                 {
                     ESP_LOGE(__func__, "Downloaded file is not a valid json, aborting...\n");
@@ -910,6 +914,11 @@ void checkUpdateOTA_task(void *pvParameter) {
                             
                             ESP_LOGI(__func__, "Current firmware version (%s) is different from the available one (%s), upgrading...", CONFIG_FIRMWARE_VERSION, new_version);
                             if(cJSON_IsString(file) && (file->valuestring != NULL)) {
+                                /* Ensure to disable any WiFi power save mode, this allows best throughput
+                                * and hence timings for overall OTA operation.
+                                */
+                                esp_wifi_set_ps(WIFI_PS_NONE);
+
                                 ESP_LOGI(__func__, "Downloading and installing new firmware (%s)...", file->valuestring);
 
                                 uint16_t n = strlen(CONFIG_FIRMWARE_UPGRADE_URL);
@@ -929,8 +938,8 @@ void checkUpdateOTA_task(void *pvParameter) {
                                 esp_err_t ret = updateOTA(&ota_client_config);
                                 if (ret == ESP_OK) {
                                     ESP_LOGI(__func__, "OTA OK, restarting...\n");
-                                    vTaskSuspendAll();
-                                    esp_restart();
+                                    //esp_restart();
+                                    xSemaphoreGive(restart_semaphore);
                                 } else {
                                     ESP_LOGE(__func__, "OTA failed...\n");
                                 }
@@ -964,6 +973,26 @@ void checkUpdateOTA_task(void *pvParameter) {
 void giveSemaphoreForCheckUpdateOTA(TimerHandle_t xTimer) 
 {
     xSemaphoreGive(checkUpdateOTA_semaphore);
+}
+
+/**
+ * @brief Restart task triggered when OTA task write image to flash done.
+ * 
+ * @param pvParameter 
+ * 
+ * @note This task is created because restart function in OTA task fail! 
+ *      Don't know reason.
+ */
+void restart_task(void *pvParameter)
+{
+    while (1)
+    {
+        if (xSemaphoreTake(restart_semaphore, portMAX_DELAY))
+        {
+            esp_restart();
+        }
+    }
+    
 }
 
 /*------------------------------------ MAIN_APP ------------------------------------*/
@@ -1139,7 +1168,7 @@ void app_main(void)
 #if (CONFIG_OTA_UPDATE)
     checkUpdateOTA_semaphore = xSemaphoreCreateBinary();
 
-     checkUpdateOTA_timer = xTimerCreate( "CheckOTATimer",                                    // Name of timer
+    checkUpdateOTA_timer = xTimerCreate( "CheckOTATimer",                                    // Name of timer
                                            pdMS_TO_TICKS(CONFIG_TIME_INTERVAL_UPDATE * 1000), // Period of timer (in ticks)
                                            pdTRUE,                                            // Auto-reload
                                            (void *)0,                                         // Timer ID
@@ -1147,5 +1176,8 @@ void app_main(void)
     xTimerStart(checkUpdateOTA_timer, portMAX_DELAY);
 
     // xTaskCreate(checkUpdateOTA_task, "CheckOTA", (1024 * 8), NULL,(UBaseType_t)5, &checkUpdateOTATask_handle);
+
+    restart_semaphore = xSemaphoreCreateBinary();
+    xTaskCreate(restart_task, "Restart", (1024 * 1), NULL,(UBaseType_t)25, &restartTask_handle);
 #endif
 }
