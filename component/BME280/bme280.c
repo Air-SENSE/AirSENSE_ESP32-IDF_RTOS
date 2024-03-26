@@ -18,7 +18,7 @@ esp_err_t bme280_init(bme280 *bme280_device, bmp280_params_t *bme280_params,
     i2c_master_start(i2c_command);
     i2c_master_write_byte(i2c_command, address << 1 | WRITE_BIT, ACK_CHECK_EN);
     i2c_master_stop(i2c_command);
-    error_t = i2c_master_cmd_begin(i2c_port, i2c_command, (max_timeout / portTICK_RATE_MS));
+    error_t = i2c_master_cmd_begin(i2c_port, i2c_command, (max_timeout / portTICK_PERIOD_MS));
     i2c_cmd_link_delete(i2c_command);
 
     if (error_t != ESP_OK)

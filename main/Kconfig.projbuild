@@ -146,22 +146,44 @@ menu "MQTT Config menu"
         help 
             MQTT password
 
-    config BROKER_CERTIFICATE_OVERRIDE
-        string "Broker certificate override"
-        default ""
+    config MQTT_TOPIC
+        string "MQTT topic"
+        default "AirSENSE_Beta"
         help
-            Please leave empty if broker certificate included from a textfile; otherwise fill in a base64 part of PEM
-            format certificate
+            Topic to subcrice
+
+    config MQTT_CLIENT_ID
+        string "Client ID"
+        default "AirSENSE"
+        help
+            Set MQTT client identifier.
+
+    config MQTT_TIMEOUT
+        int "MQTT Timeout in ms"
+        default 10000
+        help
+            Abort network operation if it is not completed after this value, in milliseconds.
+
+    config MQTT_DISABLE_AUTO_RECONNECT
+        bool "Disable auto reconnect to server"
+        default n
+        help
+            Client will reconnect to server (when errors/disconnect).
+
+    # config BROKER_CERTIFICATE_OVERRIDE
+    #     string "Broker certificate override"
+    #     default ""
+    #     help
+    #         Please leave empty if broker certificate included from a textfile; otherwise fill in a base64 part of PEM
+    #         format certificate
 
     config BROKER_CERTIFICATE_OVERRIDDEN
         bool
         default y if BROKER_CERTIFICATE_OVERRIDE != ""
 
-    config BROKER_BIN_SIZE_TO_SEND
-        # This option is not visible and is used only to set parameters for example tests
-        # Here we configure the data size to send and to be expected in the python script
-        int
-        default 20000
+    # config BROKER_BIN_SIZE_TO_SEND
+    #     int
+    #     default 20000
 
 endmenu
 

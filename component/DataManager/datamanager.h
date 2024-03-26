@@ -5,6 +5,7 @@
 #include "esp_log.h"
 #include "sdkconfig.h"
 #include <string.h>
+#include <inttypes.h>
 
 struct dataSensor_st
 {
@@ -26,7 +27,7 @@ struct dataSensor_st
 #endif
 };
 
-const char dataSensor_templateSaveToSDCard[] = "%s,%0.2f,%0.2f,%0.2f,%d,%d,%d";
+const char dataSensor_templateSaveToSDCard[] = "%s,%0.2f,%0.2f,%0.2f,%"PRIu32",%"PRIu32",%"PRIu32"";
 
 
 #endif

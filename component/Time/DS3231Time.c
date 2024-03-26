@@ -11,6 +11,8 @@ static const char *timeFormat3 = "%d-%d-%d";
 
 static const int month[12] = {31,28,31,30,31,30,31,31,30,31,30,31};
 
+int currentDay;
+
 
 esp_err_t ds3231_initialize(i2c_dev_t *dev, i2c_port_t port, gpio_num_t sda_gpio, gpio_num_t scl_gpio)
 {

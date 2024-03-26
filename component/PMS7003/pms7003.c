@@ -68,7 +68,7 @@ esp_err_t pms7003_readData(const int pms_modeAmbience, uint32_t *pm1_0, uint32_t
             *pm10  = ((rawData[startByte + 4] << 8) + rawData[startByte + 5]);
 
             ESP_LOGI(__func__, "PMS7003 sensor read data successful.");
-            ESP_LOGI(__func__, "PM1.0: %dug/m3\tPM2.5: %dug/m3\tPM10: %dug/m3.\r", *pm1_0, *pm2_5, *pm10);
+            ESP_LOGI(__func__, "PM1.0: %"PRIu32"g/m3\tPM2.5: %"PRIu32"ug/m3\tPM10: %"PRIu32"ug/m3.\r", *pm1_0, *pm2_5, *pm10);
             xSemaphoreGive(print_muxtex);
             vSemaphoreDelete(print_muxtex);
             check = true;

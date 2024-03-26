@@ -12,7 +12,7 @@ It has all the features which you need in a IOT system: Read Sensor data, save d
   - Support platformIO on Visual Studio Code.
   - Can be compiled to ESP32 for running freeRTOS OS.
   - Distributed under the MIT licence, so you can easily use it in commercial projects too.
-  - Using ESP-IDF (In this project we use esp-idf version 4.4.3).
+  - Using ESP-IDF (In this project we use esp-idf version 5.1.2).
 
 **Docs, Tools, and Services**
   - We are writing about documents. 
@@ -41,12 +41,9 @@ Below is short explanation of remaining files in the project folder.
 │   │  ├─ component.mk
 │   │  └─ Kconfig.projbuild
 │   │
-│   ├─ Buttons
 │   ├─ DataManager
 │   ├─ DS3231
 │   ├─ Filemanager
-│   ├─ MHZ14a
-│   ├─ OTA
 │   ├─ PMS7003
 │   └─ SNTP_Sync
 │

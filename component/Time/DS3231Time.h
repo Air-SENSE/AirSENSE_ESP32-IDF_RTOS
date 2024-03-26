@@ -25,7 +25,6 @@
 #define SECONDS_PER_YEAR            31556926ULL
 #define SECONDS_FROM_1970_TO_2023   1672506000U    // Unixtime for 2023-01-01 00:00:00
 
-int currentDay;
 
 /**
  * @brief Initialize device descriptor
