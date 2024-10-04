@@ -1,0 +1,139 @@
+[1/12] Performing build step for 'bootloader'
+[1/1] cmd.exe /C "cd /D E:\esp5.1\AirSENSE_ESP32-IDF_RTOS\build\bootloader\esp-idf\esptool_py && E:\esp5.1\Espressif\python_env\idf5.1_py3.11_env\Scripts\python.exe E:/esp5.1/Espressif/frameworks/esp-idf-v5.1.2/components/partition_table/check_sizes.py --offset 0x8000 bootloader 0x1000 E:/esp5.1/AirSENSE_ESP32-IDF_RTOS/build/bootloader/bootloader.bin"
+Bootloader binary size 0x6810 bytes. 0x7f0 bytes (7%) free.
+[2/10] Building C object esp-idf/LCD_TFT_driver/CMakeFiles/__idf_LCD_TFT_driver.dir/ili9341_extended.c.obj
+In file included from E:/esp5.1/AirSENSE_ESP32-IDF_RTOS/component/LCD_TFT_driver/ili9341_extended.h:16,
+                 from E:/esp5.1/AirSENSE_ESP32-IDF_RTOS/component/LCD_TFT_driver/ili9341_extended.c:1:
+E:/esp5.1/Espressif/frameworks/esp-idf-v5.1.2/components/driver/deprecated/driver/mcpwm.h:15:2: warning: #warning "legacy MCPWM driver is deprecated, please migrate to the new driver (include driver/mcpwm_prelude.h)" [-Wcpp]
+   15 | #warning "legacy MCPWM driver is deprecated, please migrate to the new driver (include driver/mcpwm_prelude.h)"
+      |  ^~~~~~~
+E:/esp5.1/AirSENSE_ESP32-IDF_RTOS/component/LCD_TFT_driver/ili9341_extended.c:5:26: warning: 'lvgl_mux' defined but not used [-Wunused-variable]
+    5 | static SemaphoreHandle_t lvgl_mux = NULL;
+      |                          ^~~~~~~~
+[3/10] Linking C static library esp-idf\LCD_TFT_driver\libLCD_TFT_driver.a
+[4/10] Building C object esp-idf/main/CMakeFiles/__idf_main.dir/main.c.obj
+In file included from E:/esp5.1/AirSENSE_ESP32-IDF_RTOS/component/MH_Z14A/mhz14a.h:22,
+                 from E:/esp5.1/AirSENSE_ESP32-IDF_RTOS/main/main.c:69:
+E:/esp5.1/Espressif/frameworks/esp-idf-v5.1.2/components/driver/deprecated/driver/mcpwm.h:15:2: warning: #warning "legacy MCPWM driver is deprecated, please migrate to the new driver (include driver/mcpwm_prelude.h)" [-Wcpp]
+   15 | #warning "legacy MCPWM driver is deprecated, please migrate to the new driver (include driver/mcpwm_prelude.h)"
+      |  ^~~~~~~
+E:/esp5.1/AirSENSE_ESP32-IDF_RTOS/main/main.c: In function 'app_main':
+E:/esp5.1/AirSENSE_ESP32-IDF_RTOS/main/main.c:1437:44: warning: passing argument 1 of 'mhz14a_getDataFromSensorViaUART' from incompatible pointer type [-Wincompatible-pointer-types]
+ 1437 |     while (mhz14a_getDataFromSensorViaUART(&co2_t) != ESP_OK)
+      |                                            ^~~~~~
+      |                                            |
+      |                                            uint32_t ** {aka long unsigned int **}
+E:/esp5.1/AirSENSE_ESP32-IDF_RTOS/component/MH_Z14A/mhz14a.h:128:53: note: expected 'uint32_t *' {aka 'long unsigned int *'} but argument is of type 'uint32_t **' {aka 'long unsigned int **'}
+  128 | esp_err_t mhz14a_getDataFromSensorViaUART(uint32_t *co2_ppm);
+      |                                           ~~~~~~~~~~^~~~~~~
+E:/esp5.1/AirSENSE_ESP32-IDF_RTOS/component/MH_Z14A/mhz14a.h: At top level:
+E:/esp5.1/AirSENSE_ESP32-IDF_RTOS/component/MH_Z14A/mhz14a.h:105:42: warning: 'mhz14a_on_off_functionSelfCalibration' declared 'static' but never defined [-Wunused-function]
+  105 | __attribute__((unused)) static esp_err_t mhz14a_on_off_functionSelfCalibration(bool statusFunction);
+      |                                          ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+E:/esp5.1/AirSENSE_ESP32-IDF_RTOS/component/MH_Z14A/mhz14a.h:42:22: warning: 'mhz14a_captureQueue' defined but not used [-Wunused-variable]
+   42 | static QueueHandle_t mhz14a_captureQueue = NULL;
+      |                      ^~~~~~~~~~~~~~~~~~~
+[5/10] Linking C static library esp-idf\main\libmain.a
+[6/10] Generating ld/sections.ld
+warning: default on the choice symbol MHZ14A_PWM (defined at E:/esp5.1/AirSENSE_ESP32-IDF_RTOS/component/MH_Z14A/Kconfig.projbuild:27) will have no effect, as defaults do not affect choice symbols
+warning: default on the choice symbol MHZ14A_UART (defined at E:/esp5.1/AirSENSE_ESP32-IDF_RTOS/component/MH_Z14A/Kconfig.projbuild:30) will have no effect, as defaults do not affect choice symbols
+[7/10] Linking CXX executable AirSENSE_ESP32-IDF_RTOS.elf
+[8/10] Generating binary image from built executable
+esptool.py v4.7.dev3
+Creating esp32 image...
+Merged 27 ELF sections
+Successfully created esp32 image.
+Generated E:/esp5.1/AirSENSE_ESP32-IDF_RTOS/build/AirSENSE_ESP32-IDF_RTOS.bin
+[9/10] cmd.exe /C "cd /D E:\esp5.1\AirSENSE_ESP32-IDF_RTOS\build\esp-idf\esptool_py && E:\esp5.1\Espressif\python_env\idf5.1_py3.11_env\Scripts\python.exe E:/esp5.1/Espressif/frameworks/esp-idf-v5.1.2/components/partition_table/check_sizes.py --offset 0x8000 partition --type app E:/esp5.1/AirSENSE_ESP32-IDF_RTOS/build/partition_table/partition-table.bin E:/esp5.1/AirSENSE_ESP32-IDF_RTOS/build/AirSENSE_ESP32-IDF_RTOS.bin"
+AirSENSE_ESP32-IDF_RTOS.bin binary size 0x148710 bytes. Smallest app partition is 0x14a000 bytes. 0x18f0 bytes (0%) free.
+Warning: The smallest app partition is nearly full (0% free space left)!
+[9/10] cmd.exe /C "cd /D E:\esp5.1\Espressif\frameworks\esp-idf-v5.1.2\components\esptool_py && E:\esp5.1\Espressif\tools\cmake\3.24.0\bin\cmake.exe -D IDF_PATH=E:/esp5.1/Espressif/frameworks/esp-idf-v5.1.2 -D SERIAL_TOOL=E:/esp5.1/Espressif/python_env/idf5.1_py3.11_env/Scripts/python.exe;;E:/esp5.1/Espressif/frameworks/esp-idf-v5.1.2/components/esptool_py/esptool/esptool.py;--chip;esp32 -D SERIAL_TOOL_ARGS=--before=default_reset;--after=hard_reset;write_flash;@flash_args -D WORKING_DIRECTORY=E:/esp5.1/AirSENSE_ESP32-IDF_RTOS/build -P E:/esp5.1/Espressif/frameworks/esp-idf-v5.1.2/components/esptool_py/run_serial_tool.cmake"
+esptool.py --chip esp32 -p COM6 -b 460800 --before=default_reset --after=hard_reset write_flash --flash_mode dio --flash_freq 40m --flash_size 4MB 0x1000 bootloader/bootloader.bin 0x10000 AirSENSE_ESP32-IDF_RTOS.bin 0x8000 partition_table/partition-table.bin 0xd000 ota_data_initial.bin
+esptool.py v4.7.dev3
+Serial port COM6
+Connecting.....
+Chip is ESP32-D0WD-V3 (revision v3.1)
+Features: WiFi, BT, Dual Core, 240MHz, VRef calibration in efuse, Coding Scheme None
+Crystal is 40MHz
+MAC: b0:b2:1c:0b:1a:04
+Uploading stub...
+Running stub...
+Stub running...
+Changing baud rate to 460800
+Changed.
+Configuring flash size...
+Flash will be erased from 0x00001000 to 0x00007fff...
+Flash will be erased from 0x00010000 to 0x00158fff...
+Flash will be erased from 0x00008000 to 0x00008fff...
+Flash will be erased from 0x0000d000 to 0x0000efff...
+Compressed 26640 bytes to 16690...
+Writing at 0x00001000... (50 %)
+Writing at 0x0000768e... (100 %)
+Wrote 26640 bytes (16690 compressed) at 0x00001000 in 0.9 seconds (effective 230.7 kbit/s)...
+Hash of data verified.
+Compressed 1345296 bytes to 841383...
+Writing at 0x00010000... (1 %)
+Writing at 0x0001c5f7... (3 %)
+Writing at 0x00023447... (5 %)
+Writing at 0x0002cf1e... (7 %)
+Writing at 0x00037b38... (9 %)
+Writing at 0x000447b1... (11 %)
+Writing at 0x0004b57c... (13 %)
+Writing at 0x00050e63... (15 %)
+Writing at 0x0005cf9d... (17 %)
+Writing at 0x00063b4f... (19 %)
+Writing at 0x00069237... (21 %)
+Writing at 0x0006e96b... (23 %)
+Writing at 0x00074272... (25 %)
+Writing at 0x0007a1c5... (26 %)
+Writing at 0x0007f8c3... (28 %)
+Writing at 0x0008589f... (30 %)
+Writing at 0x0008b20e... (32 %)
+Writing at 0x000912b2... (34 %)
+Writing at 0x00096c0e... (36 %)
+Writing at 0x0009c57f... (38 %)
+Writing at 0x000a2c74... (40 %)
+Writing at 0x000a8b6b... (42 %)
+Writing at 0x000ae5f6... (44 %)
+Writing at 0x000b3ba3... (46 %)
+Writing at 0x000b9412... (48 %)
+Writing at 0x000bed91... (50 %)
+Writing at 0x000c4934... (51 %)
+Writing at 0x000ca538... (53 %)
+Writing at 0x000cfe1a... (55 %)
+Writing at 0x000d644c... (57 %)
+Writing at 0x000dbe55... (59 %)
+Writing at 0x000e18b9... (61 %)
+Writing at 0x000e6eff... (63 %)
+Writing at 0x000ec16a... (65 %)
+Writing at 0x000f16be... (67 %)
+Writing at 0x000f6823... (69 %)
+Writing at 0x000fbf9d... (71 %)
+Writing at 0x00101667... (73 %)
+Writing at 0x00107276... (75 %)
+Writing at 0x0010c933... (76 %)
+Writing at 0x00112334... (78 %)
+Writing at 0x00117c7a... (80 %)
+Writing at 0x0011d5c2... (82 %)
+Writing at 0x0012364b... (84 %)
+Writing at 0x0012b8fa... (86 %)
+Writing at 0x00133975... (88 %)
+Writing at 0x0013a4dd... (90 %)
+Writing at 0x0013ff07... (92 %)
+Writing at 0x00145ad7... (94 %)
+Writing at 0x0014b4d7... (96 %)
+Writing at 0x00151351... (98 %)
+Writing at 0x001565d5... (100 %)
+Wrote 1345296 bytes (841383 compressed) at 0x00010000 in 19.4 seconds (effective 555.5 kbit/s)...
+Hash of data verified.
+Compressed 3072 bytes to 143...
+Writing at 0x00008000... (100 %)
+Wrote 3072 bytes (143 compressed) at 0x00008000 in 0.1 seconds (effective 322.0 kbit/s)...
+Hash of data verified.
+Compressed 8192 bytes to 31...
+Writing at 0x0000d000... (100 %)
+Wrote 8192 bytes (31 compressed) at 0x0000d000 in 0.2 seconds (effective 434.7 kbit/s)...
+Hash of data verified.
+
+Leaving...
+Hard resetting via RTS pin...

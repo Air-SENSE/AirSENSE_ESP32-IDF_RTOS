@@ -1,0 +1,28 @@
+menu "PMS7003 configuration"
+
+    config PMS_PIN_TX
+        int "TX GPIO Number"
+        default 17
+        help
+            GPIO number for TX.
+
+    config PMS_PIN_RX
+        int "RX GPIO Number"
+        default 16
+        help
+            GPIO number for RX.
+
+    config UART_BAUD_RATE
+        int "UART baudrate"
+        default 9600
+        help
+            UART baudrate.
+
+    config PMS_UART_PORT
+        int "Uart Port"
+        default 2
+        help 
+            UART port for PMS sensor.
+
+
+endmenu

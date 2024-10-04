@@ -1,0 +1,27 @@
+menu "SD Card menu"
+
+    config PIN_NUM_MOSI
+        int "MOSI GPIO Number"
+        default 19
+        help
+            GPIO number for SPI master MOSI.
+
+    config PIN_NUM_MISO
+        int "MISO GPIO Number"
+        default 21
+        help
+            GPIO number for SPI master MISO.
+
+    config PIN_NUM_CLK
+        int "CLK GPIO Number"
+        default 18
+        help
+            GPIO number for SPI master CLK.
+
+    config PIN_NUM_CS
+        int "CS GPIO Number"
+        default 5
+        help
+            GPIO number for SPI master CS.
+            
+endmenu

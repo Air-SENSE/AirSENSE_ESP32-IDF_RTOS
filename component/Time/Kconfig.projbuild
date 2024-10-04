@@ -1,0 +1,27 @@
+menu "RTC configuration"
+
+    config RTC_PIN_NUM_SCL
+        int "SCL GPIO Number"
+        default 27 if IDF_TARGET_ESP32 || IDF_TARGET_ESP32S2 || IDF_TARGET_ESP32S3
+        help
+            GPIO number for I2C Master clock line.
+
+    config RTC_PIN_NUM_SDA
+        int "SDA GPIO Number"
+        default 26 if IDF_TARGET_ESP32 || IDF_TARGET_ESP32S2 || IDF_TARGET_ESP32S3
+        help
+            GPIO number for I2C Master data line.
+
+    config RTC_I2C_PORT
+        int "I2C Port"
+        default 0
+        help 
+            I2C port for RTC module.
+
+    config RTC_I2C_FREQ_HZ
+        int "Frequency I2C"
+        default 400000
+        help
+            I2C frequency.
+
+endmenu

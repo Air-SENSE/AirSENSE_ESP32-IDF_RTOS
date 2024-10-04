@@ -1,0 +1,1423 @@
+ets Jul 29 2019 12:21:46
+
+rst:0x1 (POWERON_RESET),boot:0x13 (SPI_FAST_FLASH_BOOT)
+configsip: 0, SPIWP:0xee
+clk_drv:0x00,q_drv:0x00,d_drv:0x00,cs0_drv:0x00,hd_drv:0x00,wp_drv:0x00
+mode:DIO, clock div:2
+load:0x3fff0030,len:7084
+ho 0 tail 12 room 4
+load:0x40078000,len:15584
+load:0x40080400,len:4
+load:0x40080404,len:3876
+entry 0x4008064c
+[0;32mI (31) boot: ESP-IDF v5.1.2-dirty 2nd stage bootloader[0m
+[0;32mI (31) boot: compile time Oct  4 2024 15:46:43[0m
+[0;32mI (31) boot: Multicore bootloader[0m
+[0;32mI (36) boot: chip revision: v3.1[0m
+[0;32mI (40) boot.esp32: SPI Speed      : 40MHz[0m
+[0;32mI (44) boot.esp32: SPI Mode       : DIO[0m
+[0;32mI (49) boot.esp32: SPI Flash Size : 4MB[0m
+[0;32mI (53) boot: Enabling RNG early entropy source...[0m
+[0;32mI (59) boot: Partition Table:[0m
+[0;32mI (62) boot: ## Label            Usage          Type ST Offset   Length[0m
+[0;32mI (70) boot:  0 nvs              WiFi data        01 02 00009000 00004000[0m
+[0;32mI (77) boot:  1 otadata          OTA data         01 00 0000d000 00002000[0m
+[0;32mI (85) boot:  2 phy_init         RF data          01 01 0000f000 00001000[0m
+[0;32mI (92) boot:  3 factory          factory app      00 00 00010000 0014a000[0m
+[0;32mI (100) boot:  4 ota_0            OTA app          00 10 00160000 0014a000[0m
+[0;32mI (107) boot:  5 ota_1            OTA app          00 11 002b0000 0014a000[0m
+[0;32mI (115) boot: End of partition table[0m
+[0;32mI (119) boot: Defaulting to factory image[0m
+[0;32mI (124) esp_image: segment 0: paddr=00010020 vaddr=3f400020 size=4a9a0h (305568) map[0m
+[0;32mI (243) esp_image: segment 1: paddr=0005a9c8 vaddr=3ffb0000 size=03f14h ( 16148) load[0m
+[0;32mI (249) esp_image: segment 2: paddr=0005e8e4 vaddr=40080000 size=01734h (  5940) load[0m
+[0;32mI (252) esp_image: segment 3: paddr=00060020 vaddr=400d0020 size=e0c74h (920692) map[0m
+[0;32mI (589) esp_image: segment 4: paddr=00140c9c vaddr=40081734 size=17a48h ( 96840) load[0m
+[0;32mI (642) boot: Loaded app from partition at offset 0x10000[0m
+[0;32mI (642) boot: Disabling RNG early entropy source...[0m
+[0;32mI (654) cpu_start: Multicore app[0m
+[0;32mI (654) cpu_start: Pro cpu up.[0m
+[0;32mI (654) cpu_start: Starting app cpu, entry point is 0x40081604[0m
+[0;32mI (0) cpu_start: App cpu up.[0m
+[0;32mI (674) cpu_start: Pro cpu start user code[0m
+[0;32mI (674) cpu_start: cpu freq: 160000000 Hz[0m
+[0;32mI (674) cpu_start: Application information:[0m
+[0;32mI (679) cpu_start: Project name:     AirSENSE_ESP32-IDF_RTOS[0m
+[0;32mI (685) cpu_start: App version:      0.1.0.2[0m
+[0;32mI (690) cpu_start: Compile time:     Oct  4 2024 15:46:12[0m
+[0;32mI (696) cpu_start: ELF file SHA256:  3c7ec4eb00dcc69c...[0m
+[0;32mI (702) cpu_start: ESP-IDF:          v5.1.2-dirty[0m
+[0;32mI (708) cpu_start: Min chip rev:     v0.0[0m
+[0;32mI (712) cpu_start: Max chip rev:     v3.99 [0m
+[0;32mI (717) cpu_start: Chip rev:         v3.1[0m
+[0;32mI (722) heap_init: Initializing. RAM available for dynamic allocation:[0m
+[0;32mI (729) heap_init: At 3FFAE6E0 len 00001920 (6 KiB): DRAM[0m
+[0;32mI (735) heap_init: At 3FFC0DD0 len 0001F230 (124 KiB): DRAM[0m
+[0;32mI (742) heap_init: At 3FFE0440 len 00003AE0 (14 KiB): D/IRAM[0m
+[0;32mI (748) heap_init: At 3FFE4350 len 0001BCB0 (111 KiB): D/IRAM[0m
+[0;32mI (754) heap_init: At 4009917C len 00006E84 (27 KiB): IRAM[0m
+[0;32mI (762) spi_flash: detected chip: generic[0m
+[0;32mI (765) spi_flash: flash io: dio[0m
+[0;32mI (770) app_start: Starting scheduler on CPU0[0m
+[0;32mI (774) app_start: Starting scheduler on CPU1[0m
+[0;32mI (774) main_task: Started on CPU0[0m
+[0;32mI (784) main_task: Calling app_main()[0m
+[0;32mI (984) app_main: Starting app main.[0m
+This is esp32 chip with 2 CPU core(s), WiFi/BTBLE, silicon revision v3.1, 4MB external flash
+Minimum free heap size: 242628 bytes
+[0;32mI (984) app_main: Name device: ESP32-PROJECT.[0m
+[0;32mI (984) app_main: Firmware version 1.0.1.[0m
+[0;32mI (994) app_main: Initialize nvs partition.[0m
+[0;32mI (1534) app_main: Initialize SD card with SPI interface.[0m
+[0;32mI (1534) sdcard_initialize: Initializing SD card[0m
+[0;32mI (1534) sdcard_initialize: Using SPI peripheral[0m
+[0;32mI (1534) sdcard_initialize: Mounting filesystem[0m
+[0;32mI (1544) gpio: GPIO[5]| InputEn: 0| OutputEn: 1| OpenDrain: 0| Pullup: 0| Pulldown: 0| Intr:0 [0m
+[0;32mI (1554) sdspi_transaction: cmd=52, R1 response: command not supported[0m
+[0;32mI (1604) sdspi_transaction: cmd=5, R1 response: command not supported[0m
+[0;32mI (1624) sdcard_initialize: SDCard has been initialized.[0m
+[0;32mI (1624) sdcard_initialize: Filesystem mounted[0m
+[0;32mI (1624) sdcard_initialize: SDCard properties.[0m
+Name: SD16G
+Type: SDHC/SDXC
+Speed: 20.00 MHz (limit: 20.00 MHz)
+Size: 3840MB
+CSD: ver=2, sector_size=512, capacity=7864320 read_bl_len=9
+SSR: bus_width=1
+[0;32mI (1644) app_main: Initialize BME280 sensor(I2C/Wire1).[0m
+[0;32mI (1654) bme280_init: BME280 sensor initialze successful.[0m
+[0;32mI (1654) app_main: Initialize DS3231 module(I2C/Wire0).[0m
+[0;32mI (1654) ds3231_initialize: DS3231 module initialize success.[0m
+[0;32mI (1664) mhz14a_warmUp: MHZ14A warming up...[0m
+[0;32mI (2674) mhz14a_warmUp: MHZ14A warming up...[0m
+[0;32mI (3674) mhz14a_warmUp: MHZ14A warming up...[0m
+[0;32mI (4674) mhz14a_initUART: MHZ14A initialize success.[0m
+[0;32mI (4674) mhz14a_initUART: MHZ14A UART port initialize successful.[0m
+[0;32mI (4674) mhz14a_setRangeSetting: Sending command to MHZ14a sensor successful.[0m
+[0;32mI (4674) mhz14a_sendCommand: Sending command to MHZ14a sensor successful.[0m
+[0;31mE (4994) mhz14a_getDataFromSensorViaUART: Get raw data from TX buffer failed. 18[0m
+[0;32mI (4994) mhz14a_sendCommand: Sending command to MHZ14a sensor successful.[0m
+[0;32mI (5294) mhz14a_getDataFromSensorViaUART: Raw data from TX buffer: [255 134 6 57 67 0 0 0 248][0m
+[0;32mI (5294) pms7003_initUart: PMS7003 UART port initialize successful.[0m
+[0;31mE (5394) pms7003_readData: PMS7003 sensor read data failed.[0m
+[0;31mE (5494) pms7003_readData: PMS7003 sensor read data failed.[0m
+[0;31mE (5594) pms7003_readData: PMS7003 sensor read data failed.[0m
+[0;32mI (5714) pms7003_readData: PMS7003 sensor read data successful.[0m
+[0;32mI (5714) pms7003_readData: PM1.0: 17ug/m3  PM2.5: 22ug/m3  PM10: 29ug/m3.[0m
+[0;32mI (5714) gpio: GPIO[36]| InputEn: 1| OutputEn: 0| OpenDrain: 0| Pullup: 1| Pulldown: 0| Intr:2 [0m
+[0;32mI (5724) LCD TFT: Turn off LCD backlight[0m
+[0;32mI (5724) gpio: GPIO[4]| InputEn: 0| OutputEn: 1| OpenDrain: 0| Pullup: 0| Pulldown: 0| Intr:0 [0m
+[0;32mI (5734) LCD TFT: Initialize SPI bus[0m
+[0;32mI (5744) LCD TFT: Install panel IO[0m
+[0;32mI (5744) gpio: GPIO[3]| InputEn: 0| OutputEn: 1| OpenDrain: 0| Pullup: 0| Pulldown: 0| Intr:0 [0m
+[0;32mI (5754) LCD TFT: Install ILI9341 panel driver[0m
+[0;32mI (5754) gpio: GPIO[15]| InputEn: 0| OutputEn: 1| OpenDrain: 0| Pullup: 0| Pulldown: 0| Intr:0 [0m
+[0;32mI (5764) ili9341: LCD panel create success, version: 2.0.0[0m
+[0;32mI (5894) LCD TFT: Turn on LCD backlight[0m
+[0;32mI (5894) LCD TFT: Initialize LVGL library[0m
+[0;32mI (5894) LCD TFT: Register display driver to LVGL[0m
+[0;32mI (5904) LCD TFT: Install LVGL tick timer[0m
+[0;32mI (6084) ds3231_convertTimeToDayString: Convert time to day string successfully.[0m
+[0;32mI (6084) ds3231_convertTimeToDayString: Current date: 4102024[0m
+[0;32mI (6074) app_main: Create dataSensorIntermediate Queue success.[0m
+[0;32mI (6094) app_main: Create dataSensorSentToSD Queue success.[0m
+[0;32mI (6094) app_main: Create moduleError Queue success.[0m
+[0;32mI (6104) app_main: Create dataSensorSentToMQTT Queue success.[0m
+[0;32mI (6104) app_main: Create LCD Display Queue successfully.[0m
+[0;32mI (6114) app_main: Create dateTimeLostWiFi Queue successfully.[0m
+[0;32mI (7124) ds3231_getEpochTime: DS3231 get EpochTime success.[0m
+[0;32mI (7124) ds3231_isNewDay: New day come.[0m
+[0;32mI (7124) ds3231_isNewMinute: New minute.[0m
+[0;32mI (7124) ds3231_convertTimeToDayString: Convert time to day string successfully.[0m
+[0;32mI (7124) ds3231_convertTimeToString: Convert time to string successfully.[0m
+[0;32mI (7134) ds3231_convertTimeToDayString: Current date: 4102024[0m
+[0;32mI (7144) ds3231_convertTimeToString: Current date & time: 4-10-2024 16:11[0m
+[0;32mI (7144) fileEvent_task: Success to post the data sensor to dateTimeLostWiFi_queue Queue.[0m
+[0;32mI (7124) app_main: Create task AllocateData successfully.[0m
+I (7184) wifi:wifi driver task: 3ffe37ec, prio:23, stack:6656, core=0
+I (7194) wifi:wifi firmware version: 91b9630
+I (7194) wifi:wifi certification version: v7.0
+I (7194) wifi:config NVS flash: enabled
+I (7204) wifi:config nano formating: disabled
+I (7204) wifi:Init data frame dynamic rx buffer num: 32
+I (7204) wifi:Init static rx mgmt buffer num: 5
+I (7214) wifi:Init management short buffer num: 32
+I (7214) wifi:Init dynamic tx buffer num: 32
+[0;32mI (7224) pms7003_readData: PMS7003 sensor read data successful.[0m
+[0;32mI (7224) pms7003_readData: PM1.0: 17ug/m3  PM2.5: 22ug/m3  PM10: 29ug/m3.[0m
+[0;32mI (7234) mhz14a_sendCommand: Sending command to MHZ14a sensor successful.[0m
+I (7244) wifi:Init static rx buffer size: 1600
+I (7244) wifi:Init static rx buffer num: 10
+I (7254) wifi:Init dynamic rx buffer num: 32
+[0;32mI (7254) wifi_init: rx ba win: 6[0m
+[0;32mI (7254) wifi_init: tcpip mbox: 32[0m
+[0;32mI (7264) wifi_init: udp mbox: 6[0m
+[0;32mI (7264) wifi_init: tcp mbox: 6[0m
+[0;32mI (7274) wifi_init: tcp tx win: 5744[0m
+[0;32mI (7274) wifi_init: tcp rx win: 5744[0m
+[0;32mI (7274) wifi_init: tcp mss: 1440[0m
+[0;32mI (7284) wifi_init: WiFi IRAM OP enabled[0m
+[0;32mI (7284) wifi_init: WiFi RX IRAM OP enabled[0m
+[0;32mI (7294) phy_init: phy_version 4780,16b31a7,Sep 22 2023,20:42:16[0m
+I (7384) wifi:mode : sta (b0:b2:1c:0b:1a:04)
+I (7384) wifi:enable tsf
+[0;32mI (7394) WIFI_initSTA: WIFI initialize STA finished.[0m
+[0;32mI (7394) main_task: Returned from app_main()[0m
+[0;32mI (7394) WiFi_eventHandler: Trying to connect with Wi-Fi...
+[0m
+I (7414) wifi:new:<6,2>, old:<1,0>, ap:<255,255>, sta:<6,2>, prof:1
+I (7414) wifi:state: init -> auth (b0)
+I (7424) wifi:state: auth -> assoc (0)
+I (7434) wifi:state: assoc -> run (10)
+I (7454) wifi:connected with Hoang Vu 3, aid = 4, channel 6, 40D, bssid = 34:e8:94:f6:aa:d7
+I (7454) wifi:security: WPA2-PSK, phy: bgn, rssi: -44
+I (7464) wifi:pm start, type: 1
+
+[0;32mI (7464) WiFi_eventHandler: Wi-Fi connected AP SSID:Hoang Vu 3 password:0983069689.
+[0m
+I (7474) wifi:<ba-add>idx:0 (ifx:0, 34:e8:94:f6:aa:d7), tid:0, ssn:0, winSize:64
+[0;32mI (7544) mhz14a_getDataFromSensorViaUART: Raw data from TX buffer: [255 134 6 53 67 0 0 0 252][0m
+[0;32mI (7544) bme280_readSensorData: BME280 sensor read data successful.[0m
+[0;32mI (7544) getDataFromSensor_task: Read data from sensors completed![0m
+[0;32mI (7554) ds3231_convertTimeToString: Convert time to string successfully.[0m
+[0;32mI (7554) ds3231_convertTimeToString: Current date & time: 4-10-2024 16:11:21[0m
+[0;32mI (7564) getDataFromSensor_task: Success to post the data sensor to dataSensor Queue.[0m
+[0;32mI (7574) getDataFromSensor_task: Success to post the moduleError to Queue.[0m
+I (7584) wifi:AP's beacon interval = 102400 us, DTIM period = 1
+[0;32mI (7624) allocateDataToMQTTandSDQueue_task: Receiving data from intermediate queue successfully.[0m
+[0;32mI (7624) allocateDataToMQTTandSDQueue_task: Success to post the data sensor to dataSensorSentToSD Queue.[0m
+[0;32mI (7624) allocateDataToMQTTandSDQueue_task: Success to post the data sensor to LCD Display Queue.[0m
+[0;32mI (8124) DebugLed_task: Receiving data from Module Error queue successfully.[0m
+[0;32mI (8464) esp_netif_handlers: sta ip: 192.168.3.103, mask: 255.255.255.0, gw: 192.168.3.3[0m
+[0;32mI (8484) Main: got ip:192.168.3.103[0m
+[0;32mI (8484) WiFi_eventHandler: Starting MQTT Client...
+[0m
+[0;32mI (8484) sntp_init_func: Initializing SNTP.[0m
+[0;32mI (8484) mqtt_event_handler: Other event id:7[0m
+[0;32mI (8484) sntp_setTime: Waiting for system time to be set...[0m
+[0;32mI (8574) mqtt_event_handler: MQTT_EVENT_CONNECTED[0m
+[0;32mI (8584) fileEvent_task: Update file name after reconnect: 4102024[0m
+[0;32mI (8994) sntp_setTime: Waiting for system time to be set...[0m
+[0;32mI (9494) sntp_setTime: Waiting for system time to be set...[0m
+[0;32mI (9624) saveDataSensorToSDcard_task: Receiving data from queue successfully.[0m
+[0;32mI (9624) sdcard_writeDataToFile: Opening file /sdcard/4102024.txt...[0m
+[0;32mI (9634) SDcard: Success to create string data(63) for writing.[0m
+[0;32mI (9634) SDcard: Writing data to file /sdcard/4102024.txt...[0m
+[0;32mI (9634) SDcard: ESP32-PROJECT,1728058206,29.11,58.14,101171.03,17,22,29,1589
+;
+[0m
+[0;32mI (9644) sdcard_writeDataToFile: Success to write data to file /sdcard/4102024.txt.[0m
+[0;32mI (9654) Main: Save task received mutex![0m
+[0;32mI (9994) sntp_setTime: The current date/time in Viet Nam is: Fri Oct  4 16:11:24 2024 [0m
+[0;32mI (9994) Main: Current time in Viet Nam:  16:11:24 04/10/3924 Friday[0m
+[0;32mI (9994) ds3231_untilNewDay: Get seconds until new Day: 28116[0m
+[0;32mI (10004) ds3231_convertTimeToDayString: Convert time to day string successfully.[0m
+[0;32mI (10014) ds3231_convertTimeToDayString: Current date: 4102024[0m
+[0;32mI (10014) fileEvent_task: File name updated from SNTP[0m
+[0;32mI (12124) ds3231_getEpochTime: DS3231 get EpochTime success.[0m
+[0;32mI (12124) pms7003_readData: PMS7003 sensor read data successful.[0m
+[0;32mI (12124) pms7003_readData: PM1.0: 19ug/m3  PM2.5: 23ug/m3  PM10: 31ug/m3.[0m
+[0;32mI (12134) mhz14a_sendCommand: Sending command to MHZ14a sensor successful.[0m
+[0;32mI (12444) mhz14a_getDataFromSensorViaUART: Raw data from TX buffer: [255 134 6 50 68 0 0 0 254][0m
+[0;32mI (12444) bme280_readSensorData: BME280 sensor read data successful.[0m
+[0;32mI (12444) getDataFromSensor_task: Read data from sensors completed![0m
+[0;32mI (12454) ds3231_convertTimeToString: Convert time to string successfully.[0m
+[0;32mI (12464) ds3231_convertTimeToString: Current date & time: 4-10-2024 16:11:26[0m
+[0;32mI (12464) getDataFromSensor_task: Success to post the data sensor to dataSensor Queue.[0m
+[0;32mI (12474) getDataFromSensor_task: Success to post the moduleError to Queue.[0m
+[0;32mI (12534) allocateDataToMQTTandSDQueue_task: Receiving data from intermediate queue successfully.[0m
+[0;32mI (12534) allocateDataToMQTTandSDQueue_task: Success to post the data sensor to dataSensorSentToSD Queue.[0m
+[0;32mI (12534) allocateDataToMQTTandSDQueue_task: Success to post the data sensor to dataSensorSentToMQTT Queue.[0m
+[0;32mI (12544) allocateDataToMQTTandSDQueue_task: Success to post the data sensor to LCD Display Queue.[0m
+[0;32mI (13124) DebugLed_task: Receiving data from Module Error queue successfully.[0m
+[0;32mI (13484) mqttPublishMessage_task: Receiving data from queue successfully.[0m
+[0;32mI (13484) mqttPublishMessage_task: MQTT client publish message success.[0m
+[0;32mI (14654) saveDataSensorToSDcard_task: Receiving data from queue successfully.[0m
+[0;32mI (14654) sdcard_writeDataToFile: Opening file /sdcard/4102024.txt...[0m
+[0;32mI (14664) SDcard: Success to create string data(63) for writing.[0m
+[0;32mI (14664) SDcard: Writing data to file /sdcard/4102024.txt...[0m
+[0;32mI (14664) SDcard: ESP32-PROJECT,1728058212,29.12,58.13,101171.84,19,23,31,1586
+;
+[0m
+[0;32mI (14674) sdcard_writeDataToFile: Success to write data to file /sdcard/4102024.txt.[0m
+[0;32mI (14694) Main: Save task received mutex![0m
+[0;32mI (17124) ds3231_getEpochTime: DS3231 get EpochTime success.[0m
+[0;32mI (17124) pms7003_readData: PMS7003 sensor read data successful.[0m
+[0;32mI (17124) pms7003_readData: PM1.0: 19ug/m3  PM2.5: 24ug/m3  PM10: 31ug/m3.[0m
+[0;32mI (17134) mhz14a_sendCommand: Sending command to MHZ14a sensor successful.[0m
+[0;32mI (17444) mhz14a_getDataFromSensorViaUART: Raw data from TX buffer: [255 134 6 46 68 0 0 0 2][0m
+[0;32mI (17444) bme280_readSensorData: BME280 sensor read data successful.[0m
+[0;32mI (17444) getDataFromSensor_task: Read data from sensors completed![0m
+[0;32mI (17454) ds3231_convertTimeToString: Convert time to string successfully.[0m
+[0;32mI (17454) allocateDataToMQTTandSDQueue_task: Receiving data from intermediate queue successfully.[0m
+[0;32mI (17464) ds3231_convertTimeToString: Current date & time: 4-10-2024 16:11:31[0m
+[0;32mI (17474) getDataFromSensor_task: Success to post the data sensor to dataSensor Queue.[0m
+[0;32mI (17484) getDataFromSensor_task: Success to post the moduleError to Queue.[0m
+[0;32mI (17484) allocateDataToMQTTandSDQueue_task: Success to post the data sensor to dataSensorSentToSD Queue.[0m
+[0;32mI (17504) allocateDataToMQTTandSDQueue_task: Success to post the data sensor to dataSensorSentToMQTT Queue.[0m
+[0;32mI (17514) allocateDataToMQTTandSDQueue_task: Success to post the data sensor to LCD Display Queue.[0m
+[0;32mI (18124) DebugLed_task: Receiving data from Module Error queue successfully.[0m
+[0;32mI (19484) mqttPublishMessage_task: Receiving data from queue successfully.[0m
+[0;32mI (19484) mqttPublishMessage_task: MQTT client publish message success.[0m
+[0;32mI (19694) saveDataSensorToSDcard_task: Receiving data from queue successfully.[0m
+[0;32mI (19694) sdcard_writeDataToFile: Opening file /sdcard/4102024.txt...[0m
+[0;32mI (19704) SDcard: Success to create string data(63) for writing.[0m
+[0;32mI (19704) SDcard: Writing data to file /sdcard/4102024.txt...[0m
+[0;32mI (19704) SDcard: ESP32-PROJECT,1728058217,29.12,58.10,101176.05,19,24,31,1582
+;
+[0m
+[0;32mI (19714) sdcard_writeDataToFile: Success to write data to file /sdcard/4102024.txt.[0m
+[0;32mI (19734) Main: Save task received mutex![0m
+[0;32mI (22124) ds3231_getEpochTime: DS3231 get EpochTime success.[0m
+[0;32mI (22124) pms7003_readData: PMS7003 sensor read data successful.[0m
+[0;32mI (22124) pms7003_readData: PM1.0: 19ug/m3  PM2.5: 24ug/m3  PM10: 30ug/m3.[0m
+[0;32mI (22134) mhz14a_sendCommand: Sending command to MHZ14a sensor successful.[0m
+[0;32mI (22444) mhz14a_getDataFromSensorViaUART: Raw data from TX buffer: [255 134 6 41 68 0 0 0 7][0m
+[0;32mI (22444) bme280_readSensorData: BME280 sensor read data successful.[0m
+[0;32mI (22444) getDataFromSensor_task: Read data from sensors completed![0m
+[0;32mI (22454) ds3231_convertTimeToString: Convert time to string successfully.[0m
+[0;32mI (22464) ds3231_convertTimeToString: Current date & time: 4-10-2024 16:11:36[0m
+[0;32mI (22464) getDataFromSensor_task: Success to post the data sensor to dataSensor Queue.[0m
+[0;32mI (22474) getDataFromSensor_task: Success to post the moduleError to Queue.[0m
+[0;32mI (22524) allocateDataToMQTTandSDQueue_task: Receiving data from intermediate queue successfully.[0m
+[0;32mI (22524) allocateDataToMQTTandSDQueue_task: Success to post the data sensor to dataSensorSentToSD Queue.[0m
+[0;32mI (22524) allocateDataToMQTTandSDQueue_task: Success to post the data sensor to dataSensorSentToMQTT Queue.[0m
+[0;32mI (22534) allocateDataToMQTTandSDQueue_task: Success to post the data sensor to LCD Display Queue.[0m
+[0;32mI (23124) DebugLed_task: Receiving data from Module Error queue successfully.[0m
+[0;32mI (24734) saveDataSensorToSDcard_task: Receiving data from queue successfully.[0m
+[0;32mI (24734) sdcard_writeDataToFile: Opening file /sdcard/4102024.txt...[0m
+[0;32mI (24744) SDcard: Success to create string data(63) for writing.[0m
+[0;32mI (24744) SDcard: Writing data to file /sdcard/4102024.txt...[0m
+[0;32mI (24744) SDcard: ESP32-PROJECT,1728058222,29.12,58.08,101171.31,19,24,30,1577
+;
+[0m
+[0;32mI (24754) sdcard_writeDataToFile: Success to write data to file /sdcard/4102024.txt.[0m
+[0;32mI (24774) Main: Save task received mutex![0m
+[0;32mI (25484) mqttPublishMessage_task: Receiving data from queue successfully.[0m
+[0;32mI (25484) mqttPublishMessage_task: MQTT client publish message success.[0m
+[0;32mI (27124) ds3231_getEpochTime: DS3231 get EpochTime success.[0m
+[0;32mI (27124) pms7003_readData: PMS7003 sensor read data successful.[0m
+[0;32mI (27124) pms7003_readData: PM1.0: 20ug/m3  PM2.5: 26ug/m3  PM10: 29ug/m3.[0m
+[0;32mI (27134) mhz14a_sendCommand: Sending command to MHZ14a sensor successful.[0m
+[0;32mI (27444) mhz14a_getDataFromSensorViaUART: Raw data from TX buffer: [255 134 6 37 68 0 0 0 11][0m
+[0;32mI (27444) bme280_readSensorData: BME280 sensor read data successful.[0m
+[0;32mI (27444) getDataFromSensor_task: Read data from sensors completed![0m
+[0;32mI (27454) ds3231_convertTimeToString: Convert time to string successfully.[0m
+[0;32mI (27464) ds3231_convertTimeToString: Current date & time: 4-10-2024 16:11:41[0m
+[0;32mI (27464) getDataFromSensor_task: Success to post the data sensor to dataSensor Queue.[0m
+[0;32mI (27474) getDataFromSensor_task: Success to post the moduleError to Queue.[0m
+[0;32mI (27544) allocateDataToMQTTandSDQueue_task: Receiving data from intermediate queue successfully.[0m
+[0;32mI (27544) allocateDataToMQTTandSDQueue_task: Success to post the data sensor to dataSensorSentToSD Queue.[0m
+[0;32mI (27544) allocateDataToMQTTandSDQueue_task: Success to post the data sensor to dataSensorSentToMQTT Queue.[0m
+[0;32mI (27554) allocateDataToMQTTandSDQueue_task: Success to post the data sensor to LCD Display Queue.[0m
+[0;32mI (28124) DebugLed_task: Receiving data from Module Error queue successfully.[0m
+[0;32mI (29774) saveDataSensorToSDcard_task: Receiving data from queue successfully.[0m
+[0;32mI (29774) sdcard_writeDataToFile: Opening file /sdcard/4102024.txt...[0m
+[0;32mI (29784) SDcard: Success to create string data(63) for writing.[0m
+[0;32mI (29784) SDcard: Writing data to file /sdcard/4102024.txt...[0m
+[0;32mI (29784) SDcard: ESP32-PROJECT,1728058227,29.13,58.11,101171.31,20,26,29,1573
+;
+[0m
+[0;32mI (29794) sdcard_writeDataToFile: Success to write data to file /sdcard/4102024.txt.[0m
+[0;32mI (29814) Main: Save task received mutex![0m
+[0;32mI (31484) mqttPublishMessage_task: Receiving data from queue successfully.[0m
+[0;32mI (31484) mqttPublishMessage_task: MQTT client publish message success.[0m
+[0;32mI (32124) ds3231_getEpochTime: DS3231 get EpochTime success.[0m
+[0;32mI (32124) pms7003_readData: PMS7003 sensor read data successful.[0m
+[0;32mI (32124) pms7003_readData: PM1.0: 21ug/m3  PM2.5: 28ug/m3  PM10: 32ug/m3.[0m
+[0;32mI (32134) mhz14a_sendCommand: Sending command to MHZ14a sensor successful.[0m
+[0;32mI (32444) mhz14a_getDataFromSensorViaUART: Raw data from TX buffer: [255 134 6 33 68 0 0 0 15][0m
+[0;32mI (32444) bme280_readSensorData: BME280 sensor read data successful.[0m
+[0;32mI (32444) getDataFromSensor_task: Read data from sensors completed![0m
+[0;32mI (32454) ds3231_convertTimeToString: Convert time to string successfully.[0m
+[0;32mI (32464) ds3231_convertTimeToString: Current date & time: 4-10-2024 16:11:46[0m
+[0;32mI (32464) allocateDataToMQTTandSDQueue_task: Receiving data from intermediate queue successfully.[0m
+[0;32mI (32464) getDataFromSensor_task: Success to post the data sensor to dataSensor Queue.[0m
+[0;32mI (32484) allocateDataToMQTTandSDQueue_task: Success to post the data sensor to dataSensorSentToSD Queue.[0m
+[0;32mI (32484) getDataFromSensor_task: Success to post the moduleError to Queue.[0m
+[0;32mI (32494) allocateDataToMQTTandSDQueue_task: Success to post the data sensor to dataSensorSentToMQTT Queue.[0m
+[0;32mI (32514) allocateDataToMQTTandSDQueue_task: Success to post the data sensor to LCD Display Queue.[0m
+[0;32mI (33124) DebugLed_task: Receiving data from Module Error queue successfully.[0m
+[0;32mI (34814) saveDataSensorToSDcard_task: Receiving data from queue successfully.[0m
+[0;32mI (34814) sdcard_writeDataToFile: Opening file /sdcard/4102024.txt...[0m
+[0;32mI (34824) SDcard: Success to create string data(63) for writing.[0m
+[0;32mI (34824) SDcard: Writing data to file /sdcard/4102024.txt...[0m
+[0;32mI (34824) SDcard: ESP32-PROJECT,1728058232,29.12,58.08,101166.98,21,28,32,1569
+;
+[0m
+[0;32mI (34834) sdcard_writeDataToFile: Success to write data to file /sdcard/4102024.txt.[0m
+[0;32mI (34844) Main: Save task received mutex![0m
+[0;32mI (37124) ds3231_getEpochTime: DS3231 get EpochTime success.[0m
+[0;32mI (37124) pms7003_readData: PMS7003 sensor read data successful.[0m
+[0;32mI (37124) pms7003_readData: PM1.0: 21ug/m3  PM2.5: 28ug/m3  PM10: 29ug/m3.[0m
+[0;32mI (37134) mhz14a_sendCommand: Sending command to MHZ14a sensor successful.[0m
+[0;32mI (37444) mhz14a_getDataFromSensorViaUART: Raw data from TX buffer: [255 134 6 30 68 0 0 0 18][0m
+[0;32mI (37444) bme280_readSensorData: BME280 sensor read data successful.[0m
+[0;32mI (37444) getDataFromSensor_task: Read data from sensors completed![0m
+[0;32mI (37454) ds3231_convertTimeToString: Convert time to string successfully.[0m
+[0;32mI (37464) ds3231_convertTimeToString: Current date & time: 4-10-2024 16:11:51[0m
+[0;32mI (37464) getDataFromSensor_task: Success to post the data sensor to dataSensor Queue.[0m
+[0;32mI (37474) getDataFromSensor_task: Success to post the moduleError to Queue.[0m
+[0;32mI (37484) mqttPublishMessage_task: Receiving data from queue successfully.[0m
+[0;32mI (37494) mqttPublishMessage_task: MQTT client publish message success.[0m
+[0;32mI (37524) allocateDataToMQTTandSDQueue_task: Receiving data from intermediate queue successfully.[0m
+[0;32mI (37524) allocateDataToMQTTandSDQueue_task: Success to post the data sensor to dataSensorSentToSD Queue.[0m
+[0;32mI (37524) allocateDataToMQTTandSDQueue_task: Success to post the data sensor to dataSensorSentToMQTT Queue.[0m
+[0;32mI (37534) allocateDataToMQTTandSDQueue_task: Success to post the data sensor to LCD Display Queue.[0m
+[0;32mI (38124) DebugLed_task: Receiving data from Module Error queue successfully.[0m
+[0;32mI (38494) mqttPublishMessage_task: Receiving data from queue successfully.[0m
+[0;32mI (38504) mqttPublishMessage_task: MQTT client publish message success.[0m
+[0;32mI (39844) saveDataSensorToSDcard_task: Receiving data from queue successfully.[0m
+[0;32mI (39844) sdcard_writeDataToFile: Opening file /sdcard/4102024.txt...[0m
+[0;32mI (39854) SDcard: Success to create string data(63) for writing.[0m
+[0;32mI (39854) SDcard: Writing data to file /sdcard/4102024.txt...[0m
+[0;32mI (39854) SDcard: ESP32-PROJECT,1728058237,29.14,58.09,101170.78,21,28,29,1566
+;
+[0m
+[0;32mI (39864) sdcard_writeDataToFile: Success to write data to file /sdcard/4102024.txt.[0m
+[0;32mI (39884) Main: Save task received mutex![0m
+[0;32mI (42124) ds3231_getEpochTime: DS3231 get EpochTime success.[0m
+[0;32mI (42124) pms7003_readData: PMS7003 sensor read data successful.[0m
+[0;32mI (42124) pms7003_readData: PM1.0: 19ug/m3  PM2.5: 26ug/m3  PM10: 29ug/m3.[0m
+[0;32mI (42134) mhz14a_sendCommand: Sending command to MHZ14a sensor successful.[0m
+[0;32mI (42444) mhz14a_getDataFromSensorViaUART: Raw data from TX buffer: [255 134 6 26 68 0 0 0 22][0m
+[0;32mI (42444) bme280_readSensorData: BME280 sensor read data successful.[0m
+[0;32mI (42444) getDataFromSensor_task: Read data from sensors completed![0m
+[0;32mI (42454) ds3231_convertTimeToString: Convert time to string successfully.[0m
+[0;32mI (42464) ds3231_convertTimeToString: Current date & time: 4-10-2024 16:11:56[0m
+[0;32mI (42464) getDataFromSensor_task: Success to post the data sensor to dataSensor Queue.[0m
+[0;32mI (42474) getDataFromSensor_task: Success to post the moduleError to Queue.[0m
+[0;32mI (42544) allocateDataToMQTTandSDQueue_task: Receiving data from intermediate queue successfully.[0m
+[0;32mI (42544) allocateDataToMQTTandSDQueue_task: Success to post the data sensor to dataSensorSentToSD Queue.[0m
+[0;32mI (42544) allocateDataToMQTTandSDQueue_task: Success to post the data sensor to dataSensorSentToMQTT Queue.[0m
+[0;32mI (42554) allocateDataToMQTTandSDQueue_task: Success to post the data sensor to LCD Display Queue.[0m
+[0;32mI (43124) DebugLed_task: Receiving data from Module Error queue successfully.[0m
+[0;32mI (44504) mqttPublishMessage_task: Receiving data from queue successfully.[0m
+[0;32mI (44504) mqttPublishMessage_task: MQTT client publish message success.[0m
+[0;32mI (44884) saveDataSensorToSDcard_task: Receiving data from queue successfully.[0m
+[0;32mI (44884) sdcard_writeDataToFile: Opening file /sdcard/4102024.txt...[0m
+[0;32mI (44894) SDcard: Success to create string data(63) for writing.[0m
+[0;32mI (44894) SDcard: Writing data to file /sdcard/4102024.txt...[0m
+[0;32mI (44894) SDcard: ESP32-PROJECT,1728058242,29.14,58.09,101171.05,19,26,29,1562
+;
+[0m
+[0;32mI (44904) sdcard_writeDataToFile: Success to write data to file /sdcard/4102024.txt.[0m
+[0;32mI (44914) Main: Save task received mutex![0m
+[0;32mI (46574) ds3231_isNewMinute: New minute.[0m
+[0;32mI (46574) ds3231_convertTimeToString: Convert time to string successfully.[0m
+[0;32mI (46574) ds3231_convertTimeToString: Current date & time: 4-10-2024 16:12[0m
+[0;32mI (47124) ds3231_getEpochTime: DS3231 get EpochTime success.[0m
+[0;32mI (47124) pms7003_readData: PMS7003 sensor read data successful.[0m
+[0;32mI (47124) pms7003_readData: PM1.0: 19ug/m3  PM2.5: 26ug/m3  PM10: 28ug/m3.[0m
+[0;32mI (47134) mhz14a_sendCommand: Sending command to MHZ14a sensor successful.[0m
+[0;32mI (47444) mhz14a_getDataFromSensorViaUART: Raw data from TX buffer: [255 134 6 23 68 0 0 0 25][0m
+[0;32mI (47444) bme280_readSensorData: BME280 sensor read data successful.[0m
+[0;32mI (47444) getDataFromSensor_task: Read data from sensors completed![0m
+[0;32mI (47454) ds3231_convertTimeToString: Convert time to string successfully.[0m
+[0;32mI (47464) ds3231_convertTimeToString: Current date & time: 4-10-2024 16:12:1[0m
+[0;32mI (47464) allocateDataToMQTTandSDQueue_task: Receiving data from intermediate queue successfully.[0m
+[0;32mI (47464) getDataFromSensor_task: Success to post the data sensor to dataSensor Queue.[0m
+[0;32mI (47484) allocateDataToMQTTandSDQueue_task: Success to post the data sensor to dataSensorSentToSD Queue.[0m
+[0;32mI (47484) getDataFromSensor_task: Success to post the moduleError to Queue.[0m
+[0;32mI (47494) allocateDataToMQTTandSDQueue_task: Success to post the data sensor to dataSensorSentToMQTT Queue.[0m
+[0;32mI (47514) allocateDataToMQTTandSDQueue_task: Success to post the data sensor to LCD Display Queue.[0m
+[0;32mI (48124) DebugLed_task: Receiving data from Module Error queue successfully.[0m
+[0;32mI (49914) saveDataSensorToSDcard_task: Receiving data from queue successfully.[0m
+[0;32mI (49914) sdcard_writeDataToFile: Opening file /sdcard/4102024.txt...[0m
+[0;32mI (49924) SDcard: Success to create string data(63) for writing.[0m
+[0;32mI (49924) SDcard: Writing data to file /sdcard/4102024.txt...[0m
+[0;32mI (49924) SDcard: ESP32-PROJECT,1728058247,29.15,58.04,101169.16,19,26,28,1559
+;
+[0m
+[0;32mI (49934) sdcard_writeDataToFile: Success to write data to file /sdcard/4102024.txt.[0m
+[0;32mI (49954) Main: Save task received mutex![0m
+[0;32mI (50504) mqttPublishMessage_task: Receiving data from queue successfully.[0m
+[0;32mI (50504) mqttPublishMessage_task: MQTT client publish message success.[0m
+[0;32mI (52124) ds3231_getEpochTime: DS3231 get EpochTime success.[0m
+[0;32mI (52124) pms7003_readData: PMS7003 sensor read data successful.[0m
+[0;32mI (52124) pms7003_readData: PM1.0: 19ug/m3  PM2.5: 26ug/m3  PM10: 27ug/m3.[0m
+[0;32mI (52134) mhz14a_sendCommand: Sending command to MHZ14a sensor successful.[0m
+[0;32mI (52444) mhz14a_getDataFromSensorViaUART: Raw data from TX buffer: [255 134 6 19 68 0 0 0 29][0m
+[0;32mI (52444) bme280_readSensorData: BME280 sensor read data successful.[0m
+[0;32mI (52444) getDataFromSensor_task: Read data from sensors completed![0m
+[0;32mI (52454) ds3231_convertTimeToString: Convert time to string successfully.[0m
+[0;32mI (52464) ds3231_convertTimeToString: Current date & time: 4-10-2024 16:12:6[0m
+[0;32mI (52464) getDataFromSensor_task: Success to post the data sensor to dataSensor Queue.[0m
+[0;32mI (52474) getDataFromSensor_task: Success to post the moduleError to Queue.[0m
+[0;32mI (52524) allocateDataToMQTTandSDQueue_task: Receiving data from intermediate queue successfully.[0m
+[0;32mI (52524) allocateDataToMQTTandSDQueue_task: Success to post the data sensor to dataSensorSentToSD Queue.[0m
+[0;32mI (52524) allocateDataToMQTTandSDQueue_task: Success to post the data sensor to dataSensorSentToMQTT Queue.[0m
+[0;32mI (52534) allocateDataToMQTTandSDQueue_task: Success to post the data sensor to LCD Display Queue.[0m
+[0;32mI (53124) DebugLed_task: Receiving data from Module Error queue successfully.[0m
+[0;32mI (54954) saveDataSensorToSDcard_task: Receiving data from queue successfully.[0m
+[0;32mI (54954) sdcard_writeDataToFile: Opening file /sdcard/4102024.txt...[0m
+[0;32mI (54964) SDcard: Success to create string data(63) for writing.[0m
+[0;32mI (54964) SDcard: Writing data to file /sdcard/4102024.txt...[0m
+[0;32mI (54964) SDcard: ESP32-PROJECT,1728058252,29.16,58.02,101169.03,19,26,27,1555
+;
+[0m
+[0;32mI (54974) sdcard_writeDataToFile: Success to write data to file /sdcard/4102024.txt.[0m
+[0;32mI (54984) Main: Save task received mutex![0m
+[0;32mI (56504) mqttPublishMessage_task: Receiving data from queue successfully.[0m
+[0;32mI (56504) mqttPublishMessage_task: MQTT client publish message success.[0m
+[0;32mI (57124) ds3231_getEpochTime: DS3231 get EpochTime success.[0m
+[0;32mI (57124) pms7003_readData: PMS7003 sensor read data successful.[0m
+[0;32mI (57124) pms7003_readData: PM1.0: 19ug/m3  PM2.5: 26ug/m3  PM10: 27ug/m3.[0m
+[0;32mI (57134) mhz14a_sendCommand: Sending command to MHZ14a sensor successful.[0m
+[0;32mI (57444) mhz14a_getDataFromSensorViaUART: Raw data from TX buffer: [255 134 6 16 68 0 0 0 32][0m
+[0;32mI (57444) bme280_readSensorData: BME280 sensor read data successful.[0m
+[0;32mI (57444) getDataFromSensor_task: Read data from sensors completed![0m
+[0;32mI (57454) ds3231_convertTimeToString: Convert time to string successfully.[0m
+[0;32mI (57464) ds3231_convertTimeToString: Current date & time: 4-10-2024 16:12:11[0m
+[0;32mI (57464) getDataFromSensor_task: Success to post the data sensor to dataSensor Queue.[0m
+[0;32mI (57474) getDataFromSensor_task: Success to post the moduleError to Queue.[0m
+[0;32mI (57544) allocateDataToMQTTandSDQueue_task: Receiving data from intermediate queue successfully.[0m
+[0;32mI (57544) allocateDataToMQTTandSDQueue_task: Success to post the data sensor to dataSensorSentToSD Queue.[0m
+[0;32mI (57544) allocateDataToMQTTandSDQueue_task: Success to post the data sensor to dataSensorSentToMQTT Queue.[0m
+[0;32mI (57554) allocateDataToMQTTandSDQueue_task: Success to post the data sensor to LCD Display Queue.[0m
+[0;32mI (58124) DebugLed_task: Receiving data from Module Error queue successfully.[0m
+[0;32mI (59984) saveDataSensorToSDcard_task: Receiving data from queue successfully.[0m
+[0;32mI (59984) sdcard_writeDataToFile: Opening file /sdcard/4102024.txt...[0m
+[0;32mI (59994) SDcard: Success to create string data(63) for writing.[0m
+[0;32mI (59994) SDcard: Writing data to file /sdcard/4102024.txt...[0m
+[0;32mI (59994) SDcard: ESP32-PROJECT,1728058257,29.17,58.03,101167.55,19,26,27,1552
+;
+[0m
+[0;32mI (60004) sdcard_writeDataToFile: Success to write data to file /sdcard/4102024.txt.[0m
+[0;32mI (60024) Main: Save task received mutex![0m
+[0;32mI (62124) ds3231_getEpochTime: DS3231 get EpochTime success.[0m
+[0;32mI (62124) pms7003_readData: PMS7003 sensor read data successful.[0m
+[0;32mI (62124) pms7003_readData: PM1.0: 21ug/m3  PM2.5: 26ug/m3  PM10: 29ug/m3.[0m
+[0;32mI (62134) mhz14a_sendCommand: Sending command to MHZ14a sensor successful.[0m
+[0;32mI (62444) mhz14a_getDataFromSensorViaUART: Raw data from TX buffer: [255 134 6 12 68 0 0 0 36][0m
+[0;32mI (62444) bme280_readSensorData: BME280 sensor read data successful.[0m
+[0;32mI (62444) getDataFromSensor_task: Read data from sensors completed![0m
+[0;32mI (62454) ds3231_convertTimeToString: Convert time to string successfully.[0m
+[0;32mI (62464) ds3231_convertTimeToString: Current date & time: 4-10-2024 16:12:16[0m
+[0;32mI (62464) allocateDataToMQTTandSDQueue_task: Receiving data from intermediate queue successfully.[0m
+[0;32mI (62464) getDataFromSensor_task: Success to post the data sensor to dataSensor Queue.[0m
+[0;32mI (62484) allocateDataToMQTTandSDQueue_task: Success to post the data sensor to dataSensorSentToSD Queue.[0m
+[0;32mI (62484) getDataFromSensor_task: Success to post the moduleError to Queue.[0m
+[0;32mI (62494) allocateDataToMQTTandSDQueue_task: Success to post the data sensor to dataSensorSentToMQTT Queue.[0m
+[0;32mI (62504) mqttPublishMessage_task: Receiving data from queue successfully.[0m
+[0;32mI (62514) allocateDataToMQTTandSDQueue_task: Success to post the data sensor to LCD Display Queue.[0m
+[0;32mI (62524) saveDataSensorToSDcard_task: Receiving data from queue successfully.[0m
+[0;32mI (62524) mqttPublishMessage_task: MQTT client publish message success.[0m
+[0;32mI (62534) sdcard_writeDataToFile: Opening file /sdcard/4102024.txt...[0m
+[0;32mI (62564) SDcard: Success to create string data(63) for writing.[0m
+[0;32mI (62564) SDcard: Writing data to file /sdcard/4102024.txt...[0m
+[0;32mI (62564) SDcard: ESP32-PROJECT,1728058262,29.17,58.00,101173.64,21,26,29,1548
+;
+[0m
+[0;32mI (62574) sdcard_writeDataToFile: Success to write data to file /sdcard/4102024.txt.[0m
+[0;32mI (62584) Main: Save task received mutex![0m
+[0;32mI (63124) DebugLed_task: Receiving data from Module Error queue successfully.[0m
+[0;32mI (63544) mqttPublishMessage_task: Receiving data from queue successfully.[0m
+[0;32mI (63544) mqttPublishMessage_task: MQTT client publish message success.[0m
+[0;32mI (67124) ds3231_getEpochTime: DS3231 get EpochTime success.[0m
+[0;32mI (67124) pms7003_readData: PMS7003 sensor read data successful.[0m
+[0;32mI (67124) pms7003_readData: PM1.0: 20ug/m3  PM2.5: 25ug/m3  PM10: 29ug/m3.[0m
+[0;32mI (67134) mhz14a_sendCommand: Sending command to MHZ14a sensor successful.[0m
+[0;32mI (67444) mhz14a_getDataFromSensorViaUART: Raw data from TX buffer: [255 134 6 9 68 0 0 0 39][0m
+[0;32mI (67444) bme280_readSensorData: BME280 sensor read data successful.[0m
+[0;32mI (67444) getDataFromSensor_task: Read data from sensors completed![0m
+[0;32mI (67454) ds3231_convertTimeToString: Convert time to string successfully.[0m
+[0;32mI (67464) ds3231_convertTimeToString: Current date & time: 4-10-2024 16:12:21[0m
+[0;32mI (67464) getDataFromSensor_task: Success to post the data sensor to dataSensor Queue.[0m
+[0;32mI (67474) getDataFromSensor_task: Success to post the moduleError to Queue.[0m
+[0;32mI (67534) allocateDataToMQTTandSDQueue_task: Receiving data from intermediate queue successfully.[0m
+[0;32mI (67534) allocateDataToMQTTandSDQueue_task: Success to post the data sensor to dataSensorSentToSD Queue.[0m
+[0;32mI (67534) allocateDataToMQTTandSDQueue_task: Success to post the data sensor to dataSensorSentToMQTT Queue.[0m
+[0;32mI (67544) allocateDataToMQTTandSDQueue_task: Success to post the data sensor to LCD Display Queue.[0m
+[0;32mI (67584) saveDataSensorToSDcard_task: Receiving data from queue successfully.[0m
+[0;32mI (67584) sdcard_writeDataToFile: Opening file /sdcard/4102024.txt...[0m
+[0;32mI (67594) SDcard: Success to create string data(63) for writing.[0m
+[0;32mI (67594) SDcard: Writing data to file /sdcard/4102024.txt...[0m
+[0;32mI (67594) SDcard: ESP32-PROJECT,1728058267,29.17,57.98,101172.29,20,25,29,1545
+;
+[0m
+[0;32mI (67604) sdcard_writeDataToFile: Success to write data to file /sdcard/4102024.txt.[0m
+[0;32mI (67624) Main: Save task received mutex![0m
+[0;32mI (68124) DebugLed_task: Receiving data from Module Error queue successfully.[0m
+[0;32mI (69544) mqttPublishMessage_task: Receiving data from queue successfully.[0m
+[0;32mI (69544) mqttPublishMessage_task: MQTT client publish message success.[0m
+[0;32mI (72124) ds3231_getEpochTime: DS3231 get EpochTime success.[0m
+[0;32mI (72124) pms7003_readData: PMS7003 sensor read data successful.[0m
+[0;32mI (72124) pms7003_readData: PM1.0: 22ug/m3  PM2.5: 27ug/m3  PM10: 31ug/m3.[0m
+[0;32mI (72134) mhz14a_sendCommand: Sending command to MHZ14a sensor successful.[0m
+[0;32mI (72444) mhz14a_getDataFromSensorViaUART: Raw data from TX buffer: [255 134 6 5 68 0 0 0 43][0m
+[0;32mI (72444) bme280_readSensorData: BME280 sensor read data successful.[0m
+[0;32mI (72444) getDataFromSensor_task: Read data from sensors completed![0m
+[0;32mI (72454) ds3231_convertTimeToString: Convert time to string successfully.[0m
+[0;32mI (72454) allocateDataToMQTTandSDQueue_task: Receiving data from intermediate queue successfully.[0m
+[0;32mI (72464) ds3231_convertTimeToString: Current date & time: 4-10-2024 16:12:26[0m
+[0;32mI (72474) getDataFromSensor_task: Success to post the data sensor to dataSensor Queue.[0m
+[0;32mI (72484) getDataFromSensor_task: Success to post the moduleError to Queue.[0m
+[0;32mI (72484) allocateDataToMQTTandSDQueue_task: Success to post the data sensor to dataSensorSentToSD Queue.[0m
+[0;32mI (72504) allocateDataToMQTTandSDQueue_task: Success to post the data sensor to dataSensorSentToMQTT Queue.[0m
+[0;32mI (72514) allocateDataToMQTTandSDQueue_task: Success to post the data sensor to LCD Display Queue.[0m
+[0;32mI (72624) saveDataSensorToSDcard_task: Receiving data from queue successfully.[0m
+[0;32mI (72624) sdcard_writeDataToFile: Opening file /sdcard/4102024.txt...[0m
+[0;32mI (72634) SDcard: Success to create string data(63) for writing.[0m
+[0;32mI (72634) SDcard: Writing data to file /sdcard/4102024.txt...[0m
+[0;32mI (72634) SDcard: ESP32-PROJECT,1728058272,29.17,58.00,101171.61,22,27,31,1541
+;
+[0m
+[0;32mI (72644) sdcard_writeDataToFile: Success to write data to file /sdcard/4102024.txt.[0m
+[0;32mI (72654) Main: Save task received mutex![0m
+[0;32mI (73124) DebugLed_task: Receiving data from Module Error queue successfully.[0m
+[0;32mI (75544) mqttPublishMessage_task: Receiving data from queue successfully.[0m
+[0;32mI (75544) mqttPublishMessage_task: MQTT client publish message success.[0m
+[0;32mI (77124) ds3231_getEpochTime: DS3231 get EpochTime success.[0m
+[0;32mI (77124) pms7003_readData: PMS7003 sensor read data successful.[0m
+[0;32mI (77124) pms7003_readData: PM1.0: 21ug/m3  PM2.5: 28ug/m3  PM10: 34ug/m3.[0m
+[0;32mI (77134) mhz14a_sendCommand: Sending command to MHZ14a sensor successful.[0m
+[0;32mI (77444) mhz14a_getDataFromSensorViaUART: Raw data from TX buffer: [255 134 6 2 68 0 0 0 46][0m
+[0;32mI (77444) bme280_readSensorData: BME280 sensor read data successful.[0m
+[0;32mI (77444) getDataFromSensor_task: Read data from sensors completed![0m
+[0;32mI (77454) ds3231_convertTimeToString: Convert time to string successfully.[0m
+[0;32mI (77464) ds3231_convertTimeToString: Current date & time: 4-10-2024 16:12:31[0m
+[0;32mI (77464) getDataFromSensor_task: Success to post the data sensor to dataSensor Queue.[0m
+[0;32mI (77474) getDataFromSensor_task: Success to post the moduleError to Queue.[0m
+[0;32mI (77524) allocateDataToMQTTandSDQueue_task: Receiving data from intermediate queue successfully.[0m
+[0;32mI (77524) allocateDataToMQTTandSDQueue_task: Success to post the data sensor to dataSensorSentToSD Queue.[0m
+[0;32mI (77524) allocateDataToMQTTandSDQueue_task: Success to post the data sensor to dataSensorSentToMQTT Queue.[0m
+[0;32mI (77534) allocateDataToMQTTandSDQueue_task: Success to post the data sensor to LCD Display Queue.[0m
+[0;32mI (77664) saveDataSensorToSDcard_task: Receiving data from queue successfully.[0m
+[0;32mI (77664) sdcard_writeDataToFile: Opening file /sdcard/4102024.txt...[0m
+[0;32mI (77674) SDcard: Success to create string data(63) for writing.[0m
+[0;32mI (77674) SDcard: Writing data to file /sdcard/4102024.txt...[0m
+[0;32mI (77674) SDcard: ESP32-PROJECT,1728058277,29.18,57.98,101168.50,21,28,34,1538
+;
+[0m
+[0;32mI (77684) sdcard_writeDataToFile: Success to write data to file /sdcard/4102024.txt.[0m
+[0;32mI (77704) Main: Save task received mutex![0m
+[0;32mI (78124) DebugLed_task: Receiving data from Module Error queue successfully.[0m
+[0;32mI (81544) mqttPublishMessage_task: Receiving data from queue successfully.[0m
+[0;32mI (81544) mqttPublishMessage_task: MQTT client publish message success.[0m
+[0;32mI (82124) ds3231_getEpochTime: DS3231 get EpochTime success.[0m
+[0;32mI (82124) pms7003_readData: PMS7003 sensor read data successful.[0m
+[0;32mI (82124) pms7003_readData: PM1.0: 18ug/m3  PM2.5: 27ug/m3  PM10: 29ug/m3.[0m
+[0;32mI (82134) mhz14a_sendCommand: Sending command to MHZ14a sensor successful.[0m
+[0;32mI (82444) mhz14a_getDataFromSensorViaUART: Raw data from TX buffer: [255 134 5 255 68 0 0 0 50][0m
+[0;32mI (82444) bme280_readSensorData: BME280 sensor read data successful.[0m
+[0;32mI (82444) getDataFromSensor_task: Read data from sensors completed![0m
+[0;32mI (82454) ds3231_convertTimeToString: Convert time to string successfully.[0m
+[0;32mI (82464) ds3231_convertTimeToString: Current date & time: 4-10-2024 16:12:36[0m
+[0;32mI (82464) getDataFromSensor_task: Success to post the data sensor to dataSensor Queue.[0m
+[0;32mI (82474) getDataFromSensor_task: Success to post the moduleError to Queue.[0m
+[0;32mI (82544) allocateDataToMQTTandSDQueue_task: Receiving data from intermediate queue successfully.[0m
+[0;32mI (82544) allocateDataToMQTTandSDQueue_task: Success to post the data sensor to dataSensorSentToSD Queue.[0m
+[0;32mI (82544) allocateDataToMQTTandSDQueue_task: Success to post the data sensor to dataSensorSentToMQTT Queue.[0m
+[0;32mI (82554) allocateDataToMQTTandSDQueue_task: Success to post the data sensor to LCD Display Queue.[0m
+[0;32mI (82704) saveDataSensorToSDcard_task: Receiving data from queue successfully.[0m
+[0;32mI (82704) sdcard_writeDataToFile: Opening file /sdcard/4102024.txt...[0m
+[0;32mI (82714) SDcard: Success to create string data(63) for writing.[0m
+[0;32mI (82714) SDcard: Writing data to file /sdcard/4102024.txt...[0m
+[0;32mI (82714) SDcard: ESP32-PROJECT,1728058282,29.18,58.04,101171.20,18,27,29,1535
+;
+[0m
+[0;32mI (82724) sdcard_writeDataToFile: Success to write data to file /sdcard/4102024.txt.[0m
+[0;32mI (82744) Main: Save task received mutex![0m
+[0;32mI (83124) DebugLed_task: Receiving data from Module Error queue successfully.[0m
+I (85224) wifi:bcn_timeout,ap_probe_send_start
+[0;32mI (87124) ds3231_getEpochTime: DS3231 get EpochTime success.[0m
+[0;32mI (87124) pms7003_readData: PMS7003 sensor read data successful.[0m
+[0;32mI (87124) pms7003_readData: PM1.0: 18ug/m3  PM2.5: 27ug/m3  PM10: 28ug/m3.[0m
+[0;32mI (87134) mhz14a_sendCommand: Sending command to MHZ14a sensor successful.[0m
+[0;32mI (87444) mhz14a_getDataFromSensorViaUART: Raw data from TX buffer: [255 134 5 253 68 0 0 0 52][0m
+[0;32mI (87444) bme280_readSensorData: BME280 sensor read data successful.[0m
+[0;32mI (87444) getDataFromSensor_task: Read data from sensors completed![0m
+[0;32mI (87454) ds3231_convertTimeToString: Convert time to string successfully.[0m
+[0;32mI (87464) ds3231_convertTimeToString: Current date & time: 4-10-2024 16:12:41[0m
+[0;32mI (87464) allocateDataToMQTTandSDQueue_task: Receiving data from intermediate queue successfully.[0m
+[0;32mI (87464) getDataFromSensor_task: Success to post the data sensor to dataSensor Queue.[0m
+[0;32mI (87484) allocateDataToMQTTandSDQueue_task: Success to post the data sensor to dataSensorSentToSD Queue.[0m
+[0;32mI (87484) getDataFromSensor_task: Success to post the moduleError to Queue.[0m
+[0;32mI (87494) allocateDataToMQTTandSDQueue_task: Success to post the data sensor to dataSensorSentToMQTT Queue.[0m
+[0;32mI (87514) allocateDataToMQTTandSDQueue_task: Success to post the data sensor to LCD Display Queue.[0m
+[0;32mI (87544) mqttPublishMessage_task: Receiving data from queue successfully.[0m
+[0;32mI (87544) mqttPublishMessage_task: MQTT client publish message success.[0m
+I (87724) wifi:ap_probe_send over, resett wifi status to disassoc
+I (87724) wifi:state: run -> init (c800)
+I (87734) wifi:pm stop, total sleep time: 65422014 us / 80264909 us
+
+I (87734) wifi:<ba-del>idx:0, tid:0
+I (87734) wifi:new:<6,0>, old:<6,2>, ap:<255,255>, sta:<6,2>, prof:1
+[0;32mI (87744) saveDataSensorToSDcard_task: Receiving data from queue successfully.[0m
+[0;32mI (87744) WiFi_eventHandler: Wi-Fi disconnected: Retrying connect to AP SSID:Hoang Vu 3 password:0983069689[0m
+[0;32mI (87754) sdcard_writeDataToFile: Opening file /sdcard/4102024.txt...[0m
+[0;32mI (87764) WiFi_eventHandler: set bit disconnect[0m
+[0;32mI (87774) SDcard: Success to create string data(63) for writing.[0m
+[0;32mI (87784) SDcard: Writing data to file /sdcard/4102024.txt...[0m
+[0;32mI (87784) SDcard: ESP32-PROJECT,1728058287,29.19,57.98,101167.69,18,27,28,1533
+;
+[0m
+[0;32mI (87764) fileEvent_task: Update file name after disconnect: 4102024x[0m
+[0;32mI (87794) sdcard_writeDataToFile: Success to write data to file /sdcard/4102024.txt.[0m
+[0;32mI (87804) fileEvent_task: Success to post the data sensor to dateTimeLostWiFi_queue Queue.[0m
+[0;32mI (87814) Main: Save task received mutex![0m
+Time: 4-10-2024
+[0;31mE (87744) transport_base: poll_read select error 113, errno = Software caused connection abort, fd = 54[0m
+[0;31mE (87834) mqtt_client: Poll read error: 119, aborting connection[0m
+[0;31mE (87844) mqtt_event_handler: MQTT_EVENT_DISCONNECTED[0m
+[0;32mI (88124) DebugLed_task: Receiving data from Module Error queue successfully.[0m
+[0;32mI (90204) WiFi_eventHandler: Wi-Fi disconnected: Retrying connect to AP SSID:Hoang Vu 3 password:0983069689[0m
+[0;32mI (92124) ds3231_getEpochTime: DS3231 get EpochTime success.[0m
+[0;32mI (92124) pms7003_readData: PMS7003 sensor read data successful.[0m
+[0;32mI (92124) pms7003_readData: PM1.0: 19ug/m3  PM2.5: 29ug/m3  PM10: 29ug/m3.[0m
+[0;32mI (92134) mhz14a_sendCommand: Sending command to MHZ14a sensor successful.[0m
+[0;32mI (92444) mhz14a_getDataFromSensorViaUART: Raw data from TX buffer: [255 134 5 250 68 0 0 0 55][0m
+[0;32mI (92444) bme280_readSensorData: BME280 sensor read data successful.[0m
+[0;32mI (92444) getDataFromSensor_task: Read data from sensors completed![0m
+[0;32mI (92454) ds3231_convertTimeToString: Convert time to string successfully.[0m
+[0;32mI (92464) ds3231_convertTimeToString: Current date & time: 4-10-2024 16:12:46[0m
+[0;32mI (92464) getDataFromSensor_task: Success to post the data sensor to dataSensor Queue.[0m
+[0;32mI (92474) getDataFromSensor_task: Success to post the moduleError to Queue.[0m
+[0;32mI (92524) allocateDataToMQTTandSDQueue_task: Receiving data from intermediate queue successfully.[0m
+[0;32mI (92524) allocateDataToMQTTandSDQueue_task: Success to post the data sensor to dataSensorSentToSD Queue.[0m
+[0;32mI (92524) allocateDataToMQTTandSDQueue_task: Success to post the data sensor to LCD Display Queue.[0m
+[0;32mI (92624) WiFi_eventHandler: Wi-Fi disconnected: Retrying connect to AP SSID:Hoang Vu 3 password:0983069689[0m
+[0;32mI (92824) saveDataSensorToSDcard_task: Receiving data from queue successfully.[0m
+[0;32mI (92824) sdcard_writeDataToFile: Opening file /sdcard/4102024x.txt...[0m
+[0;32mI (92834) SDcard: Success to create string data(63) for writing.[0m
+[0;32mI (92834) SDcard: Writing data to file /sdcard/4102024x.txt...[0m
+[0;32mI (92834) SDcard: ESP32-PROJECT,1728058292,29.19,57.94,101170.95,19,29,29,1530
+;
+[0m
+[0;32mI (92844) sdcard_writeDataToFile: Success to write data to file /sdcard/4102024x.txt.[0m
+[0;32mI (92864) Main: Save task received mutex![0m
+[0;32mI (93124) DebugLed_task: Receiving data from Module Error queue successfully.[0m
+[0;32mI (95044) WiFi_eventHandler: Wi-Fi disconnected: Retrying connect to AP SSID:Hoang Vu 3 password:0983069689[0m
+[0;32mI (97124) ds3231_getEpochTime: DS3231 get EpochTime success.[0m
+[0;32mI (97124) pms7003_readData: PMS7003 sensor read data successful.[0m
+[0;32mI (97124) pms7003_readData: PM1.0: 20ug/m3  PM2.5: 29ug/m3  PM10: 30ug/m3.[0m
+[0;32mI (97134) mhz14a_sendCommand: Sending command to MHZ14a sensor successful.[0m
+[0;32mI (97444) mhz14a_getDataFromSensorViaUART: Raw data from TX buffer: [255 134 5 247 68 0 0 0 58][0m
+[0;32mI (97444) bme280_readSensorData: BME280 sensor read data successful.[0m
+[0;32mI (97444) getDataFromSensor_task: Read data from sensors completed![0m
+[0;32mI (97454) ds3231_convertTimeToString: Convert time to string successfully.[0m
+[0;32mI (97464) ds3231_convertTimeToString: Current date & time: 4-10-2024 16:12:51[0m
+[0;32mI (97464) getDataFromSensor_task: Success to post the data sensor to dataSensor Queue.[0m
+[0;32mI (97474) getDataFromSensor_task: Success to post the moduleError to Queue.[0m
+[0;32mI (97484) WiFi_eventHandler: Wi-Fi disconnected: Retrying connect to AP SSID:Hoang Vu 3 password:0983069689[0m
+[0;32mI (97534) allocateDataToMQTTandSDQueue_task: Receiving data from intermediate queue successfully.[0m
+[0;32mI (97534) allocateDataToMQTTandSDQueue_task: Success to post the data sensor to dataSensorSentToSD Queue.[0m
+[0;32mI (97534) allocateDataToMQTTandSDQueue_task: Success to post the data sensor to LCD Display Queue.[0m
+[0;32mI (97864) saveDataSensorToSDcard_task: Receiving data from queue successfully.[0m
+[0;32mI (97864) sdcard_writeDataToFile: Opening file /sdcard/4102024x.txt...[0m
+[0;32mI (97874) SDcard: Success to create string data(63) for writing.[0m
+[0;32mI (97874) SDcard: Writing data to file /sdcard/4102024x.txt...[0m
+[0;32mI (97874) SDcard: ESP32-PROJECT,1728058297,29.19,57.92,101173.52,20,29,30,1527
+;
+[0m
+[0;32mI (97884) sdcard_writeDataToFile: Success to write data to file /sdcard/4102024x.txt.[0m
+[0;32mI (97904) Main: Save task received mutex![0m
+[0;32mI (98124) DebugLed_task: Receiving data from Module Error queue successfully.[0m
+[0;32mI (99914) WiFi_eventHandler: Wi-Fi disconnected: Retrying connect to AP SSID:Hoang Vu 3 password:0983069689[0m
+[0;32mI (102124) ds3231_getEpochTime: DS3231 get EpochTime success.[0m
+[0;32mI (102124) pms7003_readData: PMS7003 sensor read data successful.[0m
+[0;32mI (102124) pms7003_readData: PM1.0: 19ug/m3  PM2.5: 28ug/m3  PM10: 28ug/m3.[0m
+[0;32mI (102134) mhz14a_sendCommand: Sending command to MHZ14a sensor successful.[0m
+[0;32mI (102334) WiFi_eventHandler: Wi-Fi disconnected: Retrying connect to AP SSID:Hoang Vu 3 password:0983069689[0m
+[0;32mI (102444) mhz14a_getDataFromSensorViaUART: Raw data from TX buffer: [255 134 5 246 68 0 0 0 59][0m
+[0;32mI (102444) bme280_readSensorData: BME280 sensor read data successful.[0m
+[0;32mI (102444) getDataFromSensor_task: Read data from sensors completed![0m
+[0;32mI (102454) ds3231_convertTimeToString: Convert time to string successfully.[0m
+[0;32mI (102464) ds3231_convertTimeToString: Current date & time: 4-10-2024 16:12:56[0m
+[0;32mI (102464) getDataFromSensor_task: Success to post the data sensor to dataSensor Queue.[0m
+[0;32mI (102474) getDataFromSensor_task: Success to post the moduleError to Queue.[0m
+[0;32mI (102544) allocateDataToMQTTandSDQueue_task: Receiving data from intermediate queue successfully.[0m
+[0;32mI (102544) allocateDataToMQTTandSDQueue_task: Success to post the data sensor to dataSensorSentToSD Queue.[0m
+[0;32mI (102544) allocateDataToMQTTandSDQueue_task: Success to post the data sensor to LCD Display Queue.[0m
+[0;32mI (102844) mqtt_event_handler: Other event id:7[0m
+[0;31mE (102844) esp-tls: [sock=54] connect() error: Host is unreachable[0m
+[0;31mE (102844) transport_base: Failed to open a new connection: 32772[0m
+[0;31mE (102844) mqtt_client: Error transport connect[0m
+[0;31mE (102854) mqtt_event_handler: MQTT_EVENT_ERROR[0m
+[0;31mE (102854) mqtt_event_handler: Last error code reported from esp-tls: 0x8004[0m
+[0;31mE (102864) mqtt_event_handler: Last tls stack error number: 0x0[0m
+[0;31mE (102874) mqtt_event_handler: Last captured errno : 0 (Success)[0m
+[0;31mE (102884) mqtt_event_handler: MQTT_EVENT_DISCONNECTED[0m
+[0;32mI (102904) saveDataSensorToSDcard_task: Receiving data from queue successfully.[0m
+[0;32mI (102904) sdcard_writeDataToFile: Opening file /sdcard/4102024x.txt...[0m
+[0;32mI (102914) SDcard: Success to create string data(63) for writing.[0m
+[0;32mI (102914) SDcard: Writing data to file /sdcard/4102024x.txt...[0m
+[0;32mI (102914) SDcard: ESP32-PROJECT,1728058302,29.18,57.91,101166.61,19,28,28,1526
+;
+[0m
+[0;32mI (102924) sdcard_writeDataToFile: Success to write data to file /sdcard/4102024x.txt.[0m
+[0;32mI (102934) Main: Save task received mutex![0m
+[0;32mI (103124) DebugLed_task: Receiving data from Module Error queue successfully.[0m
+[0;32mI (104784) WiFi_eventHandler: Wi-Fi disconnected: Retrying connect to AP SSID:Hoang Vu 3 password:0983069689[0m
+[0;32mI (106164) ds3231_isNewMinute: New minute.[0m
+[0;32mI (106164) ds3231_convertTimeToString: Convert time to string successfully.[0m
+[0;32mI (106164) ds3231_convertTimeToString: Current date & time: 4-10-2024 16:13[0m
+[0;32mI (107124) ds3231_getEpochTime: DS3231 get EpochTime success.[0m
+[0;32mI (107124) pms7003_readData: PMS7003 sensor read data successful.[0m
+[0;32mI (107124) pms7003_readData: PM1.0: 19ug/m3  PM2.5: 25ug/m3  PM10: 27ug/m3.[0m
+[0;32mI (107134) mhz14a_sendCommand: Sending command to MHZ14a sensor successful.[0m
+[0;32mI (107194) WiFi_eventHandler: Wi-Fi disconnected: Retrying connect to AP SSID:Hoang Vu 3 password:0983069689[0m
+[0;32mI (107444) mhz14a_getDataFromSensorViaUART: Raw data from TX buffer: [255 134 5 246 68 0 0 0 59][0m
+[0;32mI (107444) bme280_readSensorData: BME280 sensor read data successful.[0m
+[0;32mI (107444) getDataFromSensor_task: Read data from sensors completed![0m
+[0;32mI (107454) allocateDataToMQTTandSDQueue_task: Receiving data from intermediate queue successfully.[0m
+[0;32mI (107454) ds3231_convertTimeToString: Convert time to string successfully.[0m
+[0;32mI (107474) ds3231_convertTimeToString: Current date & time: 4-10-2024 16:13:1[0m
+[0;32mI (107474) getDataFromSensor_task: Success to post the data sensor to dataSensor Queue.[0m
+[0;32mI (107484) allocateDataToMQTTandSDQueue_task: Success to post the data sensor to dataSensorSentToSD Queue.[0m
+[0;32mI (107484) getDataFromSensor_task: Success to post the moduleError to Queue.[0m
+[0;32mI (107494) allocateDataToMQTTandSDQueue_task: Success to post the data sensor to LCD Display Queue.[0m
+[0;32mI (107934) saveDataSensorToSDcard_task: Receiving data from queue successfully.[0m
+[0;32mI (107934) sdcard_writeDataToFile: Opening file /sdcard/4102024x.txt...[0m
+[0;32mI (107944) SDcard: Success to create string data(63) for writing.[0m
+[0;32mI (107944) SDcard: Writing data to file /sdcard/4102024x.txt...[0m
+[0;32mI (107944) SDcard: ESP32-PROJECT,1728058307,29.20,57.90,101172.03,19,25,27,1526
+;
+[0m
+[0;32mI (107954) sdcard_writeDataToFile: Success to write data to file /sdcard/4102024x.txt.[0m
+[0;32mI (107974) Main: Save task received mutex![0m
+[0;32mI (108124) DebugLed_task: Receiving data from Module Error queue successfully.[0m
+[0;32mI (109634) WiFi_eventHandler: Wi-Fi disconnected: Retrying connect to AP SSID:Hoang Vu 3 password:0983069689[0m
+I (110614) wifi:new:<9,2>, old:<6,0>, ap:<255,255>, sta:<9,2>, prof:1
+I (110614) wifi:state: init -> auth (b0)
+I (110624) wifi:state: auth -> assoc (0)
+I (110634) wifi:state: assoc -> run (10)
+I (110654) wifi:connected with Hoang Vu 3, aid = 1, channel 9, 40D, bssid = 34:e8:94:f6:aa:d7
+I (110654) wifi:security: WPA2-PSK, phy: bgn, rssi: -47
+I (110724) wifi:pm start, type: 1
+
+I (110724) wifi:AP's beacon interval = 102400 us, DTIM period = 1
+[0;32mI (110724) WiFi_eventHandler: Wi-Fi connected AP SSID:Hoang Vu 3 password:0983069689.
+[0m
+I (111844) wifi:<ba-add>idx:0 (ifx:0, 34:e8:94:f6:aa:d7), tid:0, ssn:0, winSize:64
+[0;32mI (112124) ds3231_getEpochTime: DS3231 get EpochTime success.[0m
+[0;32mI (112124) pms7003_readData: PMS7003 sensor read data successful.[0m
+[0;32mI (112124) pms7003_readData: PM1.0: 18ug/m3  PM2.5: 24ug/m3  PM10: 28ug/m3.[0m
+[0;32mI (112134) mhz14a_sendCommand: Sending command to MHZ14a sensor successful.[0m
+[0;32mI (112444) mhz14a_getDataFromSensorViaUART: Raw data from TX buffer: [255 134 5 243 68 0 0 0 62][0m
+[0;32mI (112444) bme280_readSensorData: BME280 sensor read data successful.[0m
+[0;32mI (112444) getDataFromSensor_task: Read data from sensors completed![0m
+[0;32mI (112454) ds3231_convertTimeToString: Convert time to string successfully.[0m
+[0;32mI (112464) ds3231_convertTimeToString: Current date & time: 4-10-2024 16:13:6[0m
+[0;32mI (112464) getDataFromSensor_task: Success to post the data sensor to dataSensor Queue.[0m
+[0;32mI (112474) getDataFromSensor_task: Success to post the moduleError to Queue.[0m
+[0;32mI (112514) allocateDataToMQTTandSDQueue_task: Receiving data from intermediate queue successfully.[0m
+[0;32mI (112514) allocateDataToMQTTandSDQueue_task: Success to post the data sensor to dataSensorSentToSD Queue.[0m
+[0;32mI (112514) allocateDataToMQTTandSDQueue_task: Success to post the data sensor to LCD Display Queue.[0m
+[0;32mI (112974) saveDataSensorToSDcard_task: Receiving data from queue successfully.[0m
+[0;32mI (112974) sdcard_writeDataToFile: Opening file /sdcard/4102024x.txt...[0m
+[0;32mI (112984) SDcard: Success to create string data(63) for writing.[0m
+[0;32mI (112984) SDcard: Writing data to file /sdcard/4102024x.txt...[0m
+[0;32mI (112984) SDcard: ESP32-PROJECT,1728058312,29.20,57.90,101167.97,18,24,28,1523
+;
+[0m
+[0;32mI (112994) sdcard_writeDataToFile: Success to write data to file /sdcard/4102024x.txt.[0m
+[0;32mI (113004) Main: Save task received mutex![0m
+[0;32mI (113124) DebugLed_task: Receiving data from Module Error queue successfully.[0m
+[0;32mI (113724) esp_netif_handlers: sta ip: 192.168.3.100, mask: 255.255.255.0, gw: 192.168.3.3[0m
+[0;32mI (113744) Main: got ip:192.168.3.100[0m
+[0;32mI (113744) WiFi_eventHandler: Starting MQTT Client...
+[0m
+[0;32mI (113744) WiFi_eventHandler: Resume task mqttPublishMessageTask.[0m
+[0;31mE (113744) mqttPublishMessage_task: MQTT Client disconnected.[0m
+[0;31mE (113744) WiFi_eventHandler: Create task reconnected failed.[0m
+[0;32mI (117124) ds3231_getEpochTime: DS3231 get EpochTime success.[0m
+[0;32mI (117124) pms7003_readData: PMS7003 sensor read data successful.[0m
+[0;32mI (117124) pms7003_readData: PM1.0: 18ug/m3  PM2.5: 26ug/m3  PM10: 28ug/m3.[0m
+[0;32mI (117134) mhz14a_sendCommand: Sending command to MHZ14a sensor successful.[0m
+[0;32mI (117444) mhz14a_getDataFromSensorViaUART: Raw data from TX buffer: [255 134 5 240 68 0 0 0 65][0m
+[0;32mI (117444) bme280_readSensorData: BME280 sensor read data successful.[0m
+[0;32mI (117444) getDataFromSensor_task: Read data from sensors completed![0m
+[0;32mI (117454) ds3231_convertTimeToString: Convert time to string successfully.[0m
+[0;32mI (117464) ds3231_convertTimeToString: Current date & time: 4-10-2024 16:13:11[0m
+[0;32mI (117464) getDataFromSensor_task: Success to post the data sensor to dataSensor Queue.[0m
+[0;32mI (117474) getDataFromSensor_task: Success to post the moduleError to Queue.[0m
+[0;32mI (117524) allocateDataToMQTTandSDQueue_task: Receiving data from intermediate queue successfully.[0m
+[0;32mI (117524) allocateDataToMQTTandSDQueue_task: Success to post the data sensor to dataSensorSentToSD Queue.[0m
+[0;32mI (117524) allocateDataToMQTTandSDQueue_task: Success to post the data sensor to LCD Display Queue.[0m
+[0;32mI (117884) mqtt_event_handler: Other event id:7[0m
+[0;32mI (117954) mqtt_event_handler: MQTT_EVENT_CONNECTED[0m
+[0;32mI (117964) mqttPublishMessage_task: Receiving data from queue successfully.[0m
+[0;32mI (117964) fileEvent_task: Update file name after reconnect: 4102024[0m
+[0;32mI (117964) mqttPublishMessage_task: MQTT client publish message success.[0m
+[0;32mI (118014) saveDataSensorToSDcard_task: Receiving data from queue successfully.[0m
+[0;32mI (118014) sdcard_writeDataToFile: Opening file /sdcard/4102024.txt...[0m
+[0;32mI (118024) SDcard: Success to create string data(63) for writing.[0m
+[0;32mI (118024) SDcard: Writing data to file /sdcard/4102024.txt...[0m
+[0;32mI (118024) SDcard: ESP32-PROJECT,1728058317,29.19,57.89,101171.48,18,26,28,1520
+;
+[0m
+[0;32mI (118034) sdcard_writeDataToFile: Success to write data to file /sdcard/4102024.txt.[0m
+[0;32mI (118054) Main: Save task received mutex![0m
+[0;32mI (118124) DebugLed_task: Receiving data from Module Error queue successfully.[0m
+[0;32mI (122124) ds3231_getEpochTime: DS3231 get EpochTime success.[0m
+[0;32mI (122124) pms7003_readData: PMS7003 sensor read data successful.[0m
+[0;32mI (122124) pms7003_readData: PM1.0: 18ug/m3  PM2.5: 29ug/m3  PM10: 31ug/m3.[0m
+[0;32mI (122134) mhz14a_sendCommand: Sending command to MHZ14a sensor successful.[0m
+[0;32mI (122444) mhz14a_getDataFromSensorViaUART: Raw data from TX buffer: [255 134 5 238 68 0 0 0 67][0m
+[0;32mI (122444) bme280_readSensorData: BME280 sensor read data successful.[0m
+[0;32mI (122444) getDataFromSensor_task: Read data from sensors completed![0m
+[0;32mI (122454) ds3231_convertTimeToString: Convert time to string successfully.[0m
+[0;32mI (122464) ds3231_convertTimeToString: Current date & time: 4-10-2024 16:13:16[0m
+[0;32mI (122464) getDataFromSensor_task: Success to post the data sensor to dataSensor Queue.[0m
+[0;32mI (122474) getDataFromSensor_task: Success to post the moduleError to Queue.[0m
+[0;32mI (122534) allocateDataToMQTTandSDQueue_task: Receiving data from intermediate queue successfully.[0m
+[0;32mI (122534) allocateDataToMQTTandSDQueue_task: Success to post the data sensor to dataSensorSentToSD Queue.[0m
+[0;32mI (122534) allocateDataToMQTTandSDQueue_task: Success to post the data sensor to dataSensorSentToMQTT Queue.[0m
+[0;32mI (122544) allocateDataToMQTTandSDQueue_task: Success to post the data sensor to LCD Display Queue.[0m
+[0;32mI (123054) saveDataSensorToSDcard_task: Receiving data from queue successfully.[0m
+[0;32mI (123054) sdcard_writeDataToFile: Opening file /sdcard/4102024.txt...[0m
+[0;32mI (123064) SDcard: Success to create string data(63) for writing.[0m
+[0;32mI (123064) SDcard: Writing data to file /sdcard/4102024.txt...[0m
+[0;32mI (123064) SDcard: ESP32-PROJECT,1728058322,29.20,57.89,101170.00,18,29,31,1518
+;
+[0m
+[0;32mI (123074) sdcard_writeDataToFile: Success to write data to file /sdcard/4102024.txt.[0m
+[0;32mI (123084) Main: Save task received mutex![0m
+[0;32mI (123124) DebugLed_task: Receiving data from Module Error queue successfully.[0m
+[0;32mI (123974) mqttPublishMessage_task: Receiving data from queue successfully.[0m
+[0;32mI (123974) mqttPublishMessage_task: MQTT client publish message success.[0m
+[0;32mI (127124) ds3231_getEpochTime: DS3231 get EpochTime success.[0m
+[0;32mI (127124) pms7003_readData: PMS7003 sensor read data successful.[0m
+[0;32mI (127124) pms7003_readData: PM1.0: 18ug/m3  PM2.5: 30ug/m3  PM10: 30ug/m3.[0m
+[0;32mI (127134) mhz14a_sendCommand: Sending command to MHZ14a sensor successful.[0m
+[0;32mI (127444) mhz14a_getDataFromSensorViaUART: Raw data from TX buffer: [255 134 5 236 68 0 0 0 69][0m
+[0;32mI (127444) bme280_readSensorData: BME280 sensor read data successful.[0m
+[0;32mI (127444) getDataFromSensor_task: Read data from sensors completed![0m
+[0;32mI (127454) ds3231_convertTimeToString: Convert time to string successfully.[0m
+[0;32mI (127454) allocateDataToMQTTandSDQueue_task: Receiving data from intermediate queue successfully.[0m
+[0;32mI (127464) ds3231_convertTimeToString: Current date & time: 4-10-2024 16:13:21[0m
+[0;32mI (127474) getDataFromSensor_task: Success to post the data sensor to dataSensor Queue.[0m
+[0;32mI (127484) getDataFromSensor_task: Success to post the moduleError to Queue.[0m
+[0;32mI (127484) allocateDataToMQTTandSDQueue_task: Success to post the data sensor to dataSensorSentToSD Queue.[0m
+[0;32mI (127504) allocateDataToMQTTandSDQueue_task: Success to post the data sensor to dataSensorSentToMQTT Queue.[0m
+[0;32mI (127514) allocateDataToMQTTandSDQueue_task: Success to post the data sensor to LCD Display Queue.[0m
+[0;32mI (128094) saveDataSensorToSDcard_task: Receiving data from queue successfully.[0m
+[0;32mI (128094) sdcard_writeDataToFile: Opening file /sdcard/4102024.txt...[0m
+[0;32mI (128104) SDcard: Success to create string data(63) for writing.[0m
+[0;32mI (128104) SDcard: Writing data to file /sdcard/4102024.txt...[0m
+[0;32mI (128104) SDcard: ESP32-PROJECT,1728058327,29.21,57.89,101171.60,18,30,30,1516
+;
+[0m
+[0;32mI (128114) sdcard_writeDataToFile: Success to write data to file /sdcard/4102024.txt.[0m
+[0;32mI (128124) DebugLed_task: Receiving data from Module Error queue successfully.[0m
+[0;32mI (128134) Main: Save task received mutex![0m
+[0;32mI (129974) mqttPublishMessage_task: Receiving data from queue successfully.[0m
+[0;32mI (129974) mqttPublishMessage_task: MQTT client publish message success.[0m
+[0;32mI (132124) ds3231_getEpochTime: DS3231 get EpochTime success.[0m
+[0;32mI (132124) pms7003_readData: PMS7003 sensor read data successful.[0m
+[0;32mI (132124) pms7003_readData: PM1.0: 17ug/m3  PM2.5: 27ug/m3  PM10: 28ug/m3.[0m
+[0;32mI (132134) mhz14a_sendCommand: Sending command to MHZ14a sensor successful.[0m
+[0;32mI (132444) mhz14a_getDataFromSensorViaUART: Raw data from TX buffer: [255 134 5 235 68 0 0 0 70][0m
+[0;32mI (132444) bme280_readSensorData: BME280 sensor read data successful.[0m
+[0;32mI (132444) getDataFromSensor_task: Read data from sensors completed![0m
+[0;32mI (132454) ds3231_convertTimeToString: Convert time to string successfully.[0m
+[0;32mI (132464) ds3231_convertTimeToString: Current date & time: 4-10-2024 16:13:26[0m
+[0;32mI (132464) getDataFromSensor_task: Success to post the data sensor to dataSensor Queue.[0m
+[0;32mI (132474) getDataFromSensor_task: Success to post the moduleError to Queue.[0m
+[0;32mI (132524) allocateDataToMQTTandSDQueue_task: Receiving data from intermediate queue successfully.[0m
+[0;32mI (132524) allocateDataToMQTTandSDQueue_task: Success to post the data sensor to dataSensorSentToSD Queue.[0m
+[0;32mI (132524) allocateDataToMQTTandSDQueue_task: Success to post the data sensor to dataSensorSentToMQTT Queue.[0m
+[0;32mI (132534) allocateDataToMQTTandSDQueue_task: Success to post the data sensor to LCD Display Queue.[0m
+[0;32mI (133134) DebugLed_task: Receiving data from Module Error queue successfully.[0m
+[0;32mI (133134) saveDataSensorToSDcard_task: Receiving data from queue successfully.[0m
+[0;32mI (133134) sdcard_writeDataToFile: Opening file /sdcard/4102024.txt...[0m
+[0;32mI (133144) SDcard: Success to create string data(63) for writing.[0m
+[0;32mI (133144) SDcard: Writing data to file /sdcard/4102024.txt...[0m
+[0;32mI (133154) SDcard: ESP32-PROJECT,1728058332,29.22,58.06,101172.28,17,27,28,1515
+;
+[0m
+[0;32mI (133164) sdcard_writeDataToFile: Success to write data to file /sdcard/4102024.txt.[0m
+[0;32mI (133184) Main: Save task received mutex![0m
+[0;32mI (135974) mqttPublishMessage_task: Receiving data from queue successfully.[0m
+[0;32mI (135974) mqttPublishMessage_task: MQTT client publish message success.[0m
+[0;32mI (137124) ds3231_getEpochTime: DS3231 get EpochTime success.[0m
+[0;32mI (137124) pms7003_readData: PMS7003 sensor read data successful.[0m
+[0;32mI (137124) pms7003_readData: PM1.0: 17ug/m3  PM2.5: 26ug/m3  PM10: 27ug/m3.[0m
+[0;32mI (137134) mhz14a_sendCommand: Sending command to MHZ14a sensor successful.[0m
+[0;32mI (137444) mhz14a_getDataFromSensorViaUART: Raw data from TX buffer: [255 134 5 233 68 0 0 0 72][0m
+[0;32mI (137444) bme280_readSensorData: BME280 sensor read data successful.[0m
+[0;32mI (137444) getDataFromSensor_task: Read data from sensors completed![0m
+[0;32mI (137454) ds3231_convertTimeToString: Convert time to string successfully.[0m
+[0;32mI (137464) ds3231_convertTimeToString: Current date & time: 4-10-2024 16:13:31[0m
+[0;32mI (137464) getDataFromSensor_task: Success to post the data sensor to dataSensor Queue.[0m
+[0;32mI (137474) getDataFromSensor_task: Success to post the moduleError to Queue.[0m
+[0;32mI (137544) allocateDataToMQTTandSDQueue_task: Receiving data from intermediate queue successfully.[0m
+[0;32mI (137544) allocateDataToMQTTandSDQueue_task: Success to post the data sensor to dataSensorSentToSD Queue.[0m
+[0;32mI (137544) allocateDataToMQTTandSDQueue_task: Success to post the data sensor to dataSensorSentToMQTT Queue.[0m
+[0;32mI (137554) allocateDataToMQTTandSDQueue_task: Success to post the data sensor to LCD Display Queue.[0m
+[0;32mI (138134) DebugLed_task: Receiving data from Module Error queue successfully.[0m
+[0;32mI (138184) saveDataSensorToSDcard_task: Receiving data from queue successfully.[0m
+[0;32mI (138184) sdcard_writeDataToFile: Opening file /sdcard/4102024.txt...[0m
+[0;32mI (138194) SDcard: Success to create string data(63) for writing.[0m
+[0;32mI (138194) SDcard: Writing data to file /sdcard/4102024.txt...[0m
+[0;32mI (138194) SDcard: ESP32-PROJECT,1728058337,29.22,57.99,101171.61,17,26,27,1513
+;
+[0m
+[0;32mI (138204) sdcard_writeDataToFile: Success to write data to file /sdcard/4102024.txt.[0m
+[0;32mI (138224) Main: Save task received mutex![0m
+[0;32mI (141974) mqttPublishMessage_task: Receiving data from queue successfully.[0m
+[0;32mI (141974) mqttPublishMessage_task: MQTT client publish message success.[0m
+[0;32mI (142124) ds3231_getEpochTime: DS3231 get EpochTime success.[0m
+[0;32mI (142124) pms7003_readData: PMS7003 sensor read data successful.[0m
+[0;32mI (142124) pms7003_readData: PM1.0: 18ug/m3  PM2.5: 28ug/m3  PM10: 28ug/m3.[0m
+[0;32mI (142134) mhz14a_sendCommand: Sending command to MHZ14a sensor successful.[0m
+[0;32mI (142444) mhz14a_getDataFromSensorViaUART: Raw data from TX buffer: [255 134 5 232 68 0 0 0 73][0m
+[0;32mI (142444) bme280_readSensorData: BME280 sensor read data successful.[0m
+[0;32mI (142444) getDataFromSensor_task: Read data from sensors completed![0m
+[0;32mI (142454) ds3231_convertTimeToString: Convert time to string successfully.[0m
+[0;32mI (142464) ds3231_convertTimeToString: Current date & time: 4-10-2024 16:13:36[0m
+[0;32mI (142464) allocateDataToMQTTandSDQueue_task: Receiving data from intermediate queue successfully.[0m
+[0;32mI (142464) getDataFromSensor_task: Success to post the data sensor to dataSensor Queue.[0m
+[0;32mI (142484) allocateDataToMQTTandSDQueue_task: Success to post the data sensor to dataSensorSentToSD Queue.[0m
+[0;32mI (142484) getDataFromSensor_task: Success to post the moduleError to Queue.[0m
+[0;32mI (142494) allocateDataToMQTTandSDQueue_task: Success to post the data sensor to dataSensorSentToMQTT Queue.[0m
+[0;32mI (142514) allocateDataToMQTTandSDQueue_task: Success to post the data sensor to LCD Display Queue.[0m
+[0;32mI (142974) mqttPublishMessage_task: Receiving data from queue successfully.[0m
+[0;32mI (142974) mqttPublishMessage_task: MQTT client publish message success.[0m
+[0;32mI (143134) DebugLed_task: Receiving data from Module Error queue successfully.[0m
+[0;32mI (143224) saveDataSensorToSDcard_task: Receiving data from queue successfully.[0m
+[0;32mI (143224) sdcard_writeDataToFile: Opening file /sdcard/4102024.txt...[0m
+[0;32mI (143234) SDcard: Success to create string data(63) for writing.[0m
+[0;32mI (143234) SDcard: Writing data to file /sdcard/4102024.txt...[0m
+[0;32mI (143234) SDcard: ESP32-PROJECT,1728058342,29.22,57.98,101170.66,18,28,28,1512
+;
+[0m
+[0;32mI (143244) sdcard_writeDataToFile: Success to write data to file /sdcard/4102024.txt.[0m
+[0;32mI (143264) Main: Save task received mutex![0m
+[0;32mI (147124) ds3231_getEpochTime: DS3231 get EpochTime success.[0m
+[0;32mI (147124) pms7003_readData: PMS7003 sensor read data successful.[0m
+[0;32mI (147124) pms7003_readData: PM1.0: 18ug/m3  PM2.5: 30ug/m3  PM10: 30ug/m3.[0m
+[0;32mI (147134) mhz14a_sendCommand: Sending command to MHZ14a sensor successful.[0m
+[0;32mI (147444) mhz14a_getDataFromSensorViaUART: Raw data from TX buffer: [255 134 5 231 68 0 0 0 74][0m
+[0;32mI (147444) bme280_readSensorData: BME280 sensor read data successful.[0m
+[0;32mI (147444) getDataFromSensor_task: Read data from sensors completed![0m
+[0;32mI (147454) ds3231_convertTimeToString: Convert time to string successfully.[0m
+[0;32mI (147464) ds3231_convertTimeToString: Current date & time: 4-10-2024 16:13:41[0m
+[0;32mI (147464) getDataFromSensor_task: Success to post the data sensor to dataSensor Queue.[0m
+[0;32mI (147474) getDataFromSensor_task: Success to post the moduleError to Queue.[0m
+[0;32mI (147524) allocateDataToMQTTandSDQueue_task: Receiving data from intermediate queue successfully.[0m
+[0;32mI (147524) allocateDataToMQTTandSDQueue_task: Success to post the data sensor to dataSensorSentToSD Queue.[0m
+[0;32mI (147524) allocateDataToMQTTandSDQueue_task: Success to post the data sensor to dataSensorSentToMQTT Queue.[0m
+[0;32mI (147534) allocateDataToMQTTandSDQueue_task: Success to post the data sensor to LCD Display Queue.[0m
+[0;32mI (148134) DebugLed_task: Receiving data from Module Error queue successfully.[0m
+[0;32mI (148264) saveDataSensorToSDcard_task: Receiving data from queue successfully.[0m
+[0;32mI (148264) sdcard_writeDataToFile: Opening file /sdcard/4102024.txt...[0m
+[0;32mI (148274) SDcard: Success to create string data(63) for writing.[0m
+[0;32mI (148274) SDcard: Writing data to file /sdcard/4102024.txt...[0m
+[0;32mI (148274) SDcard: ESP32-PROJECT,1728058347,29.24,58.03,101171.75,18,30,30,1511
+;
+[0m
+[0;32mI (148284) sdcard_writeDataToFile: Success to write data to file /sdcard/4102024.txt.[0m
+[0;32mI (148304) Main: Save task received mutex![0m
+[0;32mI (148974) mqttPublishMessage_task: Receiving data from queue successfully.[0m
+[0;32mI (148974) mqttPublishMessage_task: MQTT client publish message success.[0m
+[0;32mI (152124) ds3231_getEpochTime: DS3231 get EpochTime success.[0m
+[0;32mI (152124) pms7003_readData: PMS7003 sensor read data successful.[0m
+[0;32mI (152124) pms7003_readData: PM1.0: 19ug/m3  PM2.5: 29ug/m3  PM10: 29ug/m3.[0m
+[0;32mI (152134) mhz14a_sendCommand: Sending command to MHZ14a sensor successful.[0m
+[0;32mI (152444) mhz14a_getDataFromSensorViaUART: Raw data from TX buffer: [255 134 5 230 69 0 0 0 74][0m
+[0;32mI (152444) bme280_readSensorData: BME280 sensor read data successful.[0m
+[0;32mI (152444) getDataFromSensor_task: Read data from sensors completed![0m
+[0;32mI (152454) ds3231_convertTimeToString: Convert time to string successfully.[0m
+[0;32mI (152464) ds3231_convertTimeToString: Current date & time: 4-10-2024 16:13:46[0m
+[0;32mI (152464) getDataFromSensor_task: Success to post the data sensor to dataSensor Queue.[0m
+[0;32mI (152474) getDataFromSensor_task: Success to post the moduleError to Queue.[0m
+[0;32mI (152544) allocateDataToMQTTandSDQueue_task: Receiving data from intermediate queue successfully.[0m
+[0;32mI (152544) allocateDataToMQTTandSDQueue_task: Success to post the data sensor to dataSensorSentToSD Queue.[0m
+[0;32mI (152544) allocateDataToMQTTandSDQueue_task: Success to post the data sensor to dataSensorSentToMQTT Queue.[0m
+[0;32mI (152554) allocateDataToMQTTandSDQueue_task: Success to post the data sensor to LCD Display Queue.[0m
+[0;32mI (153134) DebugLed_task: Receiving data from Module Error queue successfully.[0m
+[0;32mI (153304) saveDataSensorToSDcard_task: Receiving data from queue successfully.[0m
+[0;32mI (153304) sdcard_writeDataToFile: Opening file /sdcard/4102024.txt...[0m
+[0;32mI (153314) SDcard: Success to create string data(63) for writing.[0m
+[0;32mI (153314) SDcard: Writing data to file /sdcard/4102024.txt...[0m
+[0;32mI (153314) SDcard: ESP32-PROJECT,1728058352,29.25,57.99,101172.44,19,29,29,1510
+;
+[0m
+[0;32mI (153324) sdcard_writeDataToFile: Success to write data to file /sdcard/4102024.txt.[0m
+[0;32mI (153344) Main: Save task received mutex![0m
+[0;32mI (154974) mqttPublishMessage_task: Receiving data from queue successfully.[0m
+[0;32mI (154974) mqttPublishMessage_task: MQTT client publish message success.[0m
+[0;32mI (157124) ds3231_getEpochTime: DS3231 get EpochTime success.[0m
+[0;32mI (157224) pms7003_readData: PMS7003 sensor read data successful.[0m
+[0;32mI (157224) pms7003_readData: PM1.0: 19ug/m3  PM2.5: 28ug/m3  PM10: 28ug/m3.[0m
+[0;32mI (157224) mhz14a_sendCommand: Sending command to MHZ14a sensor successful.[0m
+[0;32mI (157534) mhz14a_getDataFromSensorViaUART: Raw data from TX buffer: [255 134 5 228 69 0 0 0 76][0m
+[0;32mI (157534) bme280_readSensorData: BME280 sensor read data successful.[0m
+[0;32mI (157534) getDataFromSensor_task: Read data from sensors completed![0m
+[0;32mI (157544) ds3231_convertTimeToString: Convert time to string successfully.[0m
+[0;32mI (157554) ds3231_convertTimeToString: Current date & time: 4-10-2024 16:13:51[0m
+[0;32mI (157554) getDataFromSensor_task: Success to post the data sensor to dataSensor Queue.[0m
+[0;32mI (157564) allocateDataToMQTTandSDQueue_task: Receiving data from intermediate queue successfully.[0m
+[0;32mI (157564) getDataFromSensor_task: Success to post the moduleError to Queue.[0m
+[0;32mI (157574) allocateDataToMQTTandSDQueue_task: Success to post the data sensor to dataSensorSentToSD Queue.[0m
+[0;32mI (157594) allocateDataToMQTTandSDQueue_task: Success to post the data sensor to dataSensorSentToMQTT Queue.[0m
+[0;32mI (157604) allocateDataToMQTTandSDQueue_task: Success to post the data sensor to LCD Display Queue.[0m
+[0;32mI (158134) DebugLed_task: Receiving data from Module Error queue successfully.[0m
+[0;32mI (158344) saveDataSensorToSDcard_task: Receiving data from queue successfully.[0m
+[0;32mI (158344) sdcard_writeDataToFile: Opening file /sdcard/4102024.txt...[0m
+[0;32mI (158354) SDcard: Success to create string data(63) for writing.[0m
+[0;32mI (158354) SDcard: Writing data to file /sdcard/4102024.txt...[0m
+[0;32mI (158354) SDcard: ESP32-PROJECT,1728058357,29.26,57.91,101174.48,19,28,28,1508
+;
+[0m
+[0;32mI (158364) sdcard_writeDataToFile: Success to write data to file /sdcard/4102024.txt.[0m
+[0;32mI (158384) Main: Save task received mutex![0m
+I (160484) wifi:new:<9,0>, old:<9,2>, ap:<255,255>, sta:<9,0>, prof:1
+[0;32mI (160974) mqttPublishMessage_task: Receiving data from queue successfully.[0m
+[0;32mI (160974) mqttPublishMessage_task: MQTT client publish message success.[0m
+I (161504) wifi:new:<9,2>, old:<9,0>, ap:<255,255>, sta:<9,2>, prof:1
+[0;32mI (162124) ds3231_getEpochTime: DS3231 get EpochTime success.[0m
+[0;32mI (162124) pms7003_readData: PMS7003 sensor read data successful.[0m
+[0;32mI (162124) pms7003_readData: PM1.0: 21ug/m3  PM2.5: 29ug/m3  PM10: 31ug/m3.[0m
+[0;32mI (162134) mhz14a_sendCommand: Sending command to MHZ14a sensor successful.[0m
+[0;32mI (162444) mhz14a_getDataFromSensorViaUART: Raw data from TX buffer: [255 134 5 227 69 0 0 0 77][0m
+[0;32mI (162444) bme280_readSensorData: BME280 sensor read data successful.[0m
+[0;32mI (162444) getDataFromSensor_task: Read data from sensors completed![0m
+[0;32mI (162454) ds3231_convertTimeToString: Convert time to string successfully.[0m
+[0;32mI (162464) ds3231_convertTimeToString: Current date & time: 4-10-2024 16:13:56[0m
+[0;32mI (162464) getDataFromSensor_task: Success to post the data sensor to dataSensor Queue.[0m
+[0;32mI (162474) getDataFromSensor_task: Success to post the moduleError to Queue.[0m
+[0;32mI (162514) allocateDataToMQTTandSDQueue_task: Receiving data from intermediate queue successfully.[0m
+[0;32mI (162514) allocateDataToMQTTandSDQueue_task: Success to post the data sensor to dataSensorSentToSD Queue.[0m
+[0;32mI (162514) allocateDataToMQTTandSDQueue_task: Success to post the data sensor to dataSensorSentToMQTT Queue.[0m
+[0;32mI (162524) allocateDataToMQTTandSDQueue_task: Success to post the data sensor to LCD Display Queue.[0m
+[0;32mI (163134) DebugLed_task: Receiving data from Module Error queue successfully.[0m
+[0;32mI (163384) saveDataSensorToSDcard_task: Receiving data from queue successfully.[0m
+[0;32mI (163384) sdcard_writeDataToFile: Opening file /sdcard/4102024.txt...[0m
+[0;32mI (163394) SDcard: Success to create string data(63) for writing.[0m
+[0;32mI (163394) SDcard: Writing data to file /sdcard/4102024.txt...[0m
+[0;32mI (163394) SDcard: ESP32-PROJECT,1728058362,29.27,57.99,101170.82,21,29,31,1507
+;
+[0m
+[0;32mI (163404) sdcard_writeDataToFile: Success to write data to file /sdcard/4102024.txt.[0m
+[0;32mI (163424) Main: Save task received mutex![0m
+[0;32mI (166774) ds3231_isNewMinute: New minute.[0m
+[0;32mI (166774) ds3231_convertTimeToString: Convert time to string successfully.[0m
+[0;32mI (166774) ds3231_convertTimeToString: Current date & time: 4-10-2024 16:14[0m
+[0;32mI (166974) mqttPublishMessage_task: Receiving data from queue successfully.[0m
+[0;32mI (166974) mqttPublishMessage_task: MQTT client publish message success.[0m
+[0;32mI (167124) ds3231_getEpochTime: DS3231 get EpochTime success.[0m
+[0;32mI (167124) pms7003_readData: PMS7003 sensor read data successful.[0m
+[0;32mI (167124) pms7003_readData: PM1.0: 21ug/m3  PM2.5: 28ug/m3  PM10: 29ug/m3.[0m
+[0;32mI (167134) mhz14a_sendCommand: Sending command to MHZ14a sensor successful.[0m
+[0;32mI (167444) mhz14a_getDataFromSensorViaUART: Raw data from TX buffer: [255 134 5 225 69 0 0 0 79][0m
+[0;32mI (167444) bme280_readSensorData: BME280 sensor read data successful.[0m
+[0;32mI (167444) getDataFromSensor_task: Read data from sensors completed![0m
+[0;32mI (167454) ds3231_convertTimeToString: Convert time to string successfully.[0m
+[0;32mI (167464) ds3231_convertTimeToString: Current date & time: 4-10-2024 16:14:1[0m
+[0;32mI (167464) getDataFromSensor_task: Success to post the data sensor to dataSensor Queue.[0m
+[0;32mI (167474) getDataFromSensor_task: Success to post the moduleError to Queue.[0m
+[0;32mI (167534) allocateDataToMQTTandSDQueue_task: Receiving data from intermediate queue successfully.[0m
+[0;32mI (167534) allocateDataToMQTTandSDQueue_task: Success to post the data sensor to dataSensorSentToSD Queue.[0m
+[0;32mI (167544) allocateDataToMQTTandSDQueue_task: Success to post the data sensor to dataSensorSentToMQTT Queue.[0m
+[0;32mI (167544) allocateDataToMQTTandSDQueue_task: Success to post the data sensor to LCD Display Queue.[0m
+[0;32mI (167974) mqttPublishMessage_task: Receiving data from queue successfully.[0m
+[0;32mI (167974) mqttPublishMessage_task: MQTT client publish message success.[0m
+[0;32mI (168134) DebugLed_task: Receiving data from Module Error queue successfully.[0m
+[0;32mI (168424) saveDataSensorToSDcard_task: Receiving data from queue successfully.[0m
+[0;32mI (168424) sdcard_writeDataToFile: Opening file /sdcard/4102024.txt...[0m
+[0;32mI (168434) SDcard: Success to create string data(63) for writing.[0m
+[0;32mI (168434) SDcard: Writing data to file /sdcard/4102024.txt...[0m
+[0;32mI (168434) SDcard: ESP32-PROJECT,1728058367,29.35,59.66,101173.41,21,28,29,1505
+;
+[0m
+[0;32mI (168444) sdcard_writeDataToFile: Success to write data to file /sdcard/4102024.txt.[0m
+[0;32mI (168464) Main: Save task received mutex![0m
+[0;32mI (172124) ds3231_getEpochTime: DS3231 get EpochTime success.[0m
+[0;32mI (172124) pms7003_readData: PMS7003 sensor read data successful.[0m
+[0;32mI (172124) pms7003_readData: PM1.0: 22ug/m3  PM2.5: 28ug/m3  PM10: 30ug/m3.[0m
+[0;32mI (172134) mhz14a_sendCommand: Sending command to MHZ14a sensor successful.[0m
+[0;32mI (172444) mhz14a_getDataFromSensorViaUART: Raw data from TX buffer: [255 134 5 224 69 0 0 0 80][0m
+[0;31mE (172444) i2cdev: Could not read from device [0x76 at 1]: 263 (ESP_ERR_TIMEOUT)[0m
+[0;31mE (172444) bmp280: Failed to read data[0m
+[0;31mE (172454) bme280_readSensorData: BME280 sensor read data failed.[0m
+ESP_ERROR_CHECK_WITHOUT_ABORT failed: esp_err_t 0x2001 (ESP_ERR_IMAGE_FLASH_FAIL) at 0x400d836b
+file: "./main/main.c" line 853
+func: getDataFromSensor_task
+expression: moduleErrorTemp.bme280Error
+[0;32mI (172474) getDataFromSensor_task: Read data from sensors completed![0m
+[0;32mI (172484) ds3231_convertTimeToString: Convert time to string successfully.[0m
+[0;32mI (172494) ds3231_convertTimeToString: Current date & time: 4-10-2024 16:14:6[0m
+[0;32mI (172494) getDataFromSensor_task: Success to post the data sensor to dataSensor Queue.[0m
+[0;32mI (172504) getDataFromSensor_task: Success to post the moduleError to Queue.[0m
+[0;32mI (172554) allocateDataToMQTTandSDQueue_task: Receiving data from intermediate queue successfully.[0m
+[0;32mI (172554) allocateDataToMQTTandSDQueue_task: Success to post the data sensor to dataSensorSentToSD Queue.[0m
+[0;32mI (172554) allocateDataToMQTTandSDQueue_task: Success to post the data sensor to dataSensorSentToMQTT Queue.[0m
+[0;32mI (172564) allocateDataToMQTTandSDQueue_task: Success to post the data sensor to LCD Display Queue.[0m
+[0;32mI (173134) DebugLed_task: Receiving data from Module Error queue successfully.[0m
+[0;32mI (173464) saveDataSensorToSDcard_task: Receiving data from queue successfully.[0m
+[0;32mI (173464) sdcard_writeDataToFile: Opening file /sdcard/4102024.txt...[0m
+[0;32mI (173474) SDcard: Success to create string data(61) for writing.[0m
+[0;32mI (173474) SDcard: Writing data to file /sdcard/4102024.txt...[0m
+[0;32mI (173474) SDcard: ESP32-PROJECT,1728058372,-273.00,-1.00,-1.00,22,28,30,1504
+;
+[0m
+[0;32mI (173484) sdcard_writeDataToFile: Success to write data to file /sdcard/4102024.txt.[0m
+[0;32mI (173504) Main: Save task received mutex![0m
+[0;32mI (173974) mqttPublishMessage_task: Receiving data from queue successfully.[0m
+[0;32mI (173974) mqttPublishMessage_task: MQTT client publish message success.[0m
+[0;32mI (177124) ds3231_getEpochTime: DS3231 get EpochTime success.[0m
+[0;32mI (177124) pms7003_readData: PMS7003 sensor read data successful.[0m
+[0;32mI (177124) pms7003_readData: PM1.0: 21ug/m3  PM2.5: 27ug/m3  PM10: 28ug/m3.[0m
+[0;32mI (177134) mhz14a_sendCommand: Sending command to MHZ14a sensor successful.[0m
+[0;32mI (177444) mhz14a_getDataFromSensorViaUART: Raw data from TX buffer: [255 134 5 222 69 0 0 0 82][0m
+[0;32mI (177444) bme280_readSensorData: BME280 sensor read data successful.[0m
+[0;32mI (177444) getDataFromSensor_task: Read data from sensors completed![0m
+[0;32mI (177454) ds3231_convertTimeToString: Convert time to string successfully.[0m
+[0;32mI (177464) ds3231_convertTimeToString: Current date & time: 4-10-2024 16:14:11[0m
+[0;32mI (177464) getDataFromSensor_task: Success to post the data sensor to dataSensor Queue.[0m
+[0;32mI (177474) allocateDataToMQTTandSDQueue_task: Receiving data from intermediate queue successfully.[0m
+[0;32mI (177474) getDataFromSensor_task: Success to post the moduleError to Queue.[0m
+[0;32mI (177484) allocateDataToMQTTandSDQueue_task: Success to post the data sensor to dataSensorSentToSD Queue.[0m
+[0;32mI (177504) allocateDataToMQTTandSDQueue_task: Success to post the data sensor to dataSensorSentToMQTT Queue.[0m
+[0;32mI (177514) allocateDataToMQTTandSDQueue_task: Success to post the data sensor to LCD Display Queue.[0m
+[0;32mI (178134) DebugLed_task: Receiving data from Module Error queue successfully.[0m
+[0;32mI (178504) saveDataSensorToSDcard_task: Receiving data from queue successfully.[0m
+[0;32mI (178504) sdcard_writeDataToFile: Opening file /sdcard/4102024.txt...[0m
+[0;32mI (178514) SDcard: Success to create string data(62) for writing.[0m
+[0;32mI (178514) SDcard: Writing data to file /sdcard/4102024.txt...[0m
+[0;32mI (178514) SDcard: ESP32-PROJECT,1728058377,24.27,95.30,67042.61,21,27,28,1502
+;
+[0m
+[0;32mI (178524) sdcard_writeDataToFile: Success to write data to file /sdcard/4102024.txt.[0m
+[0;32mI (178544) Main: Save task received mutex![0m
+[0;32mI (179974) mqttPublishMessage_task: Receiving data from queue successfully.[0m
+[0;32mI (179974) mqttPublishMessage_task: MQTT client publish message success.[0m
+[0;32mI (182124) ds3231_getEpochTime: DS3231 get EpochTime success.[0m
+[0;32mI (182124) pms7003_readData: PMS7003 sensor read data successful.[0m
+[0;32mI (182124) pms7003_readData: PM1.0: 20ug/m3  PM2.5: 27ug/m3  PM10: 28ug/m3.[0m
+[0;32mI (182134) mhz14a_sendCommand: Sending command to MHZ14a sensor successful.[0m
+[0;32mI (182444) mhz14a_getDataFromSensorViaUART: Raw data from TX buffer: [255 134 5 220 69 0 0 0 84][0m
+[0;32mI (182444) bme280_readSensorData: BME280 sensor read data successful.[0m
+[0;32mI (182444) getDataFromSensor_task: Read data from sensors completed![0m
+[0;32mI (182454) ds3231_convertTimeToString: Convert time to string successfully.[0m
+[0;32mI (182464) ds3231_convertTimeToString: Current date & time: 4-10-2024 16:14:16[0m
+[0;32mI (182464) getDataFromSensor_task: Success to post the data sensor to dataSensor Queue.[0m
+[0;32mI (182474) getDataFromSensor_task: Success to post the moduleError to Queue.[0m
+[0;32mI (182524) allocateDataToMQTTandSDQueue_task: Receiving data from intermediate queue successfully.[0m
+[0;32mI (182524) allocateDataToMQTTandSDQueue_task: Success to post the data sensor to dataSensorSentToSD Queue.[0m
+[0;32mI (182524) allocateDataToMQTTandSDQueue_task: Success to post the data sensor to dataSensorSentToMQTT Queue.[0m
+[0;32mI (182534) allocateDataToMQTTandSDQueue_task: Success to post the data sensor to LCD Display Queue.[0m
+[0;32mI (183134) DebugLed_task: Receiving data from Module Error queue successfully.[0m
+[0;32mI (183544) saveDataSensorToSDcard_task: Receiving data from queue successfully.[0m
+[0;32mI (183544) sdcard_writeDataToFile: Opening file /sdcard/4102024.txt...[0m
+[0;32mI (183554) SDcard: Success to create string data(62) for writing.[0m
+[0;32mI (183554) SDcard: Writing data to file /sdcard/4102024.txt...[0m
+[0;32mI (183554) SDcard: ESP32-PROJECT,1728058382,24.27,95.30,67042.61,20,27,28,1500
+;
+[0m
+[0;32mI (183564) sdcard_writeDataToFile: Success to write data to file /sdcard/4102024.txt.[0m
+[0;32mI (183584) Main: Save task received mutex![0m
+[0;32mI (185974) mqttPublishMessage_task: Receiving data from queue successfully.[0m
+[0;32mI (185974) mqttPublishMessage_task: MQTT client publish message success.[0m
+[0;32mI (187124) ds3231_getEpochTime: DS3231 get EpochTime success.[0m
+[0;32mI (187124) pms7003_readData: PMS7003 sensor read data successful.[0m
+[0;32mI (187124) pms7003_readData: PM1.0: 18ug/m3  PM2.5: 24ug/m3  PM10: 24ug/m3.[0m
+[0;32mI (187134) mhz14a_sendCommand: Sending command to MHZ14a sensor successful.[0m
+[0;32mI (187444) mhz14a_getDataFromSensorViaUART: Raw data from TX buffer: [255 134 5 219 69 0 0 0 85][0m
+[0;31mE (187444) i2cdev: Could not read from device [0x76 at 1]: 263 (ESP_ERR_TIMEOUT)[0m
+[0;31mE (187444) bmp280: Failed to read data[0m
+[0;31mE (187454) bme280_readSensorData: BME280 sensor read data failed.[0m
+ESP_ERROR_CHECK_WITHOUT_ABORT failed: esp_err_t 0x2001 (ESP_ERR_IMAGE_FLASH_FAIL) at 0x400d836b
+file: "./main/main.c" line 853
+func: getDataFromSensor_task
+expression: moduleErrorTemp.bme280Error
+[0;32mI (187474) getDataFromSensor_task: Read data from sensors completed![0m
+[0;32mI (187484) ds3231_convertTimeToString: Convert time to string successfully.[0m
+[0;32mI (187494) ds3231_convertTimeToString: Current date & time: 4-10-2024 16:14:21[0m
+[0;32mI (187494) getDataFromSensor_task: Success to post the data sensor to dataSensor Queue.[0m
+[0;32mI (187504) getDataFromSensor_task: Success to post the moduleError to Queue.[0m
+[0;32mI (187544) allocateDataToMQTTandSDQueue_task: Receiving data from intermediate queue successfully.[0m
+[0;32mI (187544) allocateDataToMQTTandSDQueue_task: Success to post the data sensor to dataSensorSentToSD Queue.[0m
+[0;32mI (187544) allocateDataToMQTTandSDQueue_task: Success to post the data sensor to dataSensorSentToMQTT Queue.[0m
+[0;32mI (187554) allocateDataToMQTTandSDQueue_task: Success to post the data sensor to LCD Display Queue.[0m
+[0;32mI (188134) DebugLed_task: Receiving data from Module Error queue successfully.[0m
+[0;32mI (188584) saveDataSensorToSDcard_task: Receiving data from queue successfully.[0m
+[0;32mI (188584) sdcard_writeDataToFile: Opening file /sdcard/4102024.txt...[0m
+[0;32mI (188594) SDcard: Success to create string data(61) for writing.[0m
+[0;32mI (188594) SDcard: Writing data to file /sdcard/4102024.txt...[0m
+[0;32mI (188594) SDcard: ESP32-PROJECT,1728058387,-273.00,-1.00,-1.00,18,24,24,1499
+;
+[0m
+[0;32mI (188604) sdcard_writeDataToFile: Success to write data to file /sdcard/4102024.txt.[0m
+[0;32mI (188614) Main: Save task received mutex![0m
+[0;32mI (191974) mqttPublishMessage_task: Receiving data from queue successfully.[0m
+[0;32mI (191974) mqttPublishMessage_task: MQTT client publish message success.[0m
+[0;32mI (192124) ds3231_getEpochTime: DS3231 get EpochTime success.[0m
+[0;32mI (192124) pms7003_readData: PMS7003 sensor read data successful.[0m
+[0;32mI (192124) pms7003_readData: PM1.0: 21ug/m3  PM2.5: 28ug/m3  PM10: 29ug/m3.[0m
+[0;32mI (192134) mhz14a_sendCommand: Sending command to MHZ14a sensor successful.[0m
+[0;32mI (192444) mhz14a_getDataFromSensorViaUART: Raw data from TX buffer: [255 134 5 217 69 0 0 0 87][0m
+[0;31mE (192444) i2cdev: Could not read from device [0x76 at 1]: 263 (ESP_ERR_TIMEOUT)[0m
+[0;31mE (192444) bmp280: Failed to read data[0m
+[0;31mE (192454) bme280_readSensorData: BME280 sensor read data failed.[0m
+ESP_ERROR_CHECK_WITHOUT_ABORT failed: esp_err_t 0x2001 (ESP_ERR_IMAGE_FLASH_FAIL) at 0x400d836b
+file: "./main/main.c" line 853
+func: getDataFromSensor_task
+expression: moduleErrorTemp.bme280Error
+[0;32mI (192474) getDataFromSensor_task: Read data from sensors completed![0m
+[0;32mI (192484) ds3231_convertTimeToString: Convert time to string successfully.[0m
+[0;32mI (192494) ds3231_convertTimeToString: Current date & time: 4-10-2024 16:14:26[0m
+[0;32mI (192494) getDataFromSensor_task: Success to post the data sensor to dataSensor Queue.[0m
+[0;32mI (192504) getDataFromSensor_task: Success to post the moduleError to Queue.[0m
+[0;32mI (192564) allocateDataToMQTTandSDQueue_task: Receiving data from intermediate queue successfully.[0m
+[0;32mI (192564) allocateDataToMQTTandSDQueue_task: Success to post the data sensor to dataSensorSentToSD Queue.[0m
+[0;32mI (192564) allocateDataToMQTTandSDQueue_task: Success to post the data sensor to dataSensorSentToMQTT Queue.[0m
+[0;32mI (192574) allocateDataToMQTTandSDQueue_task: Success to post the data sensor to LCD Display Queue.[0m
+[0;32mI (192974) mqttPublishMessage_task: Receiving data from queue successfully.[0m
+[0;32mI (192974) mqttPublishMessage_task: MQTT client publish message success.[0m
+[0;32mI (193134) DebugLed_task: Receiving data from Module Error queue successfully.[0m
+[0;32mI (193614) saveDataSensorToSDcard_task: Receiving data from queue successfully.[0m
+[0;32mI (193614) sdcard_writeDataToFile: Opening file /sdcard/4102024.txt...[0m
+[0;32mI (193624) SDcard: Success to create string data(61) for writing.[0m
+[0;32mI (193624) SDcard: Writing data to file /sdcard/4102024.txt...[0m
+[0;32mI (193624) SDcard: ESP32-PROJECT,1728058392,-273.00,-1.00,-1.00,21,28,29,1497
+;
+[0m
+[0;32mI (193634) sdcard_writeDataToFile: Success to write data to file /sdcard/4102024.txt.[0m
+[0;32mI (193654) Main: Save task received mutex![0m
+[0;32mI (197124) ds3231_getEpochTime: DS3231 get EpochTime success.[0m
+[0;32mI (197124) pms7003_readData: PMS7003 sensor read data successful.[0m
+[0;32mI (197124) pms7003_readData: PM1.0: 21ug/m3  PM2.5: 29ug/m3  PM10: 31ug/m3.[0m
+[0;32mI (197134) mhz14a_sendCommand: Sending command to MHZ14a sensor successful.[0m
+[0;32mI (197444) mhz14a_getDataFromSensorViaUART: Raw data from TX buffer: [255 134 5 217 69 0 0 0 87][0m
+[0;32mI (197444) bme280_readSensorData: BME280 sensor read data successful.[0m
+[0;32mI (197444) getDataFromSensor_task: Read data from sensors completed![0m
+[0;32mI (197454) ds3231_convertTimeToString: Convert time to string successfully.[0m
+[0;32mI (197464) ds3231_convertTimeToString: Current date & time: 4-10-2024 16:14:31[0m
+[0;32mI (197464) getDataFromSensor_task: Success to post the data sensor to dataSensor Queue.[0m
+[0;32mI (197474) getDataFromSensor_task: Success to post the moduleError to Queue.[0m
+[0;32mI (197484) allocateDataToMQTTandSDQueue_task: Receiving data from intermediate queue successfully.[0m
+[0;32mI (197494) allocateDataToMQTTandSDQueue_task: Success to post the data sensor to dataSensorSentToSD Queue.[0m
+[0;32mI (197504) allocateDataToMQTTandSDQueue_task: Success to post the data sensor to dataSensorSentToMQTT Queue.[0m
+[0;32mI (197514) allocateDataToMQTTandSDQueue_task: Success to post the data sensor to LCD Display Queue.[0m
+[0;32mI (198134) DebugLed_task: Receiving data from Module Error queue successfully.[0m
+[0;32mI (198654) saveDataSensorToSDcard_task: Receiving data from queue successfully.[0m
+[0;32mI (198654) sdcard_writeDataToFile: Opening file /sdcard/4102024.txt...[0m
+[0;32mI (198664) SDcard: Success to create string data(62) for writing.[0m
+[0;32mI (198664) SDcard: Writing data to file /sdcard/4102024.txt...[0m
+[0;32mI (198664) SDcard: ESP32-PROJECT,1728058397,24.27,95.30,67042.61,21,29,31,1497
+;
+[0m
+[0;32mI (198674) sdcard_writeDataToFile: Success to write data to file /sdcard/4102024.txt.[0m
+[0;32mI (198684) Main: Save task received mutex![0m
+[0;32mI (198974) mqttPublishMessage_task: Receiving data from queue successfully.[0m
+[0;32mI (198974) mqttPublishMessage_task: MQTT client publish message success.[0m
+[0;32mI (202124) ds3231_getEpochTime: DS3231 get EpochTime success.[0m
+[0;32mI (202124) pms7003_readData: PMS7003 sensor read data successful.[0m
+[0;32mI (202124) pms7003_readData: PM1.0: 21ug/m3  PM2.5: 30ug/m3  PM10: 32ug/m3.[0m
+[0;32mI (202134) mhz14a_sendCommand: Sending command to MHZ14a sensor successful.[0m
+[0;32mI (202444) mhz14a_getDataFromSensorViaUART: Raw data from TX buffer: [255 134 5 216 69 0 0 0 88][0m
+[0;32mI (202444) bme280_readSensorData: BME280 sensor read data successful.[0m
+[0;32mI (202444) getDataFromSensor_task: Read data from sensors completed![0m
+[0;32mI (202454) ds3231_convertTimeToString: Convert time to string successfully.[0m
+[0;32mI (202464) ds3231_convertTimeToString: Current date & time: 4-10-2024 16:14:36[0m
+[0;32mI (202464) getDataFromSensor_task: Success to post the data sensor to dataSensor Queue.[0m
+[0;32mI (202474) getDataFromSensor_task: Success to post the moduleError to Queue.[0m
+[0;32mI (202524) allocateDataToMQTTandSDQueue_task: Receiving data from intermediate queue successfully.[0m
+[0;32mI (202524) allocateDataToMQTTandSDQueue_task: Success to post the data sensor to dataSensorSentToSD Queue.[0m
+[0;32mI (202524) allocateDataToMQTTandSDQueue_task: Success to post the data sensor to dataSensorSentToMQTT Queue.[0m
+[0;32mI (202534) allocateDataToMQTTandSDQueue_task: Success to post the data sensor to LCD Display Queue.[0m
+[0;32mI (203134) DebugLed_task: Receiving data from Module Error queue successfully.[0m
+[0;32mI (203684) saveDataSensorToSDcard_task: Receiving data from queue successfully.[0m
+[0;32mI (203684) sdcard_writeDataToFile: Opening file /sdcard/4102024.txt...[0m
+[0;32mI (203694) SDcard: Success to create string data(62) for writing.[0m
+[0;32mI (203694) SDcard: Writing data to file /sdcard/4102024.txt...[0m
+[0;32mI (203694) SDcard: ESP32-PROJECT,1728058402,24.27,95.30,67042.61,21,30,32,1496
+;
+[0m
+[0;32mI (203704) sdcard_writeDataToFile: Success to write data to file /sdcard/4102024.txt.[0m
+[0;32mI (203724) Main: Save task received mutex![0m
+[0;32mI (204974) mqttPublishMessage_task: Receiving data from queue successfully.[0m
+[0;32mI (204974) mqttPublishMessage_task: MQTT client publish message success.[0m
+[0;32mI (207124) ds3231_getEpochTime: DS3231 get EpochTime success.[0m
+[0;32mI (207224) pms7003_readData: PMS7003 sensor read data successful.[0m
+[0;32mI (207224) pms7003_readData: PM1.0: 20ug/m3  PM2.5: 30ug/m3  PM10: 34ug/m3.[0m
+[0;32mI (207224) mhz14a_sendCommand: Sending command to MHZ14a sensor successful.[0m
+[0;32mI (207534) mhz14a_getDataFromSensorViaUART: Raw data from TX buffer: [255 134 5 215 69 0 0 0 89][0m
+[0;31mE (207534) i2cdev: Could not read from device [0x76 at 1]: 263 (ESP_ERR_TIMEOUT)[0m
+[0;31mE (207534) bmp280: Failed to read data[0m
+[0;31mE (207544) bme280_readSensorData: BME280 sensor read data failed.[0m
+ESP_ERROR_CHECK_WITHOUT_ABORT failed: esp_err_t 0x2001 (ESP_ERR_IMAGE_FLASH_FAIL) at 0x400d836b
+file: "./main/main.c" line 853
+func: getDataFromSensor_task
+expression: moduleErrorTemp.bme280Error
+[0;32mI (207564) getDataFromSensor_task: Read data from sensors completed![0m
+[0;32mI (207574) ds3231_convertTimeToString: Convert time to string successfully.[0m
+[0;32mI (207584) ds3231_convertTimeToString: Current date & time: 4-10-2024 16:14:41[0m
+[0;32mI (207584) getDataFromSensor_task: Success to post the data sensor to dataSensor Queue.[0m
+[0;32mI (207594) getDataFromSensor_task: Success to post the moduleError to Queue.[0m
+[0;32mI (207644) allocateDataToMQTTandSDQueue_task: Receiving data from intermediate queue successfully.[0m
+[0;32mI (207644) allocateDataToMQTTandSDQueue_task: Success to post the data sensor to dataSensorSentToSD Queue.[0m
+[0;32mI (207644) allocateDataToMQTTandSDQueue_task: Success to post the data sensor to dataSensorSentToMQTT Queue.[0m
+[0;32mI (207654) allocateDataToMQTTandSDQueue_task: Success to post the data sensor to LCD Display Queue.[0m
+[0;32mI (208134) DebugLed_task: Receiving data from Module Error queue successfully.[0m
+[0;32mI (208724) saveDataSensorToSDcard_task: Receiving data from queue successfully.[0m
+[0;32mI (208724) sdcard_writeDataToFile: Opening file /sdcard/4102024.txt...[0m
+[0;32mI (208734) SDcard: Success to create string data(61) for writing.[0m
+[0;32mI (208734) SDcard: Writing data to file /sdcard/4102024.txt...[0m
+[0;32mI (208734) SDcard: ESP32-PROJECT,1728058407,-273.00,-1.00,-1.00,20,30,34,1495
+;
+[0m
+[0;32mI (208744) sdcard_writeDataToFile: Success to write data to file /sdcard/4102024.txt.[0m
+[0;32mI (208754) Main: Save task received mutex![0m
+[0;32mI (210974) mqttPublishMessage_task: Receiving data from queue successfully.[0m
+[0;32mI (210974) mqttPublishMessage_task: MQTT client publish message success.[0m
+[0;32mI (212124) ds3231_getEpochTime: DS3231 get EpochTime success.[0m
+[0;32mI (212124) pms7003_readData: PMS7003 sensor read data successful.[0m
+[0;32mI (212124) pms7003_readData: PM1.0: 20ug/m3  PM2.5: 29ug/m3  PM10: 34ug/m3.[0m
+[0;32mI (212134) mhz14a_sendCommand: Sending command to MHZ14a sensor successful.[0m
+[0;32mI (212444) mhz14a_getDataFromSensorViaUART: Raw data from TX buffer: [255 134 5 215 69 0 0 0 89][0m
+[0;31mE (212444) i2cdev: Could not read from device [0x76 at 1]: 263 (ESP_ERR_TIMEOUT)[0m
+[0;31mE (212444) bmp280: Failed to read data[0m
+[0;31mE (212454) bme280_readSensorData: BME280 sensor read data failed.[0m
+ESP_ERROR_CHECK_WITHOUT_ABORT failed: esp_err_t 0x2001 (ESP_ERR_IMAGE_FLASH_FAIL) at 0x400d836b
+file: "./main/main.c" line 853
+func: getDataFromSensor_task
+expression: moduleErrorTemp.bme280Error
+[0;32mI (212474) getDataFromSensor_task: Read data from sensors completed![0m
+[0;32mI (212484) ds3231_convertTimeToString: Convert time to string successfully.[0m
+[0;32mI (212494) ds3231_convertTimeToString: Current date & time: 4-10-2024 16:14:46[0m
+[0;32mI (212494) getDataFromSensor_task: Success to post the data sensor to dataSensor Queue.[0m
+[0;32mI (212504) getDataFromSensor_task: Success to post the moduleError to Queue.[0m
+[0;32mI (212564) allocateDataToMQTTandSDQueue_task: Receiving data from intermediate queue successfully.[0m
+[0;32mI (212564) allocateDataToMQTTandSDQueue_task: Success to post the data sensor to dataSensorSentToSD Queue.[0m
+[0;32mI (212564) allocateDataToMQTTandSDQueue_task: Success to post the data sensor to dataSensorSentToMQTT Queue.[0m
+[0;32mI (212574) allocateDataToMQTTandSDQueue_task: Success to post the data sensor to LCD Display Queue.[0m
+[0;32mI (213134) DebugLed_task: Receiving data from Module Error queue successfully.[0m
+[0;32mI (213754) saveDataSensorToSDcard_task: Receiving data from queue successfully.[0m
+[0;32mI (213754) sdcard_writeDataToFile: Opening file /sdcard/4102024.txt...[0m
+[0;32mI (213764) SDcard: Success to create string data(61) for writing.[0m
+[0;32mI (213764) SDcard: Writing data to file /sdcard/4102024.txt...[0m
+[0;32mI (213764) SDcard: ESP32-PROJECT,1728058412,-273.00,-1.00,-1.00,20,29,34,1495
+;
+[0m
+[0;32mI (213774) sdcard_writeDataToFile: Success to write data to file /sdcard/4102024.txt.[0m
+[0;32mI (213794) Main: Save task received mutex![0m
+[0;32mI (216974) mqttPublishMessage_task: Receiving data from queue successfully.[0m
+[0;32mI (216974) mqttPublishMessage_task: MQTT client publish message success.[0m
+[0;32mI (217124) ds3231_getEpochTime: DS3231 get EpochTime success.[0m
+[0;32mI (217124) pms7003_readData: PMS7003 sensor read data successful.[0m
+[0;32mI (217124) pms7003_readData: PM1.0: 19ug/m3  PM2.5: 26ug/m3  PM10: 30ug/m3.[0m
+[0;32mI (217134) mhz14a_sendCommand: Sending command to MHZ14a sensor successful.[0m
+[0;32mI (217444) mhz14a_getDataFromSensorViaUART: Raw data from TX buffer: [255 134 5 214 69 0 0 0 90][0m
+[0;32mI (217444) bme280_readSensorData: BME280 sensor read data successful.[0m
+[0;32mI (217444) getDataFromSensor_task: Read data from sensors completed![0m
+[0;32mI (217454) ds3231_convertTimeToString: Convert time to string successfully.[0m
+[0;32mI (217464) ds3231_convertTimeToString: Current date & time: 4-10-2024 16:14:51[0m
+[0;32mI (217464) getDataFromSensor_task: Success to post the data sensor to dataSensor Queue.[0m
+[0;32mI (217474) getDataFromSensor_task: Success to post the moduleError to Queue.[0m
+[0;32mI (217484) allocateDataToMQTTandSDQueue_task: Receiving data from intermediate queue successfully.[0m
+[0;32mI (217494) allocateDataToMQTTandSDQueue_task: Success to post the data sensor to dataSensorSentToSD Queue.[0m
+[0;32mI (217504) allocateDataToMQTTandSDQueue_task: Success to post the data sensor to dataSensorSentToMQTT Queue.[0m
+[0;32mI (217514) allocateDataToMQTTandSDQueue_task: Success to post the data sensor to LCD Display Queue.[0m
+[0;32mI (217974) mqttPublishMessage_task: Receiving data from queue successfully.[0m
+[0;32mI (217974) mqttPublishMessage_task: MQTT client publish message success.[0m
+[0;32mI (218134) DebugLed_task: Receiving data from Module Error queue successfully.[0m
+[0;32mI (218794) saveDataSensorToSDcard_task: Receiving data from queue successfully.[0m
+[0;32mI (218794) sdcard_writeDataToFile: Opening file /sdcard/4102024.txt...[0m
+[0;32mI (218804) SDcard: Success to create string data(62) for writing.[0m
+[0;32mI (218804) SDcard: Wri

@@ -1,0 +1,50 @@
+menu "LCD TFT configuration"
+
+      config USING_LCD_TFT
+        bool "Using LCD TFT"
+        default n
+        help 
+            Using LCD TFT.
+
+    config LCD_PIN_NUM_MOSI
+        int "MOSI GPIO Number"
+        default 12
+        help
+            GPIO number for SPI master MOSI.
+
+    config LCD_PIN_NUM_MISO
+        int "MISO GPIO Number"
+        default 13
+        help
+            GPIO number for SPI master MISO.
+
+    config LCD_PIN_NUM_SCK
+        int "SCK GPIO Number"
+        default 14
+        help
+            GPIO number for SPI master CLK.
+
+    config LCD_PIN_NUM_CS
+        int "CS GPIO Number"
+        default 2
+        help
+            GPIO number for SPI master CS.       
+
+     config LCD_PIN_NUM_BK_LIGHT
+        int "Backlight GPIO Number"
+        default 4
+        help
+            GPIO number for controlling backlight of LCD TFT.      
+
+    config LCD_PIN_NUM_DC
+        int "DC GPIO Number"
+        default 1
+        help
+            GPIO number for DC pin of LCD TFT.   
+    
+     config LCD_PIN_NUM_RST
+        int "RST GPIO Number"
+        default 15
+        help
+            GPIO number for reset LCD TFT. 
+endmenu
