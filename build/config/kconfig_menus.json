@@ -4591,8 +4591,8 @@
             }
         ],
         "depends_on": null,
-        "id": "wifi-configuration",
-        "title": "WIFI Configuration",
+        "id": "wifi-config-menu",
+        "title": "WiFi Config Menu",
         "type": "menu"
     },
     {

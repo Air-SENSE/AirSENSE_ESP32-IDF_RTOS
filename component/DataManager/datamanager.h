@@ -20,6 +20,11 @@ struct dataSensor_st
     uint32_t pm10;
 
     uint32_t CO2;
+#if (0)
+    uint32_t NO;
+    uint32_t CO;
+    uint32_t SO2;
+#endif
 };
 
 const char dataSensor_templateSaveToSDCard[] = "%s,%0.2f,%0.2f,%0.2f,%" PRIu32 ",%" PRIu32 ",%" PRIu32 "";

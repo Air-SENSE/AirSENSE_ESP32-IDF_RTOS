@@ -2,7 +2,7 @@ menu "Device in use"
 
     config NAME_DEVICE
         string "Name Device"
-        default "ESP32-Project"
+        default "AirSENSE_SPARC_LAB"
         help
             Name device.
 
@@ -78,21 +78,19 @@ menu "Device in use"
         help 
             Using NO2 Sensor.
 
-            
-
 endmenu
 
-menu "WIFI Configuration"
+menu "WiFi Config Menu"
 
     config SSID
         string  "SSID"
-        default "Active Learn"
+        default "SPARC_LAB"
         help
             SSID.
 
     config PASSWORD
         string  "PASSWORD"
-        default  "123"
+        default  "123456"
         help 
             PASSWORD.
 
@@ -126,7 +124,7 @@ menu "MQTT Configuration"
 
     config BROKER_HOST
         string "Broker host"
-        default "103.1.238.175"
+        default "103.130.212.210"
         help 
             Host is MQTT server domain <ipv4 as string>
 
@@ -150,13 +148,13 @@ menu "MQTT Configuration"
 
     config MQTT_TOPIC
         string "MQTT topic"
-        default "PROJECT_VIEWDATA"
+        default "AirSENSE_Beta"
         help
             Topic to subcrice
 
     config MQTT_CLIENT_ID
         string "Client ID"
-        default "ESP32-Project"
+        default "AirSENSE"
         help
             Set MQTT client identifier.
 
@@ -172,7 +170,12 @@ menu "MQTT Configuration"
         help
             Client will reconnect to server (when errors/disconnect).
 
-   
+    # config BROKER_CERTIFICATE_OVERRIDE
+    #     string "Broker certificate override"
+    #     default ""
+    #     help
+    #         Please leave empty if broker certificate included from a textfile; otherwise fill in a base64 part of PEM
+    #         format certificate
 
     config BROKER_CERTIFICATE_OVERRIDDEN
         bool

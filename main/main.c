@@ -35,7 +35,6 @@
 #include "esp_netif.h"
 #include "esp_mac.h"
 #include "esp_attr.h"
-
 #include <spi_flash_mmap.h>
 #include "mqtt_client.h"
 #include "esp_tls.h"
@@ -1320,7 +1319,6 @@ void saveDataSensorToSDcard_task(void *parameters)
 
 void app_main(void)
 {
-
     // Allow other core to finish initialization
     vTaskDelay(pdMS_TO_TICKS(200));
     ESP_LOGI(__func__, "Starting app main.");
@@ -1414,7 +1412,6 @@ void app_main(void)
 
 // Initialize BME280 Sensor
 #if (CONFIG_USING_BME280)
-
     ESP_LOGI(__func__, "Initialize BME280 sensor(I2C/Wire%d).", CONFIG_BME_I2C_PORT);
 
     ESP_ERROR_CHECK_WITHOUT_ABORT(bme280_init(&bme280_device, &bme280_params, BME280_ADDRESS,

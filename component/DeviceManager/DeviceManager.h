@@ -1,5 +1,6 @@
 /**
  * @file DeviceManager.h
+<<<<<<< HEAD
  * @author Nguyen Nhu Hai Long
  * @brief Manager all device
  * @version 0.1
@@ -7,6 +8,15 @@
  *
  * @copyright Copyright (c) 2022
  *
+=======
+ * @author Nguyen Nhu Hai Long
+ * @brief Manager all device
+ * @version 0.1
+ * @date 2022-11-02
+ *
+ * @copyright Copyright (c) 2022
+ *
+>>>>>>> 58b9b9b1496405918645a11849a30809e4726542
  */
 
 #ifndef __DEVICEMANAGER_H__

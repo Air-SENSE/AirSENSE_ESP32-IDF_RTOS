@@ -358,14 +358,14 @@ CONFIG_USING_CO2_SENSOR=y
 # end of Device in use
 
 #
-# WIFI Configuration
+# WiFi Config Menu
 #
 CONFIG_SSID="Hoang Vu 3"
 CONFIG_PASSWORD="0983069689"
 CONFIG_MAXIMUM_AP=10
 CONFIG_MAXIMUM_RETRY=20
 CONFIG_SHOW_LIST_ACCESS_POINTS_FOUND=y
-# end of WIFI Configuration
+# end of WiFi Config Menu
 
 #
 # MQTT Configuration

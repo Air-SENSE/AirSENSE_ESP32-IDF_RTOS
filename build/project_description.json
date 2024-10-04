@@ -1,7 +1,7 @@
 {
     "version":            "1",
     "project_name":       "AirSENSE_ESP32-IDF_RTOS",
-    "project_version":    "bc81815-dirty",
+    "project_version":    "29ea87c-dirty",
     "project_path":       "E:/esp5.1/AirSENSE_ESP32-IDF_RTOS",
     "idf_path":           "E:/esp5.1/Espressif/frameworks/esp-idf-v5.1.2",
     "build_dir":          "E:/esp5.1/AirSENSE_ESP32-IDF_RTOS/build",
