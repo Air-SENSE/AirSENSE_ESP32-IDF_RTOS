@@ -1,6 +1,7 @@
 #include "DS3231Time.h"
 
 // %d:%d:%d,%d-%d-%d
+
 __attribute__((unused)) static const char *timeFormat = "%d-%d-%d %d:%d:%d";
 
 // %d %d %d
@@ -35,9 +36,9 @@ esp_err_t ds3231_convertTimeToString(i2c_dev_t *dev, char *timeString, const uns
 {
     struct tm time;
     ds3231_get_time(dev, &time);
-
+#ifdef CONFIG_RTC_TIME_SYNC
     time.tm_mon += 1;
-
+#endif
     memset(timeString, 0, lenghtString);
     int lenght = 0;
     switch (format)
@@ -69,32 +70,11 @@ esp_err_t ds3231_convertTimeToString(i2c_dev_t *dev, char *timeString, const uns
     return ESP_FAIL;
 }
 
-esp_err_t ds3231_convertTimeToDayString(i2c_dev_t *dev, char *timeString, const unsigned int lenghtString)
-{
-    struct tm time;
-    ds3231_get_time(dev, &time);
-
-    time.tm_mon += 1;
-
-    memset(timeString, 0, lenghtString);
-    int lenght = 0;
-    lenght = sprintf(timeString, timeFormat2, time.tm_mday, time.tm_mon, time.tm_year);
-    if (lenght)
-    {
-        ESP_LOGI(__func__, "Convert time to day string successfully.");
-        ESP_LOGI(__func__, "Current date: %s", timeString);
-        return ESP_OK;
-    }
-
-    ESP_LOGE(__func__, "Convert time to day string fail.");
-    return ESP_FAIL;
-}
-
 esp_err_t ds3231_setTime(i2c_dev_t *dev, struct tm *time)
 {
-
+#ifdef CONFIG_RTC_TIME_SYNC
     time->tm_year += 1900;
-
+#endif
     return ds3231_set_time(dev, time);
 }
 

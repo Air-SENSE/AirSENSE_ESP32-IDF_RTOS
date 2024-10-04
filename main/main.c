@@ -959,7 +959,7 @@ void allocateDataToMQTTandSDQueue_task(void *parameters)
 }
 
 /**
- * @brief This task receive data from module error queue and show device's status by controlling the leds in the curcuit (The Leds were predefined)
+ * @brief This task receive data from module error queue and show device's status by controlling the leds in the curcuit (The Led status were predefined)
  * @param parameters
  */
 
@@ -1086,7 +1086,7 @@ void fileEvent_task(void *parameters)
     fileStore_eventGroup = xEventGroupCreate();
     SemaphoreHandle_t file_semaphore = NULL;
     file_semaphore = xSemaphoreCreateMutex();
-    ds3231_convertTimeToDayString(&ds3231_device, CurrentFileNametoSaveData, 10);
+    ds3231_convertTimeToString(&ds3231_device, CurrentFileNametoSaveData, 10, 2);
 
     for (;;)
     {
@@ -1105,7 +1105,7 @@ void fileEvent_task(void *parameters)
 
             if (bits & FILE_RENAME_NEWDAY)
             {
-                ds3231_convertTimeToDayString(&ds3231_device, CurrentFileNametoSaveData, 10);
+                ds3231_convertTimeToString(&ds3231_device, CurrentFileNametoSaveData, 10, 2);
                 if (statusDevice.mqttClient == DISCONNECTED)
                 {
                     if (strstr(CurrentFileNametoSaveData, "x") == NULL)
@@ -1153,7 +1153,7 @@ void fileEvent_task(void *parameters)
             }
             else if (bits & FILE_RENAME_FROMSYNC)
             {
-                ds3231_convertTimeToDayString(&ds3231_device, CurrentFileNametoSaveData, 10);
+                ds3231_convertTimeToString(&ds3231_device, CurrentFileNametoSaveData, 10, 2);
                 ESP_LOGI(__func__, "File name updated from SNTP");
             }
             xSemaphoreGive(file_semaphore);
@@ -1458,7 +1458,7 @@ void app_main(void)
             .mode = GPIO_MODE_INPUT,
             .pull_up_en = 1,
             .pull_down_en = 0,
-            .pin_bit_mask = (1ULL << SW_1)};
+            .pin_bit_mask = (1ULL << SW_BUILT_IN)};
     gpio_config(&on_off_lcd_button);
     gpio_install_isr_service(0);
     gpio_isr_handler_add(SW_BUILT_IN, on_off_lcd_handler, (void *)SW_BUILT_IN);

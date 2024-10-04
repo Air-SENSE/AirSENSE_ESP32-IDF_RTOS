@@ -80,17 +80,6 @@ esp_err_t ds3231_get_time(i2c_dev_t *dev, struct tm *time);
 esp_err_t ds3231_convertTimeToString(i2c_dev_t *dev, char *timeString, const unsigned int lenghtString, uint8_t format);
 
 /**
- * @brief Get the date from the RTC, populates a supplied tm struct
- *
- * @param[in] dev Device descriptor
- * @param[out] timeString time string
- * @param[in] lenghtString lenght of time string
- *
- * @return ESP_OK to indicate success
- */
-esp_err_t ds3231_convertTimeToDayString(i2c_dev_t *dev, char *timeString, const unsigned int lenghtString);
-
-/**
  * @brief Get the time from the RTC, populates a supplied tm struct
  *
  * @param[in] dev Device descriptor

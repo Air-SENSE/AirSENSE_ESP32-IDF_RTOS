@@ -92,7 +92,7 @@ menu "WIFI Configuration"
 
     config PASSWORD
         string  "PASSWORD"
-        default  "DeepLearning"
+        default  "123"
         help 
             PASSWORD.
 
@@ -210,7 +210,7 @@ menu "OTA Configuration"
 
     config API_KEY
         string "API update key"
-        default "DOAN1_ESP32_PROJECT"
+        default "AIRSENSE_ESP32_PROJECT"
         help 
             API key to request new firmware
 endmenu
