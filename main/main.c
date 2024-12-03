@@ -148,7 +148,7 @@ uint8_t MAC_addressArray[6];
 
 // Whether send data to MQTT queue or not (depend on WIFI connection)
 bool sendToMQTTQueue = false;
-const char *formatDataSensorString = "{\n\t\"device_id\":\"%x%x%x%x\",\n\t\"Time\":%llu,\n\t\"Temperature\":%.2f,\n\t\"Humidity\":%.2f,\n\t\"Pressure\":%.2f,\n\t\"PM1\":%" PRIu32 ",\n\t\"PM2.5\":%" PRIu32 ",\n\t\"PM10\":%" PRIu32 ",\n\t\"CO2\":%" PRIu32 "\n}";
+const char *formatDataSensorString = "{\n\t\"station_id\":\"%x%x%x%x\",\n\t\"Time\":%llu,\n\t\"Temperature\":%.2f,\n\t\"Humidity\":%.2f,\n\t\"Pressure\":%.2f,\n\t\"PM1\":%" PRIu32 ",\n\t\"PM2p5\":%" PRIu32 ",\n\t\"PM10\":%" PRIu32 ",\n\t\"CO2\":%" PRIu32 "\n}";
 
 //------------------------------------------------------------------
 
@@ -480,14 +480,11 @@ static void WiFi_eventHandler(void *argument, esp_event_base_t event_base,
             }
 #endif
 #if (CONFIG_USING_FIRMWARE_UPDATE_BY_OTA)
-            if (xOTASemaphore != NULL)
+            if (ota_firmware_update_handle == NULL)
             {
                 xTaskCreate(ota_firmware_update_task, "OTA_button_Task", 4096 * 5, NULL, 30, &ota_firmware_update_handle);
             }
-            if (xOTA_reset_timer_Semaphore != NULL)
-            {
-                xTaskCreate(ota_reset_timer, "OTA_reset_timer_Task", 4096, NULL, 29, &ota_reset_time_handle);
-            }
+
 #endif
             /* When connect/reconnect wifi, esp32 take an IP address and this
              * event become active. If it's the first-time connection, create
@@ -678,7 +675,7 @@ void mqttPublishMessage_task(void *parameters)
                                 dataSensorReceiveFromQueue.pm10,
                                 dataSensorReceiveFromQueue.CO2);
 
-                        error = esp_mqtt_client_publish(mqttClient_handle, "AIRSENSE_PROJECT/DEVICE1", mqttMessage, 0, 0, 1);
+                        error = esp_mqtt_client_publish(mqttClient_handle, CONFIG_MQTT_TOPIC, mqttMessage, 0, 0, 1);
                         xSemaphoreGive(sentDataToMQTT_semaphore);
                         if (error == ESP_FAIL)
                         {
@@ -1379,6 +1376,10 @@ void app_main(void)
 
     xOTA_reset_timer_Semaphore = xSemaphoreCreateBinary();
     xOTASemaphore = xSemaphoreCreateBinary();
+    if (ota_reset_time_handle == NULL)
+    {
+        xTaskCreate(ota_reset_timer, "OTA_reset_timer_Task", 4096, NULL, 29, &ota_reset_time_handle);
+    }
 #endif // CONFIG_USING_FIRMWARE_UPDATE_BY_OTA
     // Initialize I2C Driver
 
@@ -1449,6 +1450,7 @@ void app_main(void)
 #if (CONFIG_USING_LCD_TFT)
     // Define a button for turning on or off the LCD sreen
     // Pointer to LCD's main display
+
     gpio_config_t on_off_lcd_button =
         {
             .intr_type = GPIO_INTR_NEGEDGE,

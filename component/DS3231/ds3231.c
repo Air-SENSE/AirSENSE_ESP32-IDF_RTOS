@@ -96,7 +96,7 @@ esp_err_t ds3231_set_time(i2c_dev_t *dev, struct tm *time)
     CHECK_ARG(time);
 
     uint8_t data[7];
-
+    esp_err_t res;
     /* time/date data */
     data[0] = dec2bcd(time->tm_sec);
     data[1] = dec2bcd(time->tm_min);
@@ -108,10 +108,11 @@ esp_err_t ds3231_set_time(i2c_dev_t *dev, struct tm *time)
     data[5] = dec2bcd(time->tm_mon + 1);
     data[6] = dec2bcd(time->tm_year - 2000);
     I2C_DEV_TAKE_MUTEX(dev);
-    I2C_DEV_CHECK(dev, i2c_dev_write_reg(dev, DS3231_ADDR_TIME, data, 7));
+    res = i2c_dev_write_reg(dev, DS3231_ADDR_TIME, data, 7);
+    I2C_DEV_CHECK(dev, res);
     I2C_DEV_GIVE_MUTEX(dev);
 
-    return ESP_OK;
+    return res;
 }
 
 esp_err_t ds3231_set_alarm(i2c_dev_t *dev, ds3231_alarm_t alarms, struct tm *time1,

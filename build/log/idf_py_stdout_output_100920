@@ -1,0 +1,160 @@
+ets Jul 29 2019 12:21:46
+
+rst:0x1 (POWERON_RESET),boot:0x13 (SPI_FAST_FLASH_BOOT)
+configsip: 0, SPIWP:0xee
+clk_drv:0x00,q_drv:0x00,d_drv:0x00,cs0_drv:0x00,hd_drv:0x00,wp_drv:0x00
+mode:DIO, clock div:2
+load:0x3fff0030,len:7084
+ho 0 tail 12 room 4
+load:0x40078000,len:15584
+load:0x40080400,len:4
+load:0x40080404,len:3876
+entry 0x4008064c
+[0;32mI (31) boot: ESP-IDF v5.1.2-dirty 2nd stage bootloader[0m
+[0;32mI (31) boot: compile time Oct 24 2024 14:38:48[0m
+[0;32mI (31) boot: Multicore bootloader[0m
+[0;32mI (36) boot: chip revision: v3.1[0m
+[0;32mI (40) boot.esp32: SPI Speed      : 40MHz[0m
+[0;32mI (44) boot.esp32: SPI Mode       : DIO[0m
+[0;32mI (49) boot.esp32: SPI Flash Size : 4MB[0m
+[0;32mI (53) boot: Enabling RNG early entropy source...[0m
+[0;32mI (59) boot: Partition Table:[0m
+[0;32mI (62) boot: ## Label            Usage          Type ST Offset   Length[0m
+[0;32mI (70) boot:  0 nvs              WiFi data        01 02 00009000 00004000[0m
+[0;32mI (77) boot:  1 otadata          OTA data         01 00 0000d000 00002000[0m
+[0;32mI (85) boot:  2 phy_init         RF data          01 01 0000f000 00001000[0m
+[0;32mI (92) boot:  3 factory          factory app      00 00 00010000 0014a000[0m
+[0;32mI (100) boot:  4 ota_0            OTA app          00 10 00160000 0014a000[0m
+[0;32mI (107) boot:  5 ota_1            OTA app          00 11 002b0000 0014a000[0m
+[0;32mI (115) boot: End of partition table[0m
+[0;32mI (119) boot: Defaulting to factory image[0m
+[0;32mI (124) esp_image: segment 0: paddr=00010020 vaddr=3f400020 size=4a900h (305408) map[0m
+[0;32mI (242) esp_image: segment 1: paddr=0005a928 vaddr=3ffb0000 size=03f14h ( 16148) load[0m
+[0;32mI (249) esp_image: segment 2: paddr=0005e844 vaddr=40080000 size=017d4h (  6100) load[0m
+[0;32mI (252) esp_image: segment 3: paddr=00060020 vaddr=400d0020 size=e0c0ch (920588) map[0m
+[0;32mI (589) esp_image: segment 4: paddr=00140c34 vaddr=400817d4 size=179a8h ( 96680) load[0m
+[0;32mI (642) boot: Loaded app from partition at offset 0x10000[0m
+[0;32mI (642) boot: Disabling RNG early entropy source...[0m
+[0;32mI (654) cpu_start: Multicore app[0m
+[0;32mI (654) cpu_start: Pro cpu up.[0m
+[0;32mI (654) cpu_start: Starting app cpu, entry point is 0x40081604[0m
+[0;32mI (0) cpu_start: App cpu up.[0m
+[0;32mI (674) cpu_start: Pro cpu start user code[0m
+[0;32mI (674) cpu_start: cpu freq: 160000000 Hz[0m
+[0;32mI (674) cpu_start: Application information:[0m
+[0;32mI (679) cpu_start: Project name:     AirSENSE_ESP32-IDF_RTOS[0m
+[0;32mI (685) cpu_start: App version:      c0799e5-dirty[0m
+[0;32mI (691) cpu_start: Compile time:     Oct 24 2024 14:38:31[0m
+[0;32mI (697) cpu_start: ELF file SHA256:  dc12d280981696bb...[0m
+[0;32mI (703) cpu_start: ESP-IDF:          v5.1.2-dirty[0m
+[0;32mI (708) cpu_start: Min chip rev:     v0.0[0m
+[0;32mI (713) cpu_start: Max chip rev:     v3.99 [0m
+[0;32mI (718) cpu_start: Chip rev:         v3.1[0m
+[0;32mI (723) heap_init: Initializing. RAM available for dynamic allocation:[0m
+[0;32mI (730) heap_init: At 3FFAE6E0 len 00001920 (6 KiB): DRAM[0m
+[0;32mI (736) heap_init: At 3FFC0DD0 len 0001F230 (124 KiB): DRAM[0m
+[0;32mI (742) heap_init: At 3FFE0440 len 00003AE0 (14 KiB): D/IRAM[0m
+[0;32mI (748) heap_init: At 3FFE4350 len 0001BCB0 (111 KiB): D/IRAM[0m
+[0;32mI (755) heap_init: At 4009917C len 00006E84 (27 KiB): IRAM[0m
+[0;32mI (762) spi_flash: detected chip: generic[0m
+[0;32mI (765) spi_flash: flash io: dio[0m
+[0;32mI (770) app_start: Starting scheduler on CPU0[0m
+[0;32mI (775) app_start: Starting scheduler on CPU1[0m
+[0;32mI (775) main_task: Started on CPU0[0m
+[0;32mI (785) main_task: Calling app_main()[0m
+[0;32mI (985) app_main: Starting app main.[0m
+This is esp32 chip with 2 CPU core(s), WiFi/BTBLE, silicon revision v3.1, 4MB external flash
+Minimum free heap size: 242628 bytes
+[0;32mI (985) app_main: Name device: ESP32-PROJECT.[0m
+[0;32mI (985) app_main: Firmware version 1.0.1.[0m
+[0;32mI (995) app_main: Initialize nvs partition.[0m
+[0;31mE (1535) i2cdev: Could not write to device [0x27 at 0]: 263 (ESP_ERR_TIMEOUT)[0m
+[0;32mI (1535) app_main: Initialize SD card with SPI interface.[0m
+[0;32mI (1535) sdcard_initialize: Initializing SD card[0m
+[0;32mI (1545) sdcard_initialize: Using SPI peripheral[0m
+[0;32mI (1555) sdcard_initialize: Mounting filesystem[0m
+[0;32mI (1555) gpio: GPIO[5]| InputEn: 0| OutputEn: 1| OpenDrain: 0| Pullup: 0| Pulldown: 0| Intr:0 [0m
+[0;31mE (1765) sdmmc_sd: sdmmc_init_sd_if_cond: send_if_cond (1) returned 0x108[0m
+[0;31mE (1765) vfs_fat_sdmmc: sdmmc_card_init failed (0x108).[0m
+[0;32mI (1765) gpio: GPIO[5]| InputEn: 1| OutputEn: 0| OpenDrain: 0| Pullup: 0| Pulldown: 0| Intr:0 [0m
+[0;31mE (1775) sdcard_initialize: Failed to initialize the card (ESP_ERR_INVALID_RESPONSE). Make sure SD card lines have pull-up resistors in place.[0m
+ESP_ERROR_CHECK_WITHOUT_ABORT failed: esp_err_t 0x108 (ESP_ERR_INVALID_RESPONSE) at 0x400d8e08
+file: "./main/main.c" line 1406
+func: app_main
+expression: sd_err
+[0;31mE (1805) i2cdev: Could not write to device [0x27 at 0]: -1 (ESP_FAIL)[0m
+[0;32mI (1805) app_main: Initialize BME280 sensor(I2C/Wire1).[0m
+[0;31mE (1825) i2cdev: Could not read from device [0x76 at 1]: 263 (ESP_ERR_TIMEOUT)[0m
+[0;31mE (1825) bmp280: Sensor not found[0m
+ESP_ERROR_CHECK_WITHOUT_ABORT failed: esp_err_t 0x107 (ESP_ERR_TIMEOUT) at 0x400d9c7b
+file: "./component/BME280/bme280.c" line 14
+func: bme280_init
+expression: bmp280_init(bme280_device, bme280_params)
+[0;33mW (1845) bme280_init: ESP_FAIL: No ack, sensor not connected...skip...[0m
+[0;31mE (1855) bme280_init: I2C port(Wire1) for BME280 sensor initialize failed.[0m
+ESP_ERROR_CHECK_WITHOUT_ABORT failed: esp_err_t 0x2000 (ESP_ERR_IMAGE_BASE) at 0x400d8e56
+file: "./main/main.c" line 1418
+func: app_main
+expression: bme280_init(&bme280_device, &bme280_params, BME280_ADDRESS, CONFIG_BME_I2C_PORT, CONFIG_BME_PIN_NUM_SDA, CONFIG_BME_PIN_NUM_SCL)
+[0;32mI (1885) app_main: Initialize DS3231 module(I2C/Wire0).[0m
+[0;32mI (1895) ds3231_initialize: DS3231 module initialize success.[0m
+[0;31mE (1905) i2cdev: Could not read from device [0x68 at 0]: 263 (ESP_ERR_TIMEOUT)[0m
+[0;32mI (1905) mhz14a_warmUp: MHZ14A warming up...[0m
+[0;32mI (2915) mhz14a_warmUp: MHZ14A warming up...[0m
+[0;31mE (145025) pms7003_readData: PMS7003 sensor read data failed.[0m
+[0;31mE (145125) pms7003_readData: PMS7003 sensor read data failed.[0m
+[0;31mE (145225) pms7003_readData: PMS7003 sensor read data failed.[0m
+[0;31mE (145325) pms7003_readData: PMS7003 sensor read data failed.[0m
+[0;31mE (145425) pms7003_readData: PMS7003 sensor read data failed.[0m
+[0;31mE (145525) pms7003_readData: PMS7003 sensor read data failed.[0m
+[0;31mE (145625) pms7003_readData: PMS7003 sensor read data failed.[0m
+[0;31mE (145725) pms7003_readData: PMS7003 sensor read data failed.[0m
+[0;31mE (145825) pms7003_readData: PMS7003 sensor read data failed.[0m
+[0;31mE (145925) pms7003_readData: PMS7003 sensor read data failed.[0m
+[0;31mE (146025) pms7003_readData: PMS7003 sensor read data failed.[0m
+[0;31mE (146125) pms7003_readData: PMS7003 sensor read data failed.[0m
+[0;31mE (146225) pms7003_readData: PMS7003 sensor read data failed.[0m
+[0;31mE (146325) pms7003_readData: PMS7003 sensor read data failed.[0m
+[0;31mE (146425) pms7003_readData: PMS7003 sensor read data failed.[0m
+[0;31mE (146525) pms7003_readData: PMS7003 sensor read data failed.[0m
+[0;31mE (146625) pms7003_readData: PMS7003 sensor read data failed.[0m
+[0;31mE (146725) pms7003_readData: PMS7003 sensor read data failed.[0m
+[0;31mE (146825) pms7003_readData: PMS7003 sensor read data failed.[0m
+[0;31mE (146925) pms7003_readData: PMS7003 sensor read data failed.[0m
+[0;31mE (147025) pms7003_readData: PMS7003 sensor read data failed.[0m
+[0;31mE (147125) pms7003_readData: PMS7003 sensor read data failed.[0m
+[0;31mE (147225) pms7003_readData: PMS7003 sensor read data failed.[0m
+[0;31mE (147325) pms7003_readData: PMS7003 sensor read data failed.[0m
+[0;31mE (147425) pms7003_readData: PMS7003 sensor read data failed.[0m
+[0;31mE (147525) pms7003_readData: PMS7003 sensor read data failed.[0m
+[0;31mE (147625) pms7003_readData: PMS7003 sensor read data failed.[0m
+[0;31mE (147725) pms7003_readData: PMS7003 sensor read data failed.[0m
+[0;31mE (147825) pms7003_readData: PMS7003 sensor read data failed.[0m
+[0;31mE (147925) pms7003_readData: PMS7003 sensor read data failed.[0m
+[0;31mE (148025) pms7003_readData: PMS7003 sensor read data failed.[0m
+[0;31mE (148125) pms7003_readData: PMS7003 sensor read data failed.[0m
+[0;31mE (148225) pms7003_readData: PMS7003 sensor read data failed.[0m
+[0;31mE (148325) pms7003_readData: PMS7003 sensor read data failed.[0m
+[0;31mE (148425) pms7003_readData: PMS7003 sensor read data failed.[0m
+[0;31mE (148525) pms7003_readData: PMS7003 sensor read data failed.[0m
+[0;31mE (148625) pms7003_readData: PMS7003 sensor read data failed.[0m
+[0;31mE (148725) pms7003_readData: PMS7003 sensor read data failed.[0m
+[0;31mE (148825) pms7003_readData: PMS7003 sensor read data failed.[0m
+[0;31mE (148925) pms7003_readData: PMS7003 sensor read data failed.[0m
+[0;31mE (149025) pms7003_readData: PMS7003 sensor read data failed.[0m
+[0;31mE (149125) pms7003_readData: PMS7003 sensor read data failed.[0m
+[0;31mE (149225) pms7003_readData: PMS7003 sensor read data failed.[0m
+[0;31mE (149325) pms7003_readData: PMS7003 sensor read data failed.[0m
+[0;31mE (149425) pms7003_readData: PMS7003 sensor read data failed.[0m
+[0;31mE (149525) pms7003_readData: PMS7003 sensor read data failed.[0m
+[0;31mE (149625) pms7003_readData: PMS7003 sensor read data failed.[0m
+[0;31mE (149725) pms7003_readData: PMS7003 sensor read data failed.[0m
+[0;31mE (149825) pms7003_readData: PMS7003 sensor read data failed.[0m
+[0;31mE (149925) pms7003_readData: PMS7003 sensor read data failed.[0m
+[0;31mE (150025) pms7003_readData: PMS7003 sensor read data failed.[0m
+[0;31mE (150125) pms7003_readData: PMS7003 sensor read data failed.[0m
+[0;31mE (150225) pms7003_readData: PMS7003 sensor read data failed.[0m
+[0;31mE (150325) pms7003_readData: PMS7003 sensor read data failed.[0m
+[0;31mE (150425) pms7003_readData: PMS7003 sensor read data failed.[0m
+[0;31mE (150525) pms7003_readData: PMS7003 sensor read data failed.[0m
+[0;31mE (150625) pms7003_readData: PMS7003 sensor read data failed.[0m
