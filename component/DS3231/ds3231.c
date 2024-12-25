@@ -17,35 +17,41 @@
 #define I2C_FREQ_HZ 400000
 
 #define DS3231_STAT_OSCILLATOR 0x80
-#define DS3231_STAT_32KHZ      0x08
-#define DS3231_STAT_ALARM_2    0x02
-#define DS3231_STAT_ALARM_1    0x01
+#define DS3231_STAT_32KHZ 0x08
+#define DS3231_STAT_ALARM_2 0x02
+#define DS3231_STAT_ALARM_1 0x01
 
-#define DS3231_CTRL_OSCILLATOR    0x80
-#define DS3231_CTRL_TEMPCONV      0x20
-#define DS3231_CTRL_ALARM_INTS    0x04
-#define DS3231_CTRL_ALARM2_INT    0x02
-#define DS3231_CTRL_ALARM1_INT    0x01
+#define DS3231_CTRL_OSCILLATOR 0x80
+#define DS3231_CTRL_TEMPCONV 0x20
+#define DS3231_CTRL_ALARM_INTS 0x04
+#define DS3231_CTRL_ALARM2_INT 0x02
+#define DS3231_CTRL_ALARM1_INT 0x01
 
-#define DS3231_ALARM_WDAY   0x40
+#define DS3231_ALARM_WDAY 0x40
 #define DS3231_ALARM_NOTSET 0x80
 
-#define DS3231_ADDR_TIME    0x00
-#define DS3231_ADDR_ALARM1  0x07
-#define DS3231_ADDR_ALARM2  0x0b
+#define DS3231_ADDR_TIME 0x00
+#define DS3231_ADDR_ALARM1 0x07
+#define DS3231_ADDR_ALARM2 0x0b
 #define DS3231_ADDR_CONTROL 0x0e
-#define DS3231_ADDR_STATUS  0x0f
-#define DS3231_ADDR_AGING   0x10
-#define DS3231_ADDR_TEMP    0x11
+#define DS3231_ADDR_STATUS 0x0f
+#define DS3231_ADDR_AGING 0x10
+#define DS3231_ADDR_TEMP 0x11
 
-#define DS3231_12HOUR_FLAG  0x40
-#define DS3231_12HOUR_MASK  0x1f
-#define DS3231_PM_FLAG      0x20
-#define DS3231_MONTH_MASK   0x1f
+#define DS3231_12HOUR_FLAG 0x40
+#define DS3231_12HOUR_MASK 0x1f
+#define DS3231_PM_FLAG 0x20
+#define DS3231_MONTH_MASK 0x1f
 
-#define CHECK_ARG(ARG) do { if (!ARG) return ESP_ERR_INVALID_ARG; } while (0)
+#define CHECK_ARG(ARG)                  \
+    do                                  \
+    {                                   \
+        if (!ARG)                       \
+            return ESP_ERR_INVALID_ARG; \
+    } while (0)
 
-enum {
+enum
+{
     DS3231_SET = 0,
     DS3231_CLEAR,
     DS3231_REPLACE
@@ -90,7 +96,7 @@ esp_err_t ds3231_set_time(i2c_dev_t *dev, struct tm *time)
     CHECK_ARG(time);
 
     uint8_t data[7];
-
+    esp_err_t res;
     /* time/date data */
     data[0] = dec2bcd(time->tm_sec);
     data[1] = dec2bcd(time->tm_min);
@@ -101,16 +107,16 @@ esp_err_t ds3231_set_time(i2c_dev_t *dev, struct tm *time)
     data[4] = dec2bcd(time->tm_mday);
     data[5] = dec2bcd(time->tm_mon + 1);
     data[6] = dec2bcd(time->tm_year - 2000);
-
     I2C_DEV_TAKE_MUTEX(dev);
-    I2C_DEV_CHECK(dev, i2c_dev_write_reg(dev, DS3231_ADDR_TIME, data, 7));
+    res = i2c_dev_write_reg(dev, DS3231_ADDR_TIME, data, 7);
+    I2C_DEV_CHECK(dev, res);
     I2C_DEV_GIVE_MUTEX(dev);
 
-    return ESP_OK;
+    return res;
 }
 
 esp_err_t ds3231_set_alarm(i2c_dev_t *dev, ds3231_alarm_t alarms, struct tm *time1,
-        ds3231_alarm1_rate_t option1, struct tm *time2, ds3231_alarm2_rate_t option2)
+                           ds3231_alarm1_rate_t option1, struct tm *time2, ds3231_alarm2_rate_t option2)
 {
     CHECK_ARG(dev);
 
@@ -124,8 +130,7 @@ esp_err_t ds3231_set_alarm(i2c_dev_t *dev, ds3231_alarm_t alarms, struct tm *tim
         data[i++] = (option1 >= DS3231_ALARM1_MATCH_SEC ? dec2bcd(time1->tm_sec) : DS3231_ALARM_NOTSET);
         data[i++] = (option1 >= DS3231_ALARM1_MATCH_SECMIN ? dec2bcd(time1->tm_min) : DS3231_ALARM_NOTSET);
         data[i++] = (option1 >= DS3231_ALARM1_MATCH_SECMINHOUR ? dec2bcd(time1->tm_hour) : DS3231_ALARM_NOTSET);
-        data[i++] = (option1 == DS3231_ALARM1_MATCH_SECMINHOURDAY ? (dec2bcd(time1->tm_wday + 1) & DS3231_ALARM_WDAY) :
-            (option1 == DS3231_ALARM1_MATCH_SECMINHOURDATE ? dec2bcd(time1->tm_mday) : DS3231_ALARM_NOTSET));
+        data[i++] = (option1 == DS3231_ALARM1_MATCH_SECMINHOURDAY ? (dec2bcd(time1->tm_wday + 1) & DS3231_ALARM_WDAY) : (option1 == DS3231_ALARM1_MATCH_SECMINHOURDATE ? dec2bcd(time1->tm_mday) : DS3231_ALARM_NOTSET));
     }
 
     /* alarm 2 data */
@@ -134,8 +139,7 @@ esp_err_t ds3231_set_alarm(i2c_dev_t *dev, ds3231_alarm_t alarms, struct tm *tim
         CHECK_ARG(time2);
         data[i++] = (option2 >= DS3231_ALARM2_MATCH_MIN ? dec2bcd(time2->tm_min) : DS3231_ALARM_NOTSET);
         data[i++] = (option2 >= DS3231_ALARM2_MATCH_MINHOUR ? dec2bcd(time2->tm_hour) : DS3231_ALARM_NOTSET);
-        data[i++] = (option2 == DS3231_ALARM2_MATCH_MINHOURDAY ? (dec2bcd(time2->tm_wday + 1) & DS3231_ALARM_WDAY) :
-            (option2 == DS3231_ALARM2_MATCH_MINHOURDATE ? dec2bcd(time2->tm_mday) : DS3231_ALARM_NOTSET));
+        data[i++] = (option2 == DS3231_ALARM2_MATCH_MINHOURDAY ? (dec2bcd(time2->tm_wday + 1) & DS3231_ALARM_WDAY) : (option2 == DS3231_ALARM2_MATCH_MINHOURDATE ? dec2bcd(time2->tm_mday) : DS3231_ALARM_NOTSET));
     }
 
     I2C_DEV_TAKE_MUTEX(dev);
@@ -388,17 +392,19 @@ esp_err_t ds3231_get_time(i2c_dev_t *dev, struct tm *time)
         /* 12H */
         time->tm_hour = bcd2dec(data[2] & DS3231_12HOUR_MASK) - 1;
         /* AM/PM? */
-        if (data[2] & DS3231_PM_FLAG) time->tm_hour += 12;
+        if (data[2] & DS3231_PM_FLAG)
+            time->tm_hour += 12;
     }
-    else time->tm_hour = bcd2dec(data[2]); /* 24H */
+    else
+        time->tm_hour = bcd2dec(data[2]); /* 24H */
     time->tm_wday = bcd2dec(data[3]) - 1;
     time->tm_mday = bcd2dec(data[4]);
-    time->tm_mon  = bcd2dec(data[5] & DS3231_MONTH_MASK) - 1;
+    time->tm_mon = bcd2dec(data[5] & DS3231_MONTH_MASK) - 1;
     time->tm_year = bcd2dec(data[6]) + 2000;
     time->tm_isdst = 0;
 
     // apply a time zone (if you are not using localtime on the rtc or you want to check/apply DST)
-    //applyTZ(time);
+    // applyTZ(time);
 
     return ESP_OK;
 }

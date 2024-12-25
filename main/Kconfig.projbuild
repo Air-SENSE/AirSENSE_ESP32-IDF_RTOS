@@ -102,7 +102,7 @@ menu "WiFi Config Menu"
 
     config MAXIMUM_RETRY
         int "Maximum retry"
-        default 25
+        default 20
         help
             Set the Maximum retry to avoid station reconnecting to the AP unlimited when the AP is really inexistent.
 
@@ -114,11 +114,11 @@ menu "WiFi Config Menu"
 
 endmenu
 
-menu "MQTT Config menu"
+menu "MQTT Configuration"
 
     config BROKER_URI
         string "Broker URL"
-        default "mqtt://103.130.212.210:1885"
+        default "mqtt://103.1.238.175:1885"
         help
             URL of an mqtt broker which this device connects to.
 
@@ -181,9 +181,39 @@ menu "MQTT Config menu"
         bool
         default y if BROKER_CERTIFICATE_OVERRIDE != ""
 
-    # config BROKER_BIN_SIZE_TO_SEND
-    #     int
-    #     default 20000
+  
 
 endmenu
+menu "Get Data Period"
+    config GET_DATA_PERIOD
+        int "Period to get data in seconds"
+        default 5
+        help
+            The interval to read data from sensors and send to queue
+endmenu
 
+menu "OTA Configuration"
+    config USING_FIRMWARE_UPDATE_BY_OTA
+        bool "Using firmware update by OTA"
+        default n
+        help 
+            Using firmware update by OTA.
+
+    config FIRMWARE_UPDATE_URL
+        string "Firmware Update URL"
+        default "https://192.168.2.106:8070/hello_world.bin"
+        help
+            URL of server which hosts the firmware image.
+
+    config EXAMPLE_OTA_RECV_TIMEOUT
+        int "OTA Receive Timeout"
+        default 5000
+        help
+            Maximum time for reception
+
+    config API_KEY
+        string "API update key"
+        default "AIRSENSE_ESP32_PROJECT"
+        help 
+            API key to request new firmware
+endmenu

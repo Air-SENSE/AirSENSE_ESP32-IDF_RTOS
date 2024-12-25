@@ -1,0 +1,252 @@
+ets Jul 29 2019 12:21:46
+
+rst:0x1 (POWERON_RESET),boot:0x13 (SPI_FAST_FLASH_BOOT)
+configsip: 0, SPIWP:0xee
+clk_drv:0x00,q_drv:0x00,d_drv:0x00,cs0_drv:0x00,hd_drv:0x00,wp_drv:0x00
+mode:DIO, clock div:2
+load:0x3fff0030,len:7084
+ho 0 tail 12 room 4
+load:0x40078000,len:15584
+load:0x40080400,len:4
+load:0x40080404,len:3876
+entry 0x4008064c
+[0;32mI (31) boot: ESP-IDF v5.1.2-dirty 2nd stage bootloader[0m
+[0;32mI (31) boot: compile time Oct 24 2024 14:38:48[0m
+[0;32mI (31) boot: Multicore bootloader[0m
+[0;32mI (36) boot: chip revision: v3.1[0m
+[0;32mI (40) boot.esp32: SPI Speed      : 40MHz[0m
+[0;32mI (44) boot.esp32: SPI Mode       : DIO[0m
+[0;32mI (49) boot.esp32: SPI Flash Size : 4MB[0m
+[0;32mI (53) boot: Enabling RNG early entropy source...[0m
+[0;32mI (59) boot: Partition Table:[0m
+[0;32mI (62) boot: ## Label            Usage          Type ST Offset   Length[0m
+[0;32mI (70) boot:  0 nvs              WiFi data        01 02 00009000 00004000[0m
+[0;32mI (77) boot:  1 otadata          OTA data         01 00 0000d000 00002000[0m
+[0;32mI (85) boot:  2 phy_init         RF data          01 01 0000f000 00001000[0m
+[0;32mI (92) boot:  3 factory          factory app      00 00 00010000 0014a000[0m
+[0;32mI (100) boot:  4 ota_0            OTA app          00 10 00160000 0014a000[0m
+[0;32mI (107) boot:  5 ota_1            OTA app          00 11 002b0000 0014a000[0m
+[0;32mI (115) boot: End of partition table[0m
+[0;32mI (119) boot: Defaulting to factory image[0m
+[0;32mI (124) esp_image: segment 0: paddr=00010020 vaddr=3f400020 size=4a900h (305408) map[0m
+[0;32mI (242) esp_image: segment 1: paddr=0005a928 vaddr=3ffb0000 size=03f14h ( 16148) load[0m
+[0;32mI (249) esp_image: segment 2: paddr=0005e844 vaddr=40080000 size=017d4h (  6100) load[0m
+[0;32mI (252) esp_image: segment 3: paddr=00060020 vaddr=400d0020 size=e0c0ch (920588) map[0m
+[0;32mI (589) esp_image: segment 4: paddr=00140c34 vaddr=400817d4 size=179a8h ( 96680) load[0m
+[0;32mI (642) boot: Loaded app from partition at offset 0x10000[0m
+[0;32mI (642) boot: Disabling RNG early entropy source...[0m
+[0;32mI (654) cpu_start: Multicore app[0m
+[0;32mI (654) cpu_start: Pro cpu up.[0m
+[0;32mI (654) cpu_start: Starting app cpu, entry point is 0x40081604[0m
+[0;32mI (0) cpu_start: App cpu up.[0m
+[0;32mI (674) cpu_start: Pro cpu start user code[0m
+[0;32mI (674) cpu_start: cpu freq: 160000000 Hz[0m
+[0;32mI (674) cpu_start: Application information:[0m
+[0;32mI (679) cpu_start: Project name:     AirSENSE_ESP32-IDF_RTOS[0m
+[0;32mI (685) cpu_start: App version:      c0799e5-dirty[0m
+[0;32mI (691) cpu_start: Compile time:     Nov 22 2024 10:15:24[0m
+[0;32mI (697) cpu_start: ELF file SHA256:  e0d56f667a224693...[0m
+[0;32mI (703) cpu_start: ESP-IDF:          v5.1.2-dirty[0m
+[0;32mI (708) cpu_start: Min chip rev:     v0.0[0m
+[0;32mI (713) cpu_start: Max chip rev:     v3.99 [0m
+[0;32mI (718) cpu_start: Chip rev:         v3.1[0m
+[0;32mI (723) heap_init: Initializing. RAM available for dynamic allocation:[0m
+[0;32mI (730) heap_init: At 3FFAE6E0 len 00001920 (6 KiB): DRAM[0m
+[0;32mI (736) heap_init: At 3FFC0DD0 len 0001F230 (124 KiB): DRAM[0m
+[0;32mI (742) heap_init: At 3FFE0440 len 00003AE0 (14 KiB): D/IRAM[0m
+[0;32mI (748) heap_init: At 3FFE4350 len 0001BCB0 (111 KiB): D/IRAM[0m
+[0;32mI (755) heap_init: At 4009917C len 00006E84 (27 KiB): IRAM[0m
+[0;32mI (762) spi_flash: detected chip: generic[0m
+[0;32mI (765) spi_flash: flash io: dio[0m
+[0;32mI (770) app_start: Starting scheduler on CPU0[0m
+[0;32mI (775) app_start: Starting scheduler on CPU1[0m
+[0;32mI (775) main_task: Started on CPU0[0m
+[0;32mI (785) main_task: Calling app_main()[0m
+[0;32mI (985) app_main: Starting app main.[0m
+This is esp32 chip with 2 CPU core(s), WiFi/BTBLE, silicon revision v3.1, 4MB external flash
+Minimum free heap size: 242628 bytes
+[0;32mI (985) app_main: Name device: ESP32-PROJECT.[0m
+[0;32mI (985) app_main: Firmware version 1.0.1.[0m
+[0;32mI (995) app_main: Initialize nvs partition.[0m
+[0;32mI (1535) app_main: Initialize SD card with SPI interface.[0m
+[0;32mI (1535) sdcard_initialize: Initializing SD card[0m
+[0;32mI (1535) sdcard_initialize: Using SPI peripheral[0m
+[0;32mI (1535) sdcard_initialize: Mounting filesystem[0m
+[0;32mI (1545) gpio: GPIO[5]| InputEn: 0| OutputEn: 1| OpenDrain: 0| Pullup: 0| Pulldown: 0| Intr:0 [0m
+[0;32mI (1555) sdspi_transaction: cmd=52, R1 response: command not supported[0m
+[0;32mI (1605) sdspi_transaction: cmd=5, R1 response: command not supported[0m
+[0;32mI (1625) sdcard_initialize: SDCard has been initialized.[0m
+[0;32mI (1625) sdcard_initialize: Filesystem mounted[0m
+[0;32mI (1625) sdcard_initialize: SDCard properties.[0m
+Name: SD16G
+Type: SDHC/SDXC
+Speed: 20.00 MHz (limit: 20.00 MHz)
+Size: 3840MB
+CSD: ver=2, sector_size=512, capacity=7864320 read_bl_len=9
+SSR: bus_width=1
+[0;32mI (1645) app_main: Initialize BME280 sensor(I2C/Wire1).[0m
+[0;32mI (1655) bme280_init: BME280 sensor initialze successful.[0m
+[0;32mI (1655) app_main: Initialize DS3231 module(I2C/Wire0).[0m
+[0;32mI (1655) ds3231_initialize: DS3231 module initialize success.[0m
+[0;32mI (1665) mhz14a_warmUp: MHZ14A warming up...[0m
+[0;32mI (2675) mhz14a_warmUp: MHZ14A warming up...[0m
+[0;32mI (3675) mhz14a_warmUp: MHZ14A warming up...[0m
+[0;32mI (4675) mhz14a_initUART: MHZ14A initialize success.[0m
+[0;32mI (4675) mhz14a_initUART: MHZ14A UART port initialize successful.[0m
+[0;32mI (4675) mhz14a_setRangeSetting: Sending command to MHZ14a sensor successful.[0m
+[0;32mI (4675) mhz14a_sendCommand: Sending command to MHZ14a sensor successful.[0m
+[0;31mE (4995) mhz14a_getDataFromSensorViaUART: Get raw data from TX buffer failed. 18[0m
+[0;32mI (4995) mhz14a_sendCommand: Sending command to MHZ14a sensor successful.[0m
+[0;32mI (5295) mhz14a_getDataFromSensorViaUART: Raw data from TX buffer: [255 134 1 244 66 0 0 0 67][0m
+[0;32mI (5295) pms7003_initUart: PMS7003 UART port initialize successful.[0m
+[0;31mE (5395) pms7003_readData: PMS7003 sensor read data failed.[0m
+[0;31mE (5495) pms7003_readData: PMS7003 sensor read data failed.[0m
+[0;31mE (5595) pms7003_readData: PMS7003 sensor read data failed.[0m
+[0;31mE (5695) pms7003_readData: PMS7003 sensor read data failed.[0m
+[0;31mE (5795) pms7003_readData: PMS7003 sensor read data failed.[0m
+[0;32mI (5945) pms7003_readData: PMS7003 sensor read data successful.[0m
+[0;32mI (5945) pms7003_readData: PM1.0: 23ug/m3  PM2.5: 31ug/m3  PM10: 36ug/m3.[0m
+[0;32mI (5945) gpio: GPIO[0]| InputEn: 1| OutputEn: 0| OpenDrain: 0| Pullup: 1| Pulldown: 0| Intr:2 [0m
+[0;32mI (5955) LCD TFT: Turn off LCD backlight[0m
+[0;32mI (5955) gpio: GPIO[4]| InputEn: 0| OutputEn: 1| OpenDrain: 0| Pullup: 0| Pulldown: 0| Intr:0 [0m
+[0;32mI (5965) LCD TFT: Initialize SPI bus[0m
+[0;32mI (5975) LCD TFT: Install panel IO[0m
+[0;32mI (5975) gpio: GPIO[3]| InputEn: 0| OutputEn: 1| OpenDrain: 0| Pullup: 0| Pulldown: 0| Intr:0 [0m
+[0;32mI (5985) LCD TFT: Install ILI9341 panel driver[0m
+[0;32mI (5985) gpio: GPIO[15]| InputEn: 0| OutputEn: 1| OpenDrain: 0| Pullup: 0| Pulldown: 0| Intr:0 [0m
+[0;32mI (5995) ili9341: LCD panel create success, version: 2.0.0[0m
+[0;32mI (6125) LCD TFT: Turn on LCD backlight[0m
+[0;32mI (6125) LCD TFT: Initialize LVGL library[0m
+[0;32mI (6125) LCD TFT: Register display driver to LVGL[0m
+[0;32mI (6135) LCD TFT: Install LVGL tick timer[0m
+[0;32mI (6295) app_main: Create dataSensorIntermediate Queue success.[0m
+[0;32mI (6295) app_main: Create dataSensorSentToSD Queue success.[0m
+[0;32mI (6295) ds3231_convertTimeToString: Convert time to string successfully.[0m
+[0;32mI (6305) ds3231_convertTimeToString: Current date & time: 29112024[0m
+[0;32mI (6315) app_main: Create moduleError Queue success.[0m
+[0;32mI (6315) app_main: Create dataSensorSentToMQTT Queue success.[0m
+[0;32mI (6325) app_main: Create LCD Display Queue successfully.[0m
+[0;32mI (6335) app_main: Create dateTimeLostWiFi Queue successfully.[0m
+[0;32mI (7335) ds3231_getEpochTime: DS3231 get EpochTime success.[0m
+[0;32mI (7335) ds3231_isNewDay: New day come.[0m
+[0;32mI (7335) ds3231_isNewMinute: New minute.[0m
+[0;32mI (7335) ds3231_convertTimeToString: Convert time to string successfully.[0m
+[0;32mI (7335) ds3231_convertTimeToString: Convert time to string successfully.[0m
+[0;32mI (7345) ds3231_convertTimeToString: Current date & time: 29112024[0m
+[0;32mI (7355) ds3231_convertTimeToString: Current date & time: 29-11-2024 10:34[0m
+[0;32mI (7355) fileEvent_task: Success to post the data sensor to dateTimeLostWiFi_queue Queue.[0m
+[0;32mI (7335) app_main: Create task AllocateData successfully.[0m
+I (7395) wifi:wifi driver task: 3ffe37ec, prio:23, stack:6656, core=0
+I (7405) wifi:wifi firmware version: 91b9630
+I (7405) wifi:wifi certification version: v7.0
+I (7405) wifi:config NVS flash: enabled
+I (7405) wifi:config nano formating: disabled
+I (7415) wifi:Init data frame dynamic rx buffer num: 32
+I (7415) wifi:Init static rx mgmt buffer num: 5
+I (7425) wifi:Init management short buffer num: 32
+I (7425) wifi:Init dynamic tx buffer num: 32
+[0;32mI (7435) pms7003_readData: PMS7003 sensor read data successful.[0m
+[0;32mI (7435) pms7003_readData: PM1.0: 23ug/m3  PM2.5: 32ug/m3  PM10: 37ug/m3.[0m
+[0;32mI (7445) mhz14a_sendCommand: Sending command to MHZ14a sensor successful.[0m
+I (7455) wifi:Init static rx buffer size: 1600
+I (7455) wifi:Init static rx buffer num: 10
+I (7465) wifi:Init dynamic rx buffer num: 32
+[0;32mI (7465) wifi_init: rx ba win: 6[0m
+[0;32mI (7465) wifi_init: tcpip mbox: 32[0m
+[0;32mI (7475) wifi_init: udp mbox: 6[0m
+[0;32mI (7475) wifi_init: tcp mbox: 6[0m
+[0;32mI (7485) wifi_init: tcp tx win: 5744[0m
+[0;32mI (7485) wifi_init: tcp rx win: 5744[0m
+[0;32mI (7485) wifi_init: tcp mss: 1440[0m
+[0;32mI (7495) wifi_init: WiFi IRAM OP enabled[0m
+[0;32mI (7495) wifi_init: WiFi RX IRAM OP enabled[0m
+[0;32mI (7505) phy_init: phy_version 4780,16b31a7,Sep 22 2023,20:42:16[0m
+I (7615) wifi:mode : sta (b0:b2:1c:0b:1a:04)
+I (7615) wifi:enable tsf
+[0;32mI (7615) WIFI_initSTA: WIFI initialize STA finished.[0m
+[0;32mI (7615) main_task: Returned from app_main()[0m
+[0;32mI (7615) WiFi_eventHandler: Trying to connect with Wi-Fi...
+[0m
+[0;32mI (7755) mhz14a_getDataFromSensorViaUART: Raw data from TX buffer: [255 134 1 244 66 0 0 0 67][0m
+[0;32mI (7755) bme280_readSensorData: BME280 sensor read data successful.[0m
+[0;32mI (7755) getDataFromSensor_task: Read data from sensors completed![0m
+[0;32mI (7765) ds3231_convertTimeToString: Convert time to string successfully.[0m
+[0;32mI (7775) ds3231_convertTimeToString: Current date & time: 29-11-2024 10:34:38[0m
+[0;32mI (7775) getDataFromSensor_task: Success to post the data sensor to dataSensor Queue.[0m
+[0;32mI (7785) getDataFromSensor_task: Success to post the moduleError to Queue.[0m
+I (7795) wifi:new:<1,1>, old:<1,0>, ap:<255,255>, sta:<1,1>, prof:1
+I (7805) wifi:state: init -> auth (b0)
+I (7805) wifi:state: auth -> assoc (0)
+I (7815) wifi:state: assoc -> run (10)
+[0;32mI (7835) allocateDataToMQTTandSDQueue_task: Receiving data from intermediate queue successfully.[0m
+[0;32mI (7835) allocateDataToMQTTandSDQueue_task: Success to post the data sensor to dataSensorSentToSD Queue.[0m
+[0;32mI (7835) allocateDataToMQTTandSDQueue_task: Success to post the data sensor to LCD Display Queue.[0m
+I (7945) wifi:connected with WICOM, aid = 3, channel 1, 40U, bssid = b0:be:76:49:ec:54
+I (7945) wifi:security: WPA2-PSK, phy: bgn, rssi: -59
+I (7955) wifi:pm start, type: 1
+
+[0;32mI (7965) WiFi_eventHandler: Wi-Fi connected AP SSID:WICOM password:Wicom123.
+[0m
+I (8015) wifi:<ba-add>idx:0 (ifx:0, b0:be:76:49:ec:54), tid:0, ssn:2, winSize:64
+I (8025) wifi:AP's beacon interval = 102400 us, DTIM period = 1
+[0;32mI (8335) DebugLed_task: Receiving data from Module Error queue successfully.[0m
+[0;32mI (9465) esp_netif_handlers: sta ip: 192.168.0.100, mask: 255.255.255.0, gw: 192.168.0.1[0m
+[0;32mI (9485) Main: got ip:192.168.0.100[0m
+[0;32mI (9485) WiFi_eventHandler: Starting MQTT Client...
+[0m
+[0;32mI (9485) sntp_init_func: Initializing SNTP.[0m
+[0;32mI (9485) mqtt_event_handler: Other event id:7[0m
+[0;32mI (9485) sntp_setTime: Waiting for system time to be set...[0m
+I (9545) wifi:<ba-add>idx:1 (ifx:0, b0:be:76:49:ec:54), tid:2, ssn:1, winSize:64
+[0;32mI (9605) mqtt_event_handler: MQTT_EVENT_CONNECTED[0m
+[0;32mI (9605) fileEvent_task: Update file name after reconnect: 29112024[0m
+[0;32mI (9835) saveDataSensorToSDcard_task: Receiving data from queue successfully.[0m
+[0;32mI (9835) sdcard_writeDataToFile: Opening file /sdcard/29112024.txt...[0m
+[0;32mI (9855) SDcard: Success to create string data(62) for writing.[0m
+[0;32mI (9855) SDcard: Writing data to file /sdcard/29112024.txt...[0m
+[0;32mI (9855) SDcard: ESP32-PROJECT,1732876403,28.41,39.63,102035.19,23,32,37,500
+;
+[0m
+[0;32mI (9865) sdcard_writeDataToFile: Success to write data to file /sdcard/29112024.txt.[0m
+[0;32mI (9885) Main: Save task received mutex![0m
+[0;32mI (9995) sntp_setTime: Waiting for system time to be set...[0m
+[0;32mI (10495) sntp_setTime: Waiting for system time to be set...[0m
+[0;32mI (10995) sntp_setTime: Waiting for system time to be set...[0m
+[0;32mI (11495) sntp_setTime: Waiting for system time to be set...[0m
+[0;32mI (11995) sntp_setTime: The current date/time in Viet Nam is: Fri Nov 29 10:34:54 2024 [0m
+[0;32mI (11995) Main: Current time in Viet Nam:  10:34:54 29/11/3924 Friday[0m
+[0;32mI (11995) ds3231_untilNewDay: Get seconds until new Day: 48306[0m
+[0;32mI (11995) ds3231_convertTimeToString: Convert time to string successfully.[0m
+[0;32mI (12015) ds3231_convertTimeToString: Current date & time: 29112024[0m
+[0;32mI (12015) fileEvent_task: File name updated from SNTP[0m
+[0;32mI (12335) ds3231_getEpochTime: DS3231 get EpochTime success.[0m
+[0;32mI (12335) pms7003_readData: PMS7003 sensor read data successful.[0m
+[0;32mI (12335) pms7003_readData: PM1.0: 22ug/m3  PM2.5: 32ug/m3  PM10: 38ug/m3.[0m
+[0;32mI (12345) mhz14a_sendCommand: Sending command to MHZ14a sensor successful.[0m
+[0;32mI (12655) mhz14a_getDataFromSensorViaUART: Raw data from TX buffer: [255 134 1 244 66 0 0 0 67][0m
+[0;32mI (12655) bme280_readSensorData: BME280 sensor read data successful.[0m
+[0;32mI (12655) getDataFromSensor_task: Read data from sensors completed![0m
+[0;32mI (12665) ds3231_convertTimeToString: Convert time to string successfully.[0m
+[0;32mI (12675) ds3231_convertTimeToString: Current date & time: 29-11-2024 10:34:54[0m
+[0;32mI (12675) getDataFromSensor_task: Success to post the data sensor to dataSensor Queue.[0m
+[0;32mI (12685) getDataFromSensor_task: Success to post the moduleError to Queue.[0m
+[0;32mI (12745) allocateDataToMQTTandSDQueue_task: Receiving data from intermediate queue successfully.[0m
+[0;32mI (12745) allocateDataToMQTTandSDQueue_task: Success to post the data sensor to dataSensorSentToSD Queue.[0m
+[0;32mI (12745) allocateDataToMQTTandSDQueue_task: Success to post the data sensor to dataSensorSentToMQTT Queue.[0m
+[0;32mI (12755) allocateDataToMQTTandSDQueue_task: Success to post the data sensor to LCD Display Queue.[0m
+[0;32mI (13335) DebugLed_task: Receiving data from Module Error queue successfully.[0m
+[0;32mI (14485) mqttPublishMessage_task: Receiving data from queue successfully.[0m
+[0;32mI (14485) mqttPublishMessage_task: MQTT client publish message success.[0m
+[0;32mI (14885) saveDataSensorToSDcard_task: Receiving data from queue successfully.[0m
+[0;32mI (14885) sdcard_writeDataToFile: Opening file /sdcard/29112024.txt...[0m
+[0;32mI (14895) SDcard: Success to create string data(62) for writing.[0m
+[0;32mI (14895) SDcard: Writing data to file /sdcard/29112024.txt...[0m
+[0;32mI (14895) SDcard: ESP32-PROJECT,1732876420,28.38,39.71,102035.52,22,32,38,500
+;
+[0m
+[0;32mI (14905) sdcard_writeDataToFile: Success to write data to file /sdcard/29112024.txt.[0m
+[0;32mI (14925) Main: Save task received mutex![0m
+[0;32mI (17335) ds3231_getEpochTime: DS3231 get EpochTime success.[0m
+[0;32mI (17335) pms7003_readData: PMS7003 sensor read data successful.[0m
+[0;32mI (17335) pms7003_readData: PM1.0: 23ug/m3  PM2.5: 35ug/m3  PM10: 36ug/m3.[0m
+[0;32mI (17345) mhz14a_sendCommand: Sending command to MHZ14a sensor successful.[0m

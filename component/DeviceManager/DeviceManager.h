@@ -1,12 +1,22 @@
 /**
  * @file DeviceManager.h
- * @author Nguyen Nhu Hai Long 
- * @brief Manager all device 
+<<<<<<< HEAD
+ * @author Nguyen Nhu Hai Long
+ * @brief Manager all device
  * @version 0.1
  * @date 2022-11-02
- * 
+ *
  * @copyright Copyright (c) 2022
- * 
+ *
+=======
+ * @author Nguyen Nhu Hai Long
+ * @brief Manager all device
+ * @version 0.1
+ * @date 2022-11-02
+ *
+ * @copyright Copyright (c) 2022
+ *
+>>>>>>> 58b9b9b1496405918645a11849a30809e4726542
  */
 
 #ifndef __DEVICEMANAGER_H__
@@ -19,8 +29,8 @@
 #include "string.h"
 #include "time.h"
 
-
-typedef enum {
+typedef enum
+{
     DISCONNECTED = 0,
     CONNECTED,
     CONNECTING,
@@ -44,7 +54,7 @@ struct moduleError_st
     esp_err_t ds3231Error;
     esp_err_t bme280Error;
     esp_err_t pms7003Error;
+    esp_err_t mhz14aError;
 };
-
 
 #endif

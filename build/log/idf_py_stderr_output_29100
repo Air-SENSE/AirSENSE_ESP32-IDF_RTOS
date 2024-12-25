@@ -1,0 +1,4 @@
+warning: default on the choice symbol MHZ14A_PWM (defined at E:/esp5.1/AirSENSE_ESP32-IDF_RTOS/component/MH_Z14A/Kconfig.projbuild:27) will have no effect, as defaults do not affect choice symbols
+warning: default on the choice symbol MHZ14A_UART (defined at E:/esp5.1/AirSENSE_ESP32-IDF_RTOS/component/MH_Z14A/Kconfig.projbuild:30) will have no effect, as defaults do not affect choice symbols
+Compiler supported targets: xtensa-esp32-elf
+

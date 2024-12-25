@@ -1,0 +1,7 @@
+CMake Error at run_serial_tool.cmake:66 (message):
+  
+  E:/esp5.1/Espressif/python_env/idf5.1_py3.11_env/Scripts/python.exe;;E:/esp5.1/Espressif/frameworks/esp-idf-v5.1.2/components/esptool_py/esptool/esptool.py;--chip;esp32
+  failed.
+
+
+

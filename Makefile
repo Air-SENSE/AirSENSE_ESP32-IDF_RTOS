@@ -3,6 +3,6 @@
 # project subdirectory.
 #
 
-PROJECT_NAME := AirSENSE_RTOS_V1.0
+PROJECT_NAME := AirSENSE_ESP32-IDF_RTOS
 
 include $(IDF_PATH)/make/project.mk
