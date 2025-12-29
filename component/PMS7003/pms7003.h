@@ -19,7 +19,7 @@
 #define ESP_ERROR_PMS7003_READ_DATA_FAILED          ((ID_PMS7003 << 12)|(0x02))
 #define PMS_ERROR_INVALID_VALUE                     UINT32_MAX
 
-#define UART_CONFIG_DEFAULT()   {   .baud_rate = CONFIG_UART_BAUD_RATE,     \
+#define UART_CONFIG_DEFAULT()   {   .baud_rate = 115200,     \
                                     .data_bits = UART_DATA_8_BITS,          \
                                     .parity = UART_PARITY_DISABLE,          \
                                     .stop_bits = UART_STOP_BITS_1,          \

@@ -59,6 +59,10 @@
 #include "lwip/err.h"
 #include "lwip/sys.h"
 
+#include "esp_mac.h"
+#include "esp_bridge.h"
+#include "esp_mesh_lite.h"
+
 #include "bme280.h"
 #include "sdcard.h"
 #include "pms7003.h"
@@ -94,7 +98,13 @@ static EventGroupHandle_t fileStore_eventGroup;
 #define FILE_RENAME_NEWDAY BIT2
 #define FILE_RENAME_FROMSYNC BIT3
 
-
+#define MAX_RETRY  5
+#define RAW_MSG_ID_BROADCAST 1
+#define RAW_MSG_ID_TO_SIBLING 2
+#define RAW_MSG_ID_TO_ROOT 3
+#define RAW_MSG_ID_TO_ROOT_RESP 4
+#define RAW_MSG_ID_TO_PARENT 5
+#define RAW_MSG_ID_TO_PARENT_RESP 6
 
 TaskHandle_t getDataFromSensorTask_handle = NULL;
 TaskHandle_t saveDataSensorToSDcardTask_handle = NULL;
@@ -888,8 +898,6 @@ void app_main(void)
     // Wait a second for memory initialization
     vTaskDelay(500 / portTICK_PERIOD_MS);
 
-// Smartconfig
-// configSmartWifi();
 
 // Initialize SD card
 #if (CONFIG_USING_SDCARD)
@@ -1022,7 +1030,7 @@ void app_main(void)
         ESP_LOGE(__func__, "Create task AllocateData failed.");
     }
 
-#if (CONFIG_USING_WIFI)
+#if (!MESH_ROOT)
     WIFI_initSTA();
 #endif
 }
